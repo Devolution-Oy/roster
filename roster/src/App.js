@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  // @todo Remove react initial app icons with the company's own icons 
   return (
     <div className="App">
       <header className="App-header">
