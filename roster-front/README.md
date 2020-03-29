@@ -1,13 +1,5 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-# Roster front end APP
-This directory contains source for Roster's front end source code.
-
-@todo Create a docker container for the APP
-
-@todo Enable static analysis
-
-@todo Create github actions workflow, which checks, builds, tests, sec test, and deploy they app
 ## Available Scripts
 
 In the project directory, you can run:
