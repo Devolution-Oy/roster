@@ -1,33 +1,50 @@
 import React, { Component } from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import { compose } from 'recompose';
+
+import { withFirebase } from '../components/Firebase';
+import * as ROUTES from '../constants/routes';
 import './Auth.css';
-import AuthContext from '../context/auth-context';
+
 
 class AuthPage extends Component {
-  static contextType = AuthContext;
-
-  constructor(props) {
-    super(props);
-    this.userRef = React.createRef();
-    this.pwRef = React.createRef();
-  }
-
 
   render() {
     return (
-      <form className="auth-form" onSubmit={this.submitHandler}>
-        <div className="form-control">
-          <label htmlFor="user">Username</label>
-          <input type="text" id="user" ref={this.userRef} />
-        </div>
-        <div className="form-control">
-          <label htmlFor="password">Password</label>
-          <input type="password" id="password" ref={this.pwRef} />
-        </div>
+      <div>
+        <h1>Login with github</h1>
+        <LoginForm />
+      </div>
+    );
+  }
+}
+
+
+class LoginFormBase extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  submitHandler = (event) => {
+    event.preventDefault();
+    this.props.firebase.githubAuth(); 
+    this.props.history.push(ROUTES.USER);
+  }
+
+  render() {
+    return(
+      <form className="login-form" onSubmit={this.submitHandler}>
         <div className="form-control">
           <button type="submit" id="btn_submit">Login</button>
         </div>
-      </form>);
+      </form>
+    );
   }
 }
+
+const LoginForm = compose(
+  withRouter,
+  withFirebase,
+)(LoginFormBase);
 
 export default AuthPage;
