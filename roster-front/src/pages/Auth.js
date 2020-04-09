@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 
 import { withFirebase } from '../components/Firebase';
@@ -21,9 +21,6 @@ class AuthPage extends Component {
 
 
 class LoginFormBase extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   submitHandler = (event) => {
     event.preventDefault();
