@@ -1,5 +1,5 @@
 .navbar {
-    position: fixed;
+    position: sticky;
     left: 0;
     top: 0;
     width: 100%;
@@ -10,8 +10,10 @@
     align-items: center;
 }
 
-.navbar__logo h1 {
+.navbar__logo img {
     margin: 0;
+    width: 175px;
+    height: 75px;
 }
 
 .navbar__item {

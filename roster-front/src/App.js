@@ -7,7 +7,6 @@ import {
 } from 'react-router-dom';
 
 import FrontPage from './pages/Front';
-import AuthPage from './pages/Auth';
 import UserPage from './pages/User';
 import AdminPage from './pages/Admin';
 import Navbar from './components/Navbar';
@@ -22,7 +21,6 @@ const App = () => (
       <Navbar />
       <main className="main-content">
         <Route exact path={ROUTES.LANDING} component={FrontPage} />
-        <Route exact path={ROUTES.AUTH}    component={AuthPage} />
         <Route exact path={ROUTES.USER}    component={UserPage} />
         <Route exact path={ROUTES.ADMIN}   component={AdminPage} />
       </main>

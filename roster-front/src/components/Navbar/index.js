@@ -1,32 +1,58 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import GithubButton from 'react-github-login-button';
+import { compose } from 'recompose';
+import PropTypes from 'prop-types';
 
 import './Navbar.css';
+import logo from '../../roster-logo.jpg';
 import * as ROUTES from '../../constants/routes';
 import SignOutButton from '../Session/SignOut';
 import { AuthContext} from '../Session'; 
+import { withFirebase } from '../Firebase';
 
-const Navbar = () => (
-  <header className="navbar">
-    <div className="navbari__logo"> 
-      <h1>Devolution Roster</h1>
-    </div>
-    <div>
-      <nav className="navbar__item">
-        <AuthContext.Consumer>
-          {authUser => authUser ? <NavigationAuth /> : <NavigationNonAuth />}
-        </AuthContext.Consumer>
-      </nav>
-    </div>
-  </header>
-);
+class Navbar extends Component {
 
-const NavigationNonAuth = () => (
-  <ul>
-    <li><Link to={ROUTES.LANDING}> Front </Link></li>
-    <li><Link to={ROUTES.AUTH}> Login </Link></li>
-  </ul>
-);
+
+  render() {
+    return(
+      <header className='navbar'>
+        <div className='navbar__logo'> 
+          <img src={logo} alt='Roster logo'/>
+        </div>
+        <div>
+          <nav className="navbar__item">
+            <AuthContext.Consumer>
+              {authUser => authUser ? <NavigationAuth /> : <NavigationNonAuth />}
+            </AuthContext.Consumer>
+          </nav>
+        </div>
+      </header>
+    );
+  }
+}
+
+class NavigationNonAuthBase extends Component {
+
+  submitHandler = (event) => {
+    event.preventDefault();
+    this.props.firebase.githubAuth(); 
+    this.props.history.push(ROUTES.USER);
+  }
+  
+  render() {
+    return (
+      <ul>
+        <li><Link to={ROUTES.LANDING}> Front </Link></li>
+        <li><GithubButton type='light' onClick={this.submitHandler} id='btn_github' /></li>
+      </ul>
+    );
+  }
+}
+NavigationNonAuthBase.propTypes = {
+  firebase: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
+};
 
 const NavigationAuth = () => (
   <ul>
@@ -36,5 +62,10 @@ const NavigationAuth = () => (
     <li><SignOutButton /></li>
   </ul>
 );
+
+const NavigationNonAuth = compose(
+  withRouter,
+  withFirebase,
+)(NavigationNonAuthBase);
 
 export default Navbar;
