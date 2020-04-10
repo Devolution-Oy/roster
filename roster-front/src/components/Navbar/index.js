@@ -43,7 +43,6 @@ class NavigationNonAuthBase extends Component {
   render() {
     return (
       <ul>
-        <li><Link to={ROUTES.LANDING}> Front </Link></li>
         <li><GithubButton type='light' onClick={this.submitHandler} id='btn_github' /></li>
       </ul>
     );
