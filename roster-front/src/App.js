@@ -15,6 +15,7 @@ import Navbar from './components/Navbar';
 import * as ROUTES from './constants/routes';
 import { withAuthentication } from './components/Session';
 
+
 const App = () => (
   <Router>
     <div>
