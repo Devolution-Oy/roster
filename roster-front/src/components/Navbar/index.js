@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import GithubButton from 'react-github-login-button';
-import { compose } from 'recompose';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import './Navbar.css';
 import logo from '../../roster-logo.jpg';
 import * as ROUTES from '../../constants/routes';
-import SignOutButton from '../Session/SignOut';
 import { AuthContext} from '../Session'; 
-import { withFirebase } from '../Firebase';
+
+import SignOutButton from '../Session/SignOut';
+import GithubLoginButton from './GithubLoginButton';
 
 class Navbar extends Component {
-
 
   render() {
     return(
@@ -32,26 +29,11 @@ class Navbar extends Component {
   }
 }
 
-class NavigationNonAuthBase extends Component {
-
-  submitHandler = (event) => {
-    event.preventDefault();
-    this.props.firebase.githubAuth(); 
-    this.props.history.push(ROUTES.USER);
-  }
-  
-  render() {
-    return (
-      <ul>
-        <li><GithubButton type='light' onClick={this.submitHandler} id='btn_github' /></li>
-      </ul>
-    );
-  }
-}
-NavigationNonAuthBase.propTypes = {
-  firebase: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired
-};
+const NavigationNonAuth = () => (
+  <ul>
+    <li><GithubLoginButton /></li>
+  </ul>
+);
 
 const NavigationAuth = () => (
   <ul>
@@ -62,9 +44,5 @@ const NavigationAuth = () => (
   </ul>
 );
 
-const NavigationNonAuth = compose(
-  withRouter,
-  withFirebase,
-)(NavigationNonAuthBase);
 
 export default Navbar;
