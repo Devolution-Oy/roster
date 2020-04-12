@@ -7,7 +7,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  build:
+  deploy_master:
     runs-on: ubuntu-latest
     env:
       REACT_APP_FIREBASE_APP_ID: ${{ secrets.REACT_APP_FIREBASE_APP_ID }}
@@ -18,11 +18,13 @@ jobs:
       REACT_APP_FIREBASE_PROJECT_ID: ${{ secrets.REACT_APP_FIREBASE_PROJECT_ID }}
       REACT_APP_FIREBASE_SENDER_ID: ${{ secrets.REACT_APP_FIREBASE_SENDER_ID }}
       REACT_APP_FIREBASE_STORAGE_BUCKET: ${{ secrets.REACT_APP_FIREBASE_STORAGE_BUCKET }}
-    
+      CI: 1
     steps:
     - uses: actions/checkout@master
     - uses: actions/setup-node@master
     - run: npm install
+      working-directory: ./roster-front
+    - run: npm run test
       working-directory: ./roster-front
     - run: npm run build
       working-directory: ./roster-front
@@ -31,5 +33,4 @@ jobs:
         args: deploy --only hosting
       env:
         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-
 
