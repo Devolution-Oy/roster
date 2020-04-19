@@ -6,10 +6,15 @@ admin.initializeApp();
 // HTTP Callable: Create a new user record into firestore
 exports.addUser = functions.https.onCall((data, context) => {
   if (!context.auth) {
-    throw new functions.https.HttpsError('unauthenticated', 'Aunauthenticated');
+    throw new functions.https.HttpsError('unauthenticated', 'Unauthenticated');
   }
 
-  return admin.firestore().collection('users').doc(data.useruid).set(data.userdata);
+  if (!data.uid) {
+    throw new functions.https.HttpsError('invalid-argument',
+      'Given data does not contain data.uid');
+  }
+
+  return admin.firestore().collection('users').doc(data.uid).set(data.data);
 });
 
 exports.deleteUser = functions.auth.user().onDelete(user => {
