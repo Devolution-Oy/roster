@@ -4,7 +4,10 @@ import Firebase, { FirebaseContext } from './components/Firebase';
 import { act } from 'react-dom/test-utils';
 import { render, unmountComponentAtNode } from 'react-dom';
 
-jest.mock('./components/Navbar/GithubLoginButton');
+jest.mock('./components/GithubLogin/GithubLoginButton');
+jest.mock('./components/Firebase/firebase');
+jest.mock('./components/Session/withAuthorization');
+jest.mock('./components/Session/withAuthentication');
 
 let container = null;
 beforeEach(() => {

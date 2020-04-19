@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import AuthContext from './context';
-import { withFirebase } from '../Firebase';
+import AuthContext from '../context';
 
 const withAuthentication = Component => {
   class WithAuthentication extends React.Component {
@@ -10,22 +9,8 @@ const withAuthentication = Component => {
       super(props);
 
       this.state = {
-        authUser: null,
+        authUser: props.authUser
       };
-    }
-
-    componentDidMount() {
-      this.listener = this.props.firebase.auth.onAuthStateChanged(
-        authUser => {
-          authUser
-            ? this.setState({authUser})
-            : this.setState({authUser: null});
-        },
-      );
-    }
-
-    componentWillUnmount() {
-    //  this.listener();
     }
 
     render() {
@@ -37,9 +22,9 @@ const withAuthentication = Component => {
     }
   }
   WithAuthentication.propTypes = {
-    firebase: PropTypes.object
+    authUser: PropTypes.object
   };
-  return withFirebase(WithAuthentication);
+  return WithAuthentication;
 };
 
 export default withAuthentication;

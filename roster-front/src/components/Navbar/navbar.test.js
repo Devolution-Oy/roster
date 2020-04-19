@@ -4,9 +4,18 @@ import { act } from 'react-dom/test-utils';
 import {
   BrowserRouter as Router
 } from 'react-router-dom';
-import NavigationNonAuth from './index';
+import Navbar, { NavigationNonAuth } from './Navbar';
+import * as ROLES from '../../constants/roles';
+import { AuthContext } from '../Session';
+import Firebase, { FirebaseContext } from '../Firebase';
 
-jest.mock('./GithubLoginButton');
+jest.mock('../GithubLogin/GithubLoginButton');
+jest.mock('../Session/withAuthorization');
+jest.mock('../Session/withAuthentication');
+jest.mock('../Firebase/firebase');
+
+const adminuser = {username: 'test', role: ROLES.ADMIN};
+const normaluser = {username: 'test', role: ROLES.USER};
 
 let container = null;
 beforeEach(() => {
@@ -20,14 +29,52 @@ afterEach(() => {
   container = null;
 });
 
-test('Non-Autohrized navbar contains github login button', () => {
-  act(() =>  {
-    render(
-      <Router>
-        <NavigationNonAuth />
-      </Router>, container
-    );
+describe('Navbar user access',() => {
+  it('Non-Autohrized navbar contains github login button', () => {
+    act(() => {
+      render(
+        <Router>
+          <NavigationNonAuth />
+        </Router>, container
+      );
+    });
+
+    expect(container.querySelector('.btn_github')).toBeTruthy();
   });
 
-  expect(container.querySelector('.btn_github')).toBeTruthy();
+  it('Admin level user can see admin page link',() => {
+    act(() => {
+      render(
+        <FirebaseContext.Provider value={new Firebase()}>
+          <Router>
+            <AuthContext.Provider value={adminuser}>
+              <Navbar />
+            </AuthContext.Provider>
+          </Router>
+        </FirebaseContext.Provider>
+        , container);
+    });
+    
+    expect(container.querySelector('.linkLanding')).toBeTruthy();
+    expect(container.querySelector('.linkUser')).toBeTruthy();
+    expect(container.querySelector('.linkAdmin')).toBeTruthy();
+  });
+
+  it('Normal user cant see admin page link',() => {
+    act(() => {
+      render(
+        <FirebaseContext.Provider value={new Firebase()}>
+          <Router>
+            <AuthContext.Provider value={normaluser}>
+              <Navbar />
+            </AuthContext.Provider>
+          </Router>
+        </FirebaseContext.Provider>
+        , container);
+    });
+    
+    expect(container.querySelector('.linkLanding')).toBeTruthy();
+    expect(container.querySelector('.linkUser')).toBeTruthy();
+    expect(container.querySelector('.linkAdmin')).toBeNull();
+  });
 });

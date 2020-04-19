@@ -8,12 +8,11 @@ import {
 
 import FrontPage from './pages/Front';
 import UserPage from './pages/User';
-import AdminPage from './pages/Admin';
+import AdminPage from './pages/Admin/Admin';
 import Navbar from './components/Navbar';
 
 import * as ROUTES from './constants/routes';
 import { withAuthentication } from './components/Session';
-
 
 const App = () => (
   <Router>

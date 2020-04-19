@@ -34,10 +34,9 @@ class Firebase {
     this.provider = new app.auth.GithubAuthProvider();
   }
 
-
   githubAuth = () => {
-    this.auth.signInWithPopup(this.provider);
-  }
+    return this.auth.signInWithPopup(this.provider);
+  };
 
   doSignOut = () => 
     this.auth.signOut();

@@ -5,12 +5,20 @@ import PropTypes from 'prop-types';
 import { withFirebase } from '../Firebase';
 import { compose } from 'recompose';
 import * as ROUTES from '../../constants/routes';
+import * as ROLES from '../../constants/roles';
 
 class GithubLoginButtonBase extends Component {
   submitHandler = (event) => {
     event.preventDefault();
-    this.props.firebase.githubAuth(); 
-    this.props.history.push(ROUTES.USER);
+    this.props.firebase.githubAuth().then((result) => {
+      if (!result.additionalUserInfo.isNewUser)
+        this.props.firebase.user(result.additionalUserInfo.username)
+          .set({ 'role': ROLES.USER });
+        
+      this.props.history.push(ROUTES.USER);
+    }).catch(error => {
+      console.log({error});
+    });
   }
   
   render() {

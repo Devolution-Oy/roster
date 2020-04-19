@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom';
 import './Navbar.css';
 import logo from '../../roster-logo.jpg';
 import * as ROUTES from '../../constants/routes';
+import * as ROLES from '../../constants/roles';
 import { AuthContext} from '../Session'; 
 
 import SignOutButton from '../Session/SignOut';
-import GithubLoginButton from './GithubLoginButton';
+import GithubLoginButton from '../GithubLogin/GithubLoginButton';
 
 class Navbar extends Component {
 
@@ -29,17 +30,20 @@ class Navbar extends Component {
   }
 }
 
-const NavigationNonAuth = () => (
+export const NavigationNonAuth = () => (
   <ul>
     <li><GithubLoginButton /></li>
   </ul>
 );
 
-const NavigationAuth = () => (
+export const NavigationAuth = () => (
   <ul>
-    <li><Link to={ROUTES.LANDING}> Front </Link></li>
-    <li><Link to={ROUTES.USER}> Home </Link></li>
-    <li><Link to={ROUTES.ADMIN}> Admin </Link></li>
+    <li><Link className='linkLanding' to={ROUTES.LANDING}> Front </Link></li>
+    <li><Link className='linkUser' to={ROUTES.USER}> User </Link></li>
+    <AuthContext.Consumer>
+      {authUser => authUser['role'] === ROLES.ADMIN ?
+        <li><Link className='linkAdmin' to={ROUTES.ADMIN}> Admin </Link></li> : null}
+    </AuthContext.Consumer>
     <li><SignOutButton /></li>
   </ul>
 );

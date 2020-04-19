@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
+import PropTypes from 'prop-types';
 
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
@@ -11,8 +12,8 @@ const withAuthorization = condition => Component => {
     componentDidMount() {
       this.listener = this.props.firebase.auth.onAuthStateChanged(authUser => {
         if (!condition(authUser)) {
-          console.log("Not authorized. Redirecting to login");
-          this.props.history.push(ROUTES.USER);
+          console.log('Not authorized. Redirecting to FrontPage');
+          this.props.history.push(ROUTES.LANDING);
         }
       });
     }
@@ -31,6 +32,12 @@ const withAuthorization = condition => Component => {
       );
     }
   }
+
+  WithAuthorization.propTypes = {
+    firebase: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
+  };
+  
   return compose(
     withRouter,
     withFirebase,
