@@ -1,6 +1,7 @@
 import app from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
+import 'firebase/functions';
 
 const prodConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_KEY,
@@ -29,7 +30,7 @@ class Firebase {
   constructor() {
     app.initializeApp(config);
     this.auth = app.auth();
-    this.db = app.database();
+    this.functions = app.functions();
 
     this.provider = new app.auth.GithubAuthProvider();
   }
@@ -41,9 +42,14 @@ class Firebase {
   doSignOut = () => 
     this.auth.signOut();
 
-  // User data
-  user = uid => this.db.ref(`user/${uid}`);
-  users = () => this.db.ref('users');
+  addUserData = user => {
+    const addUser = this.functions.httpsCallable('addUser');
+    return addUser(user).then(res => {
+      console.log('Write OK ' + res);
+    }).catch(error => {
+      console.log(error);
+    });
+  }
 }
 
 export default Firebase;
