@@ -8,12 +8,29 @@ import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
 
 class GithubLoginButtonBase extends Component {
+  
+  createNewUserRecord = user => {
+    const record = {
+      uid: user.user.uid,
+      data: {
+        githubUser: user.additionalUserInfo.username,
+        displayName: user.user.displayName,
+        email: user.user.email,
+        photo: user.user.photoURL,
+        projects: [],
+        role: ROLES.USER,
+      }
+    };
+    this.props.firebase.addUserData(record);
+  }
+
   submitHandler = (event) => {
     event.preventDefault();
     this.props.firebase.githubAuth().then((result) => {
-      if (!result.additionalUserInfo.isNewUser)
-        this.props.firebase.user(result.additionalUserInfo.username)
-          .set({ 'role': ROLES.USER });
+      if (result.additionalUserInfo.isNewUser)
+      {
+        this.createNewUserRecord(result);
+      }
         
       this.props.history.push(ROUTES.USER);
     }).catch(error => {
