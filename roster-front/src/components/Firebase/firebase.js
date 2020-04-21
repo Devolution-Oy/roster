@@ -50,7 +50,7 @@ class Firebase {
     });
   }
 
-  readUserData = uid => {
+  getUserData = uid => {
     const getUser = this.functions.httpsCallable('getUser');
     return getUser(uid);
   };
