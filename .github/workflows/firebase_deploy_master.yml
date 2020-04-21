@@ -36,6 +36,10 @@ jobs:
       working-directory: ./roster-front
     - run: npm run build
       working-directory: ./roster-front
+    - run: npm install
+      working-directory: ./functions
+    - run: npm run test
+      working-directory: ./functions
     - uses: w9jds/firebase-action@master
       with:
         args: deploy
