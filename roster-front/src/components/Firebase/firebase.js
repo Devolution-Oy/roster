@@ -51,9 +51,8 @@ class Firebase {
   }
 
   getUserData = uid => {
-    console.log(uid);
     const getUser = this.functions.httpsCallable('getUser');
-    return getUser({text: uid});
+    return getUser({uid: uid});
   };
 }
 
