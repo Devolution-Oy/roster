@@ -13,6 +13,7 @@ let container = null;
 beforeEach(() => {
   container = document.createElement('div');
   document.body.appendChild(container);
+  jest.clearAllMocks();
 });
 
 afterEach(() => {
@@ -23,7 +24,6 @@ afterEach(() => {
 
 const DummyComponent = withAuthentication(
   class dummyComponent extends Component {
-
     render() {
       return (
         <AuthContext.Consumer>
@@ -37,7 +37,7 @@ const DummyComponent = withAuthentication(
 );
 
 describe('Auth state change listener', () => {
-
+  const uid = 'LoR1xY535HP6gNJNRBokMfhD8343';
   it('Auth user is set when user logs in and cleared on log out',async() => {
     act(() => {
       render(
@@ -50,8 +50,10 @@ describe('Auth state change listener', () => {
 
     await firebase.githubAuth();
     expect(container.querySelector('.TestUser')).toBeTruthy();
+    expect(firebase.getUserData).toHaveBeenLastCalledWith(uid);
     
     await firebase.doSignOut();
     expect(container.querySelector('.NotDefined')).toBeTruthy();
   });
+
 });

@@ -31,7 +31,6 @@ class Firebase {
     app.initializeApp(config);
     this.auth = app.auth();
     this.functions = app.functions();
-
     this.provider = new app.auth.GithubAuthProvider();
   }
 
@@ -50,6 +49,11 @@ class Firebase {
       console.log(error);
     });
   }
+
+  readUserData = uid => {
+    const getUser = this.functions.httpsCallable('getUser');
+    return getUser(uid);
+  };
 }
 
 export default Firebase;

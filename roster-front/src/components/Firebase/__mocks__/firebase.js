@@ -1,10 +1,24 @@
 import { Component } from 'react';
 
 const user = {
+  uid: 'LoR1xY535HP6gNJNRBokMfhD8343',
+  displayName: 'Test User',
+  email: 'test@test.fi',
+  photoURL: 'https://testurl.fi',
   additionalUserInfo: {
-    isNewUser: false,
-    userName: 'TestUser' 
+    isNewUser: true,
+    userName: 'tester'
   }
+};
+
+const userRecord = {
+  uid: 'LoR1xY535HP6gNJNRBokMfhD8343',
+  displayName: 'Test User',
+  githubUser: 'testuser',
+  email: 'test@test.fi',
+  photo: 'https://testurl.fi',
+  projects: {},
+  role: 1
 };
 
 class Auth extends Component {
@@ -51,6 +65,15 @@ class Firebase {
       resolve(null);
     });
   }
+
+  getUserData = jest.fn(uid => {
+    return new Promise((resolve) => {
+      console.log(uid);
+      resolve(userRecord);
+    });
+  });
+
+  addUserData = jest.fn();
 }
 
 export default Firebase;
