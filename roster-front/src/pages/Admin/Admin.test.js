@@ -9,8 +9,29 @@ import * as ROLES from '../../constants/roles';
 jest.mock('../../components/Session/withAuthorization');
 jest.mock('../../components/Session/withAuthentication');
 
-const adminuser = {username: 'test', role: ROLES.ADMIN};
-const normaluser = {username: 'test', role: ROLES.USER};
+const adminuser = {
+  uid: 'test',
+  data: {
+    displayName: 'tester',
+    email: 'test@test.fi',
+    githubUser: 'testuser',
+    photo: 'https://photo.url.fi',
+    projects: [],
+    role: ROLES.ADMIN
+  }
+};
+
+const normaluser = {
+  uid: 'test',
+  data: {
+    displayName: 'tester',
+    email: 'test@test.fi',
+    githubUser: 'testuser',
+    photo: 'https://photo.url.fi',
+    projects: [],
+    role: ROLES.USER
+  }
+};
 
 let container = null;
 beforeEach(() => {

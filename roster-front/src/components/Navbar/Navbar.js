@@ -41,7 +41,7 @@ export const NavigationAuth = () => (
     <li><Link className='linkLanding' to={ROUTES.LANDING}> Front </Link></li>
     <li><Link className='linkUser' to={ROUTES.USER}> User </Link></li>
     <AuthContext.Consumer>
-      {authUser => authUser['role'] === ROLES.ADMIN ?
+      {authUser => authUser.data.role === ROLES.ADMIN ?
         <li><Link className='linkAdmin' to={ROUTES.ADMIN}> Admin </Link></li> : null}
     </AuthContext.Consumer>
     <li><SignOutButton /></li>
