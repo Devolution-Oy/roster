@@ -14,8 +14,29 @@ jest.mock('../Session/withAuthorization');
 jest.mock('../Session/withAuthentication');
 jest.mock('../Firebase/firebase');
 
-const adminuser = {username: 'test', role: ROLES.ADMIN};
-const normaluser = {username: 'test', role: ROLES.USER};
+const adminuser = {
+  uid: 'test',
+  data: {
+    displayName: 'tester',
+    email: 'test@test.fi',
+    githubUser: 'testuser',
+    photo: 'https://photo.url.fi',
+    projects: [],
+    role: ROLES.ADMIN
+  }
+};
+
+const normaluser = {
+  uid: 'test',
+  data: {
+    displayName: 'tester',
+    email: 'test@test.fi',
+    githubUser: 'testuser',
+    photo: 'https://photo.url.fi',
+    projects: [],
+    role: ROLES.USER
+  }
+};
 
 let container = null;
 beforeEach(() => {
