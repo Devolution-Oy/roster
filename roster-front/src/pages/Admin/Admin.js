@@ -22,5 +22,5 @@ class AdminPage extends Component {
   }
 }
 
-const condition = authUser => authUser['role'] === ROLES.ADMIN;
+const condition = authUser => authUser.data.role === ROLES.ADMIN;
 export default withAuthorization(condition)(AdminPage);
