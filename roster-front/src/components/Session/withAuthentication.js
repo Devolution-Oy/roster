@@ -18,7 +18,11 @@ const withAuthentication = Component => {
       this.props.firebase.getUserData(authUser.uid).then(user => {
         console.log('Succesfully fetched user data');
         console.log(user);
-        this.setState({authUser: user});
+        const loggedUser = {
+          uid: authUser.uid,
+          data: user
+        };
+        this.setState({authUser: loggedUser});
       }).catch(error => {
         console.log(error);
         this.setState({authUser: null});
