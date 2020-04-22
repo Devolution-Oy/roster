@@ -19,7 +19,7 @@ const withAuthentication = Component => {
         console.log('Succesfully fetched user data');
         const loggedUser = {
           uid: authUser.uid,
-          data: user
+          data: user.data
         };
         console.log(loggedUser);
         this.setState({authUser: loggedUser});
