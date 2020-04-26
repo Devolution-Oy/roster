@@ -1,6 +1,5 @@
 *** Variables ***
 ${ROSTER_USER}    devolution-roster-test
-${USER_PW}        devolution-test-account-617584
 
 *** Keywords ***
 Github login
