@@ -1,0 +1,53 @@
+name: Roster PR test
+
+on: pull_request
+
+jobs:
+  staging:
+    runs-on: ubuntu-latest
+    env:
+      REACT_APP_FIREBASE_APP_ID_PR: ${{ secrets.REACT_APP_FIREBASE_APP_ID_PR }}
+      REACT_APP_FIREBASE_AUTH_DOMAIN_PR: ${{ secrets.REACT_APP_FIREBASE_AUTH_DOMAIN_PR }}
+      REACT_APP_FIREBASE_DATABASE_PR: ${{ secrets.REACT_APP_FIREBASE_DATABASE_PR }}
+      REACT_APP_FIREBASE_KEY_PR: ${{ secrets.REACT_APP_FIREBASE_KEY_PR }}
+      REACT_APP_FIREBASE_MEASUREMENT_ID_PR: ${{ secrets.REACT_APP_FIREBASE_MEASUREMENT_ID_PR }}
+      REACT_APP_FIREBASE_PROJECT_ID_PR: ${{ secrets.REACT_APP_FIREBASE_PROJECT_ID_PR }}
+      REACT_APP_FIREBASE_SENDER_ID_PR: ${{ secrets.REACT_APP_FIREBASE_SENDER_ID_PR }}
+      REACT_APP_FIREBASE_STORAGE_BUCKET_PR: ${{ secrets.REACT_APP_FIREBASE_STORAGE_BUCKET_PR }}
+      REACT_APP_DEPLOY_ENV: pr
+      CI: 1
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
+      - name: Install front end dependencies 
+        run: npm ci
+        working-directory: ./roster-front
+      - name: Front-end unittests
+        run: npm run test
+        working-directory: ./roster-front
+      - name: Build front-end
+        run: npm run build
+        working-directory: ./roster-front
+      - name: Insall functions dependencies
+        run: npm ci 
+        working-directory: ./functions
+      - name: Run functions unittests
+        run: npm run test
+        working-directory: ./functions
+      - name: Deploy firebase to PR env
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy -P roster-pr 
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      - name: Run Robot tests
+        run: |
+          docker build -t rfcontainer .
+          docker run -v ${PWD}:/home/robot --rm rfcontainer -v USER_PW:${{ secrets.TEST_USER_PW }} -v FB_PROJECT:roster-pr
+        working-directory: ./testautomation
+      - name: Upload test results
+        uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: reports
+          path: ./testautomation/logs
