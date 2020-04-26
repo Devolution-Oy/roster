@@ -64,7 +64,6 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 ENV TINI_VERSION v0.19.0
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
 RUN chmod +x /tini
-ENTRYPOINT ["/tini", "--"]
 
 USER ${UNAME}
 
