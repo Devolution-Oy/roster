@@ -29,7 +29,7 @@ jobs:
         run: npm run build
         working-directory: ./roster-front
       - name: Insall functions dependencies
-        run: npm install
+        run: npm ci 
         working-directory: ./functions
       - name: Run functions unittests
         run: npm run test
