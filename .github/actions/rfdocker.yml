@@ -1,4 +1,0 @@
-name: 'rf-docker'
-runs:
-  using: 'docker'
-  image: 'Dockerfile'

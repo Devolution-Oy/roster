@@ -48,21 +48,22 @@ const devConfig = {
 };
 
 var config = null;
-switch (process.env.DEPLOY_ENV) {
+const deploy_env = process.env.REACT_APP_DEPLOY_ENV;
+switch (deploy_env) {
 case 'production':
-  config = prodConfig; 
+  config = prodConfig;
   break;
 case 'staging':
-  config = stagingConfig; 
+  config = stagingConfig;
   break;
 case 'pr':
-  config = prConfig; 
+  config = prConfig;
   break;
 case 'dev':
-  config = devConfig; 
+  config = devConfig;
   break;
 default:
-  config = devConfig; 
+  config = devConfig;
   break;
 }
 
