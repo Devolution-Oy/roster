@@ -12,5 +12,4 @@ Github login
     Switch window    MAIN
 
 Logout from roster
-    pause execution
     Click element    xpath=.//button[@id='btn_logout']

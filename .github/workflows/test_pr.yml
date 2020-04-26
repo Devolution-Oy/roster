@@ -37,13 +37,13 @@ jobs:
       - name: Deploy firebase to staging env
         uses: w9jds/firebase-action@master
         with:
-          args: deploy -P pr 
+          args: deploy -P roster-pr 
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
       - name: Run Robot tests
         run: |
           docker build -t rfcontainer .
-          docker run -v ${PWD}:/home/robot --rm rfcontainer -v USER_PW:${{ secrets.TEST_USER_PW }} -v HOST_URL:roster-pr
+          docker run -v ${PWD}:/home/robot --rm rfcontainer -v USER_PW:${{ secrets.TEST_USER_PW }} -v FB_PROJECT:roster-pr
         working-directory: ./testautomation
       - name: Upload test results
         uses: actions/upload-artifact@v1

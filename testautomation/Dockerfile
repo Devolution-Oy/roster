@@ -50,10 +50,6 @@ RUN curl -sS -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-ke
     apt-get -yqq install google-chrome-stable && \
     rm -rf /var/lib/apt/lists/*
 
-ENV VIRTUAL_ENV=${UHOME}/venv
-RUN python3 -m venv $VIRTUAL_ENV
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
-
 WORKDIR ${UHOME}
 COPY --chown=robot:robot requirements.txt ${UHOME}/.
 
