@@ -39,7 +39,7 @@ jobs:
       - name: Deploy firebase to staging env
         uses: w9jds/firebase-action@master
         with:
-          args: deploy -P roster-test
+          args: deploy -P roster-test-e37b6
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
       - name: Run Robot tests
