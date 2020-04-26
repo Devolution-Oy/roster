@@ -42,7 +42,7 @@ jobs:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
       - name: Run Robot tests
         uses: .github/actions/rfdocker
-          volumes: ./testautomation:/home/robot
+        volumes: ./testautomation:/home/robot
         with:
           args: -v USER_PW:${{ secrets.TEST_USER_PW }} -v HOST_URL:roster-pr
         working-directory: ./testautomation
