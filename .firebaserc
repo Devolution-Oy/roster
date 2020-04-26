@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "devolution-roster"
+    "default": "devolution-roster",
+    "test": "roster-test-e37b6",
+    "pr": "roster-pr"
   }
 }

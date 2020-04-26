@@ -14,6 +14,28 @@ const prodConfig = {
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 };
 
+const stagingConfig = {
+  apiKey: process.env.REACT_APP_FIREBASE_KEY_STAGING,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN_STAGING,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_STAGING,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID_STAGING,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET_STAGING,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID_STAGING,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID_STAGING,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID_STAGING
+};
+
+const prConfig = {
+  apiKey: process.env.REACT_APP_FIREBASE_KEY_PR,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN_PR,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_PR,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID_PR,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET_PR,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID_PR,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID_PR,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID_PR
+};
+
 const devConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_KEY_DEV,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN_DEV,
@@ -25,7 +47,25 @@ const devConfig = {
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID_DEV
 };
 
-const config = process.env.NODE_ENV === 'production' ? prodConfig : devConfig;
+var config = null;
+switch (process.env.DEPLOY_ENV) {
+case 'production':
+  config = prodConfig; 
+  break;
+case 'staging':
+  config = stagingConfig; 
+  break;
+case 'pr':
+  config = prConfig; 
+  break;
+case 'dev':
+  config = devConfig; 
+  break;
+default:
+  config = devConfig; 
+  break;
+}
+
 class Firebase {
   constructor() {
     app.initializeApp(config);
