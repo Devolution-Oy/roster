@@ -40,5 +40,15 @@ jobs:
           args: deploy -P pr 
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-      - name: Run robot tests in staging env
-        run: echo "TODO"
+      - name: Run Robot tests
+        using: 'docker'
+        image: 'Dockerfile'
+        volumes: ./testautomation:/home/robot
+        with:
+          args: -v USER_PW:${{ secrets.TEST_USER_PW }} -v HOST_URL:roster-pr
+        working-directory: ./testautomation
+      - name: Upload test results
+        uses: actions/upload-artifact@v1
+        with:
+          name: reports
+          path: ./testautomation/logs
