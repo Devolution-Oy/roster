@@ -1,13 +1,61 @@
-
-name: Firebase deploy master
+name: Roster master
 
 on:
   push:
     branches: [ master ]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  deploy_master:
+  staging:
+    runs-on: ubuntu-latest
+    env:
+      REACT_APP_FIREBASE_APP_ID_STAGING: ${{ secrets.REACT_APP_FIREBASE_APP_ID_STAGING }}
+      REACT_APP_FIREBASE_AUTH_DOMAIN_STAGING: ${{ secrets.REACT_APP_FIREBASE_AUTH_DOMAIN_STAGING }}
+      REACT_APP_FIREBASE_DATABASE_STAGING: ${{ secrets.REACT_APP_FIREBASE_DATABASE_STAGING }}
+      REACT_APP_FIREBASE_KEY_STAGING: ${{ secrets.REACT_APP_FIREBASE_KEY_STAGING }}
+      REACT_APP_FIREBASE_MEASUREMENT_ID_STAGING: ${{ secrets.REACT_APP_FIREBASE_MEASUREMENT_ID_STAGING }}
+      REACT_APP_FIREBASE_PROJECT_ID_STAGING: ${{ secrets.REACT_APP_FIREBASE_PROJECT_ID_STAGING }}
+      REACT_APP_FIREBASE_SENDER_ID_STAGING: ${{ secrets.REACT_APP_FIREBASE_SENDER_ID_STAGING }}
+      REACT_APP_FIREBASE_STORAGE_BUCKET_STAGING: ${{ secrets.REACT_APP_FIREBASE_STORAGE_BUCKET_STAGING }}
+      REACT_APP_DEPLOY_ENV: staging
+      CI: 1
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
+      - name: Install front end dependencies 
+        run: npm ci
+        working-directory: ./roster-front
+      - name: Front-end unittests
+        run: npm run test
+        working-directory: ./roster-front
+      - name: Build front-end
+        run: npm run build
+        working-directory: ./roster-front
+      - name: Insall functions dependencies
+        run: npm ci
+        working-directory: ./functions
+      - name: Run functions unittests
+        run: npm run test
+        working-directory: ./functions
+      - name: Deploy firebase to staging env
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy -P staging
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      - name: Run Robot tests
+        run: |
+          docker build -t rfcontainer .
+          docker run -v ${PWD}:/home/robot --rm rfcontainer -v USER_PW:${{ secrets.TEST_USER_PW }} -v FB_PROJECT:roster-test-e37b6
+        working-directory: ./testautomation
+      - name: Upload test results
+        uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: reports-staging
+          path: ./testautomation/logs
+
+  deploy_production:
+    needs: staging
     runs-on: ubuntu-latest
     env:
       REACT_APP_FIREBASE_APP_ID: ${{ secrets.REACT_APP_FIREBASE_APP_ID }}
@@ -18,31 +66,33 @@ jobs:
       REACT_APP_FIREBASE_PROJECT_ID: ${{ secrets.REACT_APP_FIREBASE_PROJECT_ID }}
       REACT_APP_FIREBASE_SENDER_ID: ${{ secrets.REACT_APP_FIREBASE_SENDER_ID }}
       REACT_APP_FIREBASE_STORAGE_BUCKET: ${{ secrets.REACT_APP_FIREBASE_STORAGE_BUCKET }}
-      REACT_APP_FIREBASE_APP_ID_DEV: ${{ secrets.REACT_APP_FIREBASE_APP_ID_DEV }}
-      REACT_APP_FIREBASE_AUTH_DOMAIN_DEV: ${{ secrets.REACT_APP_FIREBASE_AUTH_DOMAIN_DEV }}
-      REACT_APP_FIREBASE_DATABASE_DEV: ${{ secrets.REACT_APP_FIREBASE_DATABASE_DEV }}
-      REACT_APP_FIREBASE_KEY_DEV: ${{ secrets.REACT_APP_FIREBASE_KEY_DEV }}
-      REACT_APP_FIREBASE_MEASUREMENT_ID_DEV: ${{ secrets.REACT_APP_FIREBASE_MEASUREMENT_ID_DEV }}
-      REACT_APP_FIREBASE_PROJECT_ID_DEV: ${{ secrets.REACT_APP_FIREBASE_PROJECT_ID_DEV }}
-      REACT_APP_FIREBASE_SENDER_ID_DEV: ${{ secrets.REACT_APP_FIREBASE_SENDER_ID_DEV }}
-      REACT_APP_FIREBASE_STORAGE_BUCKET_DEV: ${{ secrets.REACT_APP_FIREBASE_STORAGE_BUCKET_DEV }}
+      REACT_APP_DEPLOY_ENV: production 
       CI: 1
     steps:
     - uses: actions/checkout@master
     - uses: actions/setup-node@master
-    - run: npm install
+    - run: npm ci 
       working-directory: ./roster-front
     - run: npm run test
       working-directory: ./roster-front
     - run: npm run build
       working-directory: ./roster-front
-    - run: npm install
+    - run: npm ci 
       working-directory: ./functions
-    - run: npm run test
-      working-directory: ./functions
-    - uses: w9jds/firebase-action@master
+    - name: Deploy firebase to production
+      uses: w9jds/firebase-action@master
       with:
-        args: deploy
+        args: deploy -P production
       env:
         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-
+    - name: Run Robot tests
+      run: |
+        docker build -t rfcontainer .
+        docker run -v ${PWD}:/home/robot --rm rfcontainer -v USER_PW:${{ secrets.TEST_USER_PW }} -v FB_PROJECT:devolution-roster
+      working-directory: ./testautomation
+    - name: Upload test results
+      uses: actions/upload-artifact@v1
+      if: always()
+      with:
+        name: reports-production
+        path: ./testautomation/logs
