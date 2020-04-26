@@ -1,7 +1,6 @@
 *** Settings ***
 Documentation    Login test cases
 Resource         ${PROJECT_ROOT}${/}resources${/}Setup.robot
-Library          Dialogs
 
 Suite Teardown   Close All Browsers
 Force Tags       set-login

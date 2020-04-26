@@ -16,7 +16,7 @@ jobs:
       REACT_APP_FIREBASE_PROJECT_ID_STAGING: ${{ secrets.REACT_APP_FIREBASE_PROJECT_ID_STAGING }}
       REACT_APP_FIREBASE_SENDER_ID_STAGING: ${{ secrets.REACT_APP_FIREBASE_SENDER_ID_STAGING }}
       REACT_APP_FIREBASE_STORAGE_BUCKET_STAGING: ${{ secrets.REACT_APP_FIREBASE_STORAGE_BUCKET_STAGING }}
-      DEPLOY_ENV: staging
+      REACT_APP_DEPLOY_ENV: staging
       CI: 1
     steps:
       - uses: actions/checkout@master
@@ -42,8 +42,17 @@ jobs:
           args: deploy -P staging
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-      - name: Run robot tests in staging env
-        run: echo "TODO"
+      - name: Run Robot tests
+        run: |
+          docker build -t rfcontainer .
+          docker run -v ${PWD}:/home/robot --rm rfcontainer -v USER_PW:${{ secrets.TEST_USER_PW }} -v FB_PROJECT:roster-test-e37b6
+        working-directory: ./testautomation
+      - name: Upload test results
+        uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: reports-staging
+          path: ./testautomation/logs
 
   deploy_production:
     needs: staging
@@ -57,7 +66,7 @@ jobs:
       REACT_APP_FIREBASE_PROJECT_ID: ${{ secrets.REACT_APP_FIREBASE_PROJECT_ID }}
       REACT_APP_FIREBASE_SENDER_ID: ${{ secrets.REACT_APP_FIREBASE_SENDER_ID }}
       REACT_APP_FIREBASE_STORAGE_BUCKET: ${{ secrets.REACT_APP_FIREBASE_STORAGE_BUCKET }}
-      DEPLOY_ENV: production 
+      REACT_APP_DEPLOY_ENV: production 
       CI: 1
     steps:
     - uses: actions/checkout@master
@@ -76,5 +85,14 @@ jobs:
         args: deploy -P production
       env:
         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-    - name: Run robot tests in production
-      run: echo "TODO"
+    - name: Run Robot tests
+      run: |
+        docker build -t rfcontainer .
+        docker run -v ${PWD}:/home/robot --rm rfcontainer -v USER_PW:${{ secrets.TEST_USER_PW }} -v FB_PROJECT:devolution-roster
+      working-directory: ./testautomation
+    - name: Upload test results
+      uses: actions/upload-artifact@v1
+      if: always()
+      with:
+        name: reports-production
+        path: ./testautomation/logs
