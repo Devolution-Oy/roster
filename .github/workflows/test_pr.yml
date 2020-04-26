@@ -41,9 +41,9 @@ jobs:
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
       - name: Run Robot tests
-        using: 'docker'
-        image: 'Dockerfile'
-        volumes: ./testautomation:/home/robot
+        uses: docker
+          image: Dockerfile
+          volumes: ./testautomation:/home/robot
         with:
           args: -v USER_PW:${{ secrets.TEST_USER_PW }} -v HOST_URL:roster-pr
         working-directory: ./testautomation
