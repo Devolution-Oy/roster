@@ -39,7 +39,7 @@ jobs:
       - name: Deploy firebase to staging env
         uses: w9jds/firebase-action@master
         with:
-          args: deploy -P staging
+          args: deploy -P roster-test
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
       - name: Run Robot tests
@@ -82,7 +82,7 @@ jobs:
     - name: Deploy firebase to production
       uses: w9jds/firebase-action@master
       with:
-        args: deploy -P production
+        args: deploy -P devolution-roster
       env:
         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
     - name: Run Robot tests
