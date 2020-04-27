@@ -9,6 +9,7 @@ import {
 import FrontPage from './pages/Front';
 import UserPage from './pages/User';
 import AdminPage from './pages/Admin/Admin';
+import TestLoginPage from './pages/TestLogin';
 import Navbar from './components/Navbar';
 
 import * as ROUTES from './constants/routes';
@@ -22,6 +23,7 @@ const App = () => (
         <Route exact path={ROUTES.LANDING} component={FrontPage} />
         <Route exact path={ROUTES.USER}    component={UserPage} />
         <Route exact path={ROUTES.ADMIN}   component={AdminPage} />
+        <Route exact path={ROUTES.TEST_LOGIN} component={TestLoginPage} />
       </main>
     </div>
   </Router>

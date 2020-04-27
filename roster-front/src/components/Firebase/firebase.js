@@ -48,22 +48,29 @@ const devConfig = {
 };
 
 var config = null;
+var testerUid = '';
 const deploy_env = process.env.REACT_APP_DEPLOY_ENV;
+
 switch (deploy_env) {
 case 'production':
   config = prodConfig;
+  testerUid = process.env.REACT_APP_TESTER_UID;
   break;
 case 'staging':
   config = stagingConfig;
+  testerUid = process.env.REACT_APP_TESTER_UID_STAGING;
   break;
 case 'pr':
   config = prConfig;
+  testerUid = process.env.REACT_APP_TESTER_UID_PR;
   break;
 case 'dev':
   config = devConfig;
+  testerUid = process.env.REACT_APP_TESTER_UID_DEV;
   break;
 default:
   config = devConfig;
+  testerUid = process.env.REACT_APP_TESTER_UID_DEV;
   break;
 }
 
@@ -73,6 +80,11 @@ class Firebase {
     this.auth = app.auth();
     this.functions = app.functions();
     this.provider = new app.auth.GithubAuthProvider();
+    this.loginTestUid = testerUid;
+  }
+
+  testLoginUid = () => {
+    return this.loginTestUid;
   }
 
   githubAuth = () => {
@@ -95,6 +107,10 @@ class Firebase {
     const getUser = this.functions.httpsCallable('getUser');
     return getUser({uid: uid});
   };
+
+  testLogin = (email, password) => {
+    return this.auth.signInWithEmailAndPassword(email, password);
+  }
 }
 
 export default Firebase;
