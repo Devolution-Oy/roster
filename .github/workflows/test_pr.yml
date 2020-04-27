@@ -44,7 +44,7 @@ jobs:
       - name: Run Robot tests
         run: |
           docker build -t rfcontainer .
-          docker run -v ${PWD}:/home/robot --rm rfcontainer -v USER_PW:${{ secrets.TEST_USER_PW }} -v FB_PROJECT:roster-pr -L TRACE
+          docker run -v ${PWD}:/home/robot --rm rfcontainer -v USER_PW:${{ secrets.TEST_USER_PW }} -v FB_PROJECT:roster-pr -L TRACE -e not-ready
         working-directory: ./testautomation
       - name: Upload test results
         uses: actions/upload-artifact@v1
