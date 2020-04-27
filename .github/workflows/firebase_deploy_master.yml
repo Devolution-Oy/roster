@@ -46,7 +46,7 @@ jobs:
       - name: Run Robot tests
         run: |
           docker build -t rfcontainer .
-          docker run -v ${PWD}:/home/robot --rm rfcontainer -v USER_PW:${{ secrets.TEST_USER_PW }} -v FB_PROJECT:roster-test-e37b6 -L TRACE
+          docker run -v ${PWD}:/home/robot --rm rfcontainer -v USER_PW:${{ secrets.TEST_USER_PW }} -v FB_PROJECT:roster-test-e37b6 -L TRACE -e not-ready
         working-directory: ./testautomation
       - name: Upload test results
         uses: actions/upload-artifact@v1
@@ -90,7 +90,7 @@ jobs:
     - name: Run Robot tests
       run: |
         docker build -t rfcontainer .
-        docker run -v ${PWD}:/home/robot --rm rfcontainer -v USER_PW:${{ secrets.TEST_USER_PW }} -v FB_PROJECT:devolution-roster -L TRACE
+        docker run -v ${PWD}:/home/robot --rm rfcontainer -v USER_PW:${{ secrets.TEST_USER_PW }} -v FB_PROJECT:devolution-roster -L TRACE -e not-ready
       working-directory: ./testautomation
     - name: Upload test results
       uses: actions/upload-artifact@v1
