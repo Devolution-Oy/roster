@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
-import { AuthContext, withAuthorization } from '../components/Session';
+import './User.css';
+import { AuthContext, withAuthorization } from '../../components/Session';
+import { UserInfo } from '../../components/UserInfo';
 
 class UserPage extends Component {
   render() {
@@ -9,6 +11,7 @@ class UserPage extends Component {
         {authUser => (
           <div>
             <h1>User page content will be shown here</h1>
+            <UserInfo authUser={authUser} />
           </div>
         )}
       </AuthContext.Consumer>

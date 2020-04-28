@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { withAuthorization } from '../../components/Session';
 import * as ROLES from '../../constants/roles';
 
+
 class AdminPage extends Component {
   constructor(props) {
     super(props);
