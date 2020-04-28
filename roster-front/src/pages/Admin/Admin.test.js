@@ -4,34 +4,11 @@ import { act } from 'react-dom/test-utils';
 
 import { AuthContext } from '../../components/Session';
 import AdminPage from './Admin';
-import * as ROLES from '../../constants/roles';
+import { normaluser, adminuser} from '../../test_data';
 
 jest.mock('../../components/Session/withAuthorization');
 jest.mock('../../components/Session/withAuthentication');
 
-const adminuser = {
-  uid: 'test',
-  data: {
-    displayName: 'tester',
-    email: 'test@test.fi',
-    githubUser: 'testuser',
-    photo: 'https://photo.url.fi',
-    projects: [],
-    role: ROLES.ADMIN
-  }
-};
-
-const normaluser = {
-  uid: 'test',
-  data: {
-    displayName: 'tester',
-    email: 'test@test.fi',
-    githubUser: 'testuser',
-    photo: 'https://photo.url.fi',
-    projects: [],
-    role: ROLES.USER
-  }
-};
 
 let container = null;
 beforeEach(() => {
