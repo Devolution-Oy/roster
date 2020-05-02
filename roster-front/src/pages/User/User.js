@@ -4,7 +4,7 @@ import './User.css';
 import { AuthContext, withAuthorization } from '../../components/Session';
 import UserInfo from '../../components/UserInfo';
 
-// TODO: Show edit popup when info button is clicked
+
 class UserPage extends Component {
   render() {
     return (
