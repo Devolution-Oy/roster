@@ -2,7 +2,7 @@ import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import { normaluser } from '../../test_data';
-import { UserInfo } from './UserInfo'; 
+import UserInfo from './UserInfo'; 
 
 let container = null;
 beforeEach(() => {
