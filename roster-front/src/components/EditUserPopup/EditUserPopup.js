@@ -40,7 +40,7 @@ class UserEditPopup extends Component {
       role === 0;
       // TODO: Add guidance text when a field is not valid
     return (
-      <form onSubmit={this.updateUser}>
+      <form id='form_edit_user' onSubmit={this.updateUser}>
         <label id='edit_name'>Name</label>
         <input name='user' type='text' id='input_edit_name' value={user} onChange={this.onChange}/><br/>
         <label id='edit_email'>Email</label>
@@ -52,7 +52,8 @@ class UserEditPopup extends Component {
           <option value='1'>User</option>
           <option value='2'>Admin</option>
         </select><br/>
-        <button type='submit' id='edit_user_submit' disabled={isInvalid} >Confirm</button>
+        <button type='submit' id='btn_edit_user_submit' disabled={isInvalid} >Confirm</button>
+        <button id='btn_edit_user_cancel' onClick={this.props.closeEdit} >Cancel</button>
       </form>
     );
   }
@@ -67,7 +68,8 @@ UserEditPopup.propTypes = {
       githubUser: PropTypes.string.isRequired,
       role: PropTypes.number.isRequired, 
     })
-  })
+  }),
+  closeEdit: PropTypes.func
 };
 
 export default UserEditPopup;

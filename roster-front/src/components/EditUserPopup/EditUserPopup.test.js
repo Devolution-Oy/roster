@@ -30,7 +30,7 @@ describe('User edit window',() => {
     expect(document.getElementById('input_edit_github')).toBeTruthy();
     expect(document.getElementById('edit_role')).toBeTruthy();
     expect(document.getElementById('select_edit_role')).toBeTruthy();
-    expect(document.getElementById('edit_user_submit')).toBeTruthy();
+    expect(document.getElementById('btn_edit_user_submit')).toBeTruthy();
     expect(document.getElementById('input_edit_github')).toBeDisabled();
     expect(document.getElementById('select_edit_role')).toBeDisabled();
   });
@@ -43,7 +43,7 @@ describe('User edit window',() => {
     });
     const nameInput = document.getElementById('input_edit_name');
     const emailInput = document.getElementById('input_edit_email');
-    const editSubmit = document.getElementById('edit_user_submit');
+    const editSubmit = document.getElementById('btn_edit_user_submit');
     Simulate.change(nameInput, { target: { name: 'user', value: ''  }}); 
     expect(editSubmit).toBeDisabled();
     Simulate.change(nameInput, { target: { name: 'user', value: 'NewName' }}); 
