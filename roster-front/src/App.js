@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 
 import FrontPage from './pages/Front';
-import UserPage from './pages/User';
+import UserPage from './pages/User/User';
 import AdminPage from './pages/Admin/Admin';
 import TestLoginPage from './pages/TestLogin';
 import Navbar from './components/Navbar';
