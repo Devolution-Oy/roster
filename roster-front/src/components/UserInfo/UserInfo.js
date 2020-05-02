@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import UserEditPopup from '../EditUserPopup/EditUserPopup';
+import Backdrop from '../Backdrop';
 import { UserInfoTable } from './UserInfoTable';
 
 
@@ -22,7 +23,10 @@ class UserInfo extends Component {
       <div>
         <UserInfoTable showEdit={this.showEdit} authUser={this.props.authUser} />
         {this.state.showEdit &&
-        <UserEditPopup closeEdit={this.closeEdit} user={this.props.authUser} />}
+        <div>
+          <Backdrop />
+          <UserEditPopup closeEdit={this.closeEdit} user={this.props.authUser} />
+        </div>}
       </div>
     );
   }
