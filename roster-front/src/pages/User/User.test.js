@@ -50,6 +50,7 @@ describe('User info', () => {
     expect(document.getElementById('form_edit_user')).not.toBeTruthy();
     Simulate.click(btnEdit);
     expect(document.getElementById('form_edit_user')).toBeTruthy();
+    expect(container.querySelector('.backdrop')).toBeTruthy();
     const btnClose = document.getElementById('btn_edit_user_cancel');
     Simulate.click(btnClose);
     expect(document.getElementById('form_edit_user')).not.toBeTruthy();
