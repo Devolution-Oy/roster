@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
-import { act } from 'react-dom/test-utils';
+import { act, Simulate } from 'react-dom/test-utils';
 
 import { AuthContext } from '../../components/Session';
 import UserPage from './User';
@@ -35,5 +35,23 @@ describe('User info', () => {
     expect(document.getElementById('user_email')).toBeTruthy();
     expect(document.getElementById('user_github')).toBeTruthy();
     expect(document.getElementById('user_role')).toBeTruthy();
+    expect(document.getElementById('btn_edit_user')).toBeTruthy();
+  });
+
+  it('EditUserPopUp is shown when Edit is clicked', () => {
+    act(() => {
+      render(
+        <AuthContext.Provider value={normaluser}>
+          <UserPage />
+        </AuthContext.Provider>, container
+      );
+    });
+    const btnEdit = document.getElementById('btn_edit_user');
+    expect(document.getElementById('form_edit_user')).not.toBeTruthy();
+    Simulate.click(btnEdit);
+    expect(document.getElementById('form_edit_user')).toBeTruthy();
+    const btnClose = document.getElementById('btn_edit_user_cancel');
+    Simulate.click(btnClose);
+    expect(document.getElementById('form_edit_user')).not.toBeTruthy();
   });
 });
