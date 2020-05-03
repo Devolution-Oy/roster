@@ -21,7 +21,7 @@ class GithubLoginButtonBase extends Component {
         role: ROLES.USER,
       }
     };
-    this.props.firebase.addUserData(record);
+    return this.props.firebase.addUserData(record);
   }
 
   submitHandler = (event) => {
@@ -29,10 +29,17 @@ class GithubLoginButtonBase extends Component {
     this.props.firebase.githubAuth().then((result) => {
       if (result.additionalUserInfo.isNewUser)
       {
-        this.createNewUserRecord(result);
+        this.createNewUserRecord(result).then(res => {
+          console.log('Write OK ' + res);
+          this.props.history.push(ROUTES.USER);
+        }).catch(error => {
+          console.log(error);
+          this.props.history.push(ROUTES.LANDING);
+        });
       }
-        
-      this.props.history.push(ROUTES.USER);
+      else { 
+        this.props.history.push(ROUTES.USER);
+      }
     }).catch(error => {
       console.log({error});
     });

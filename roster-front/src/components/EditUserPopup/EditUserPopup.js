@@ -1,14 +1,15 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'recompose';
+
 import Modal from '../Modal';
-
-
+import { withFirebase} from '../Firebase'; 
+import { withAuthentication } from '../Session';
 import './EditUserPopup.css';
 
-// TODO: Implement db push
 
-class UserEditPopup extends Component {
+class UserEditPopupBase extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,6 +26,24 @@ class UserEditPopup extends Component {
   
   updateUser = event => {
     event.preventDefault();
+    const userData = {
+      uid: this.props.user.uid,
+      data: {
+        displayName: this.state.user,
+        email: this.state.email,
+        githubUser: this.state.github,
+        photo: this.props.user.data.photo,
+        projects: this.props.user.data.projects,
+        role: this.state.role
+      }
+    };
+    this.props.firebase.addUserData(userData).then(res =>{
+      console.log('Write OK ' + res);
+      this.props.user.update(userData);
+      this.props.closeEdit();
+    }).catch(error => {
+      console.log(error);
+    });
   };
 
   render() {
@@ -66,7 +85,7 @@ class UserEditPopup extends Component {
   }
 }
 
-UserEditPopup.propTypes = {
+UserEditPopupBase.propTypes = {
   user: PropTypes.shape({
     uid: PropTypes.string.isRequired,
     data: PropTypes.shape({
@@ -74,9 +93,18 @@ UserEditPopup.propTypes = {
       email: PropTypes.string.isRequired,
       githubUser: PropTypes.string.isRequired,
       role: PropTypes.number.isRequired, 
-    })
+      photo: PropTypes.string.isRequired,
+      projects: PropTypes.array.isRequired
+    }),
+    update: PropTypes.func.isRequired
   }),
+  firebase: PropTypes.object,
   closeEdit: PropTypes.func
 };
 
-export default UserEditPopup;
+const UserEditPopup = compose( 
+  withAuthentication,
+  withFirebase
+)(UserEditPopupBase);
+
+export default withFirebase(UserEditPopup);

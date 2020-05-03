@@ -11,7 +11,7 @@ const withAuthorization = condition => Component => {
   class WithAuthorization extends React.Component {
     componentDidMount() {
       this.listener = this.props.firebase.auth.onAuthStateChanged(authUser => {
-        if (!condition(authUser)) {
+        if (!authUser) {
           console.log('Not authorized. Redirecting to FrontPage');
           this.props.history.push(ROUTES.LANDING);
         }
@@ -32,6 +32,8 @@ const withAuthorization = condition => Component => {
       );
     }
   }
+
+  WithAuthorization.contextType = AuthContext;
 
   WithAuthorization.propTypes = {
     firebase: PropTypes.object.isRequired,

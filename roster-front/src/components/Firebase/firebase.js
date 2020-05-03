@@ -96,11 +96,7 @@ class Firebase {
 
   addUserData = user => {
     const addUser = this.functions.httpsCallable('addUser');
-    return addUser(user).then(res => {
-      console.log('Write OK ' + res);
-    }).catch(error => {
-      console.log(error);
-    });
+    return addUser(user);
   }
 
   getUserData = uid => {
