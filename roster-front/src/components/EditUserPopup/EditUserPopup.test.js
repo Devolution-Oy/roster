@@ -20,6 +20,7 @@ afterEach(() => {
   container = null;
 });
 
+window.confirm = jest.fn(() => true);
 const userData = normaluser;
 const closeEdit = jest.fn();
 const updateUser = jest.fn();
