@@ -16,11 +16,13 @@ afterEach(() => {
   container = null;
 });
 
+const closeEdit = jest.fn();
+
 describe('User edit window',() => {
   it('Renders', () => {
     act(() => {
       render(
-        <UserEditPopup user={normaluser} />, container
+        <UserEditPopup closeEdit={closeEdit} user={normaluser} />, container
       );
     });
     expect(document.getElementById('edit_name')).toBeTruthy();
@@ -30,7 +32,7 @@ describe('User edit window',() => {
     expect(document.getElementById('input_edit_github')).toBeTruthy();
     expect(document.getElementById('edit_role')).toBeTruthy();
     expect(document.getElementById('select_edit_role')).toBeTruthy();
-    expect(document.getElementById('btn_edit_user_submit')).toBeTruthy();
+    expect(container.querySelector('.btn_accept')).toBeTruthy();
     expect(document.getElementById('input_edit_github')).toBeDisabled();
     expect(document.getElementById('select_edit_role')).toBeDisabled();
   });
@@ -38,12 +40,12 @@ describe('User edit window',() => {
   it('Submit button is disabled if any of the input fields is empty', () => {
     act(() => {
       render(
-        <UserEditPopup user={normaluser} />, container
+        <UserEditPopup closeEdit={closeEdit}  user={normaluser} />, container
       );
     });
     const nameInput = document.getElementById('input_edit_name');
     const emailInput = document.getElementById('input_edit_email');
-    const editSubmit = document.getElementById('btn_edit_user_submit');
+    const editSubmit = container.querySelector('.btn_accept');
     Simulate.change(nameInput, { target: { name: 'user', value: ''  }}); 
     expect(editSubmit).toBeDisabled();
     Simulate.change(nameInput, { target: { name: 'user', value: 'NewName' }}); 

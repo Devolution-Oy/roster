@@ -12,8 +12,8 @@ const Modal = props => (
       {props.children}
     </section>
     <section className="modal__actions">
-      <button className="btnAccept" onClick={props.onAccept} >{props.accept}</button>
-      <button className="btnCancel" onClick={props.onCancel} >Cancel</button>
+      <button className="btn_accept" disabled={props.disabled} onClick={props.onAccept} >{props.accept}</button>
+      <button className="btn_cancel" onClick={props.onCancel} >Cancel</button>
     </section>
   </div>
 );
@@ -23,7 +23,8 @@ Modal.propTypes = {
   children: PropTypes.element.isRequired,
   onAccept: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
-  accept: PropTypes.string
+  accept: PropTypes.string,
+  disabled: PropTypes.bool
 };
 
 export default Modal;
