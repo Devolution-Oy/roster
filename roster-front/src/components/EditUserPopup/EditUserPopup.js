@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 
 
 import './EditUserPopup.css';
-// TODO Dim background when the window is open
 
-// TODO Implement db push
+// TODO: Use components/Modal component
+// TODO: Implement db push
 
 class UserEditPopup extends Component {
   constructor(props) {
