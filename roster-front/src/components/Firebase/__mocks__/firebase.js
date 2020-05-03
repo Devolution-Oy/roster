@@ -68,12 +68,16 @@ class Firebase {
 
   getUserData = jest.fn(uid => {
     return new Promise((resolve) => {
-      console.log(uid);
+      console.log(uid); 
       resolve(userRecord);
     });
   });
 
-  addUserData = jest.fn();
+  addUserData = jest.fn(user => {
+    return new Promise((resolve) => {
+      resolve(user);
+    });
+  });
 }
 
 export default Firebase;

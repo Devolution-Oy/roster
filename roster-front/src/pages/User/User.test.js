@@ -21,11 +21,13 @@ afterEach(() => {
   container = null;
 });
 
+const updateUser = jest.fn();
+
 describe('User info', () => {
   it('User info is shown on the page', () => {
     act(() => {
       render(
-        <AuthContext.Provider value={normaluser}>
+        <AuthContext.Provider value={{...normaluser, update: updateUser}}>
           <UserPage />
         </AuthContext.Provider>, container
       );
@@ -41,7 +43,7 @@ describe('User info', () => {
   it('EditUserPopUp is shown when Edit is clicked', () => {
     act(() => {
       render(
-        <AuthContext.Provider value={normaluser}>
+        <AuthContext.Provider value={{...normaluser, update: updateUser}}>
           <UserPage />
         </AuthContext.Provider>, container
       );
