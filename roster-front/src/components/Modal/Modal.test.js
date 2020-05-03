@@ -34,7 +34,8 @@ describe('User edit window',() => {
           title='Test title'
           onAccept={onAcceptCB}
           accept="AcceptText"
-          onCancel={onCancelCB}>
+          onCancel={onCancelCB}
+          disabled={false}>
           <TestContent />
         </Modal>
         , container
@@ -42,11 +43,29 @@ describe('User edit window',() => {
     });
     expect(container.querySelector('.modal__title').innerHTML).toBe('Test title');
     expect(document.getElementById('modal_test_content')).toBeTruthy();
-    expect(container.querySelector('.btnAccept').innerHTML).toBe('AcceptText');
-    expect(container.querySelector('.btnCancel').innerHTML).toBe('Cancel');
-    Simulate.click(container.querySelector('.btnAccept'));
+    expect(container.querySelector('.btn_accept').innerHTML).toBe('AcceptText');
+    expect(container.querySelector('.btn_cancel').innerHTML).toBe('Cancel');
+    expect(container.querySelector('.btn_accept')).not.toBeDisabled();
+    Simulate.click(container.querySelector('.btn_accept'));
     expect(onAcceptCB).toHaveBeenCalled();
-    Simulate.click(container.querySelector('.btnCancel'));
+    Simulate.click(container.querySelector('.btn_cancel'));
     expect(onCancelCB).toHaveBeenCalled();
+  });
+
+  it('Accept button is disabled if disabled=true', () => {
+    act(() => {
+      render(
+        <Modal
+          title='Test title'
+          onAccept={onAcceptCB}
+          accept="AcceptText"
+          onCancel={onCancelCB}
+          disabled={true}>
+          <TestContent />
+        </Modal>
+        , container
+      );
+    });
+    expect(container.querySelector('.btn_accept')).toBeDisabled();
   });
 });
