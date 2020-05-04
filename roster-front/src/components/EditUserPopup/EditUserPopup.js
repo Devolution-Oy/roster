@@ -26,24 +26,26 @@ class UserEditPopupBase extends Component {
   
   updateUser = event => {
     event.preventDefault();
-    const userData = {
-      uid: this.props.user.uid,
-      data: {
-        displayName: this.state.user,
-        email: this.state.email,
-        githubUser: this.state.github,
-        photo: this.props.user.data.photo,
-        projects: this.props.user.data.projects,
-        role: this.state.role
-      }
-    };
-    this.props.firebase.addUserData(userData).then(res =>{
-      console.log('Write OK ' + res);
-      this.props.user.update(userData);
-      this.props.closeEdit();
-    }).catch(error => {
-      console.log(error);
-    });
+    if (window.confirm('Are you sure you want to update user info?')) {
+      const userData = {
+        uid: this.props.user.uid,
+        data: {
+          displayName: this.state.user,
+          email: this.state.email,
+          githubUser: this.state.github,
+          photo: this.props.user.data.photo,
+          projects: this.props.user.data.projects,
+          role: this.state.role
+        }
+      };
+      this.props.firebase.addUserData(userData).then(res => {
+        console.log('Write OK ' + res);
+        this.props.user.update(userData);
+        this.props.closeEdit();
+      }).catch(error => {
+        console.log(error);
+      });
+    }
   };
 
   render() {
