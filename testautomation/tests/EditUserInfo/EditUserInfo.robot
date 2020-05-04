@@ -51,6 +51,8 @@ User edit own information
     [Arguments]   ${name}    ${email}
     SeleniumLibrary.Click element       xpath=.//button[@id='btn_edit_user']
     Wait until page contains element    xpath=.//div[@id='form_edit_user']
+    Clear element text    xpath=.//input[@id='input_edit_name']
+    Clear element text    xpath=.//input[@id='input_edit_email']
     Input text    xpath=.//input[@id='input_edit_name']     ${name}
     Input text    xpath=.//input[@id='input_edit_email']    ${email}
     Page should contain element    xpath=.//select[@id='select_edit_role' and @disabled]
