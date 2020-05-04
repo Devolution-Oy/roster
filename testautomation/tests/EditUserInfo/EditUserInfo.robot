@@ -2,6 +2,7 @@
 Documentation    User info editing test cases
 Resource         ${PROJECT_ROOT}${/}resources${/}Setup.robot
 
+Suite Setup      Set selenium speed    0.5s
 Suite Teardown   Close All Browsers
 Force Tags       set-edit-user-info
 
