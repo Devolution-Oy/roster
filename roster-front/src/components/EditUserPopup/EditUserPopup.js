@@ -70,13 +70,13 @@ class UserEditPopupBase extends Component {
         accept='Confirm'
         disabled={isInvalid}>
         <div id='form_edit_user'>
-          <label id='edit_name'>Name</label>
+          <label className='label__name' id='edit_name'>Name</label>
           <input name='user' type='text' id='input_edit_name' value={user} onChange={this.onChange} /><br />
-          <label id='edit_email'>Email</label>
+          <label className='label__name' id='edit_email'>Email</label>
           <input name='email' type='text' id='input_edit_email' value={email} onChange={this.onChange} /><br />
-          <label id='edit_github'>Github</label>
+          <label className='label__name' id='edit_github'>Github</label>
           <input name='github' disabled type='text' id='input_edit_github' value={github} onChange={this.onChange} /><br />
-          <label id='edit_role'>Role</label>
+          <label className='label__name' id='edit_role'>Role</label>
           <select value={role} name='role' disabled id='select_edit_role'>
             <option value='1'>User</option>
             <option value='2'>Admin</option>

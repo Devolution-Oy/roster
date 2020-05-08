@@ -4,7 +4,7 @@ import { act } from 'react-dom/test-utils';
 import {
   BrowserRouter as Router
 } from 'react-router-dom';
-import Navbar, { NavigationNonAuth } from './Navbar';
+import Navbar from './Navbar';
 import * as ROLES from '../../constants/roles';
 import { AuthContext } from '../Session';
 import Firebase, { FirebaseContext } from '../Firebase';
@@ -54,13 +54,16 @@ describe('Navbar user access',() => {
   it('Non-Autohrized navbar contains github login button', () => {
     act(() => {
       render(
-        <Router>
-          <NavigationNonAuth />
-        </Router>, container
-      );
+        <FirebaseContext.Provider value={new Firebase()}>
+          <Router>
+            <AuthContext.Provider value={null} >
+              <Navbar />
+            </AuthContext.Provider>
+          </Router>
+        </FirebaseContext.Provider>
+        , container);
     });
-
-    expect(container.querySelector('.btn_github')).toBeTruthy();
+    expect(document.getElementById('btn_github')).toBeTruthy();
   });
 
   it('Admin level user can see admin page link',() => {

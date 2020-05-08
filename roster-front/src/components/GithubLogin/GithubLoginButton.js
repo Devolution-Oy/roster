@@ -47,7 +47,7 @@ class GithubLoginButtonBase extends Component {
   
   render() {
     return(
-      <GithubButton type='light' onClick={this.submitHandler} id='btn_github' />
+      <GithubButton type='dark' onClick={this.submitHandler} id='btn_github' />
     );
   }
 }

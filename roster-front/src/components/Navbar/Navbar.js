@@ -18,12 +18,17 @@ class Navbar extends Component {
         <div className='navbar__logo'> 
           <img src={logo} alt='Roster logo'/>
         </div>
-        <div>
+        <div className='navbar__items'>
           <nav className="navbar__item">
             <AuthContext.Consumer>
               {authUser => authUser ? <NavigationAuth /> : <NavigationNonAuth />}
             </AuthContext.Consumer>
           </nav>
+        </div>
+        <div className='navbar__login'>
+          <AuthContext.Consumer>
+            {authUser => authUser ? <SignOutButton /> : <GithubLoginButton />}
+          </AuthContext.Consumer>
         </div>
       </header>
     );
@@ -32,7 +37,6 @@ class Navbar extends Component {
 
 export const NavigationNonAuth = () => (
   <ul>
-    <li><GithubLoginButton /></li>
   </ul>
 );
 
@@ -44,7 +48,6 @@ export const NavigationAuth = () => (
       {authUser => authUser.data.role === ROLES.ADMIN ?
         <li><Link className='linkAdmin' to={ROUTES.ADMIN}> Admin </Link></li> : null}
     </AuthContext.Consumer>
-    <li><SignOutButton /></li>
   </ul>
 );
 

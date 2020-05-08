@@ -9,7 +9,7 @@ class GithubLoginButton extends Component {
 
   render() {
     return (
-      <button className='btn_github' onClick={this.submitHandler}>Github Login Button</button>
+      <button id='btn_github' onClick={this.submitHandler}>Github Login Button</button>
     );
   }
 }

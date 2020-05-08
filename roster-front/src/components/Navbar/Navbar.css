@@ -17,7 +17,12 @@
     align: center;
 }
 
-.navbar__item {
+.navbar__items {
+    margin: 0 auto;
+}
+
+.navbar__login {
+    width: 300px;
 }
 
 .navbar__item ul {
@@ -27,13 +32,19 @@
     margin: 10px;
     align-items: center;
     background: white;
-    height: 50px;
 }
 
 .navbar__item li
 {
-    margin: 0 1rem;
+    padding: 10px 0 0 0;
+    margin: 0 2rem;
+    height: 30px;
     text-align: center;
+    min-width: 50px;
+}
+
+.navbar__item li:hover {
+    background: #efefef;
 }
 
 .navbar__item a,
