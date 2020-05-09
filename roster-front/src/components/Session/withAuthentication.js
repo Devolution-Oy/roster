@@ -21,7 +21,6 @@ const withAuthentication = Component => {
           data: user.data,
           update: this.updateAuthUser
         };
-        console.log(loggedUser);
         this.setState({authUser: loggedUser});
       }).catch(error => {
         console.log(error);
