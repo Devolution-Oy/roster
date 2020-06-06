@@ -10,8 +10,7 @@ const prodConfig = {
   projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
   storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID,
-  appId: process.env.REACT_APP_FIREBASE_APP_ID,
-  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
+  appId: process.env.REACT_APP_FIREBASE_APP_ID
 };
 
 const stagingConfig = {
@@ -21,8 +20,7 @@ const stagingConfig = {
   projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID_STAGING,
   storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET_STAGING,
   messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID_STAGING,
-  appId: process.env.REACT_APP_FIREBASE_APP_ID_STAGING,
-  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID_STAGING
+  appId: process.env.REACT_APP_FIREBASE_APP_ID_STAGING
 };
 
 const prConfig = {
@@ -32,8 +30,7 @@ const prConfig = {
   projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID_PR,
   storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET_PR,
   messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID_PR,
-  appId: process.env.REACT_APP_FIREBASE_APP_ID_PR,
-  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID_PR
+  appId: process.env.REACT_APP_FIREBASE_APP_ID_PR
 };
 
 const devConfig = {
@@ -43,8 +40,7 @@ const devConfig = {
   projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID_DEV,
   storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET_DEV,
   messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID_DEV,
-  appId: process.env.REACT_APP_FIREBASE_APP_ID_DEV,
-  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID_DEV
+  appId: process.env.REACT_APP_FIREBASE_APP_ID_DEV
 };
 
 var config = null;
