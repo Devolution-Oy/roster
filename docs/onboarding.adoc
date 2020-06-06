@@ -1,0 +1,37 @@
+# Welcome to the project
+
+## Set Up dev environment
+
+1. Clone the roster repository from github
+
+  git@github.com:Devolution-Oy/roster.git 
+
+2. Setup firebase dev project
+
+  https://firebase.google.com
+
+  1. Create a firebase project (free plan is ok)
+  2. Add a web app into the project
+  3. Enable email/password and github authentication
+
+3. Create roster.test@devolution.fi user
+
+4. Edit .env_example and save it as .env
+  The values are the firebase config, which can be found from your firebase APP configs
+
+5. Install npm packages
+
+  npm install
+
+
+6. Verify that all unit tests pass
+
+  npm test
+
+7. Start development server
+
+  npm start
+
+## TODO Add onboarding material about firebase functions
+
+## TODO ADD onboarding material about front end file structure
