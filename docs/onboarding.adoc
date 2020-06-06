@@ -31,3 +31,7 @@
 7. Start development server
 
   npm start
+
+## TODO Add onboarding material about firebase functions
+
+## TODO ADD onboarding material about front end file structure
