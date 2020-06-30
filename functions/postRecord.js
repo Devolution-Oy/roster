@@ -22,7 +22,7 @@ module.exports = async(req, res, admin) => {
     validatePostBalance,
     admin);
 
-  if (status.code != 200) {
+  if (status.code !== 200) {
     res.status(status.code).send(status.message);
     return false;
   }

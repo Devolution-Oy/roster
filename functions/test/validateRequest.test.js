@@ -8,7 +8,7 @@ const sandbox = sinon.createSandbox();
 
 describe('REST call validation', async () => {
   const stubVerifyIdToken = sandbox.stub().callsFake(token => {
-    if (!token) throw ('No token');
+    if (!token) return 'No token';
 
     return 'tester';
   });
