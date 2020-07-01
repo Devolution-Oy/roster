@@ -36,13 +36,18 @@ jobs:
       - name: Run functions unittests
         run: npm run test
         working-directory: ./functions
+      - name: Set tasker app id config to functions
+        uses: w9jds/firebase-action@master
+        args: functions:config:set tasker_app_id.value="${{ TASKER_APP_ID }}"
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          PROJECT_ID: ${{ secrets.REACT_APP_FIREBASE_PROJECT_ID_PR }}
       - name: Deploy firebase to PR env
         uses: w9jds/firebase-action@master
         with:
           args: deploy -P roster-pr 
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-          TASKER_APP_ID: ${{ secrets.TASKER_APP_ID }}
       - name: Run Robot tests
         run: |
           docker build -t rfcontainer .
