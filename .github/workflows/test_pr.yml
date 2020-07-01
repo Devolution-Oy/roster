@@ -39,14 +39,14 @@ jobs:
       - name: Set tasker app id config to functions
         uses: w9jds/firebase-action@master
         with:
-          args: functions:config:set tasker_app_id.value="${{ secrets.TASKER_APP_ID }}"
+          args: functions:config:set tasker_app_id.value="${{ secrets.TASKER_APP_ID }} && firebase deploy --only functions"
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           PROJECT_ID: ${{ secrets.REACT_APP_FIREBASE_PROJECT_ID_PR }}
       - name: Deploy firebase to PR env
         uses: w9jds/firebase-action@master
         with:
-          args: deploy -P roster-pr 
+          args: deploy -P roster-pr --only hosting 
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
       - name: Run Robot tests
