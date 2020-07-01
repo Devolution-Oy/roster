@@ -42,6 +42,7 @@ jobs:
           args: deploy -P roster-pr 
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          TASKER_APP_ID: ${{ secrets.TASKER_APP_ID }}
       - name: Run Robot tests
         run: |
           docker build -t rfcontainer .
