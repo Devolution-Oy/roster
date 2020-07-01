@@ -8,7 +8,7 @@ const sandbox = sinon.createSandbox();
 
 describe('REST call validation', async () => {
   const stubSignInWithCustomToken = sandbox.stub().callsFake(token => {
-    if (!token) throw 'No token';
+    if (!token) throw new Error('No token');
 
     return true;
   });
