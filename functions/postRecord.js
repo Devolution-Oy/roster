@@ -1,11 +1,12 @@
 const crypto = require('crypto-js');
 const functions = require('firebase-functions');
 
-const tasker_app_id = functions.config().tasker_app_id.value;
+
 /*
   Validate new record post
 */
 const validatePostBalance = req => {
+  const tasker_app_id = functions.config().tasker_app_id.value;
 
   if (!req.headers.authorization || req.headers.authorization !== tasker_app_id) {
     console.log('Received header ' + req.headers.authorization);
