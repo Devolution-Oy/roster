@@ -18,6 +18,7 @@ jobs:
       REACT_APP_FIREBASE_STORAGE_BUCKET_STAGING: ${{ secrets.REACT_APP_FIREBASE_STORAGE_BUCKET_STAGING }}
       REACT_APP_TESTER_UID_STAGING: ${{ secrets.REACT_APP_TESTER_UID_STAGING }}
       REACT_APP_DEPLOY_ENV: staging
+      TASKER_APP_ID: ${{ secrets.TASKER_APP_ID }}
       CI: 1
     steps:
       - uses: actions/checkout@master
