@@ -109,4 +109,4 @@ const UserEditPopup = compose(
   withFirebase
 )(UserEditPopupBase);
 
-export default withFirebase(UserEditPopup);
+export default UserEditPopup;

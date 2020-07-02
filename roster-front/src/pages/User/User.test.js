@@ -5,9 +5,11 @@ import { act, Simulate } from 'react-dom/test-utils';
 import { AuthContext } from '../../components/Session';
 import UserPage from './User';
 import { normaluser } from '../../test_data';
+import Firebase, { FirebaseContext } from '../../components/Firebase';
 
 jest.mock('../../components/Session/withAuthorization');
 jest.mock('../../components/Session/withAuthentication');
+jest.mock('../../components/Firebase/firebase');
 
 let container = null;
 beforeEach(() => {
@@ -27,9 +29,11 @@ describe('User info', () => {
   it('User info is shown on the page', () => {
     act(() => {
       render(
-        <AuthContext.Provider value={{...normaluser, update: updateUser}}>
-          <UserPage />
-        </AuthContext.Provider>, container
+        <FirebaseContext.Provider value={new Firebase()}>
+          <AuthContext.Provider value={{ ...normaluser, update: updateUser }}>
+            <UserPage />
+          </AuthContext.Provider>
+        </FirebaseContext.Provider>, container
       );
     });
     expect(document.getElementById('div_user_info')).toBeTruthy();
@@ -43,9 +47,11 @@ describe('User info', () => {
   it('EditUserPopUp is shown when Edit is clicked', () => {
     act(() => {
       render(
-        <AuthContext.Provider value={{...normaluser, update: updateUser}}>
-          <UserPage />
-        </AuthContext.Provider>, container
+        <FirebaseContext.Provider value={new Firebase()}>
+          <AuthContext.Provider value={{ ...normaluser, update: updateUser }}>
+            <UserPage />
+          </AuthContext.Provider>
+        </FirebaseContext.Provider>, container
       );
     });
     const btnEdit = document.getElementById('btn_edit_user');
