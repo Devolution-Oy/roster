@@ -33,9 +33,6 @@ jobs:
       - name: Insall functions dependencies
         run: npm ci 
         working-directory: ./functions
-      - name: Run functions unittests
-        run: npm run test
-        working-directory: ./functions
       - name: Set tasker app id config to functions
         uses: w9jds/firebase-action@master
         with:
@@ -43,6 +40,9 @@ jobs:
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           PROJECT_ID: ${{ secrets.REACT_APP_FIREBASE_PROJECT_ID_PR }}
+      - name: Run functions unittests
+        run: npm run test
+        working-directory: ./functions
       - name: Deploy firebase to PR env
         uses: w9jds/firebase-action@master
         with:
