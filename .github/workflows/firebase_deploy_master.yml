@@ -31,11 +31,8 @@ jobs:
       - name: Build front-end
         run: npm run build
         working-directory: ./roster-front
-      - name: Insall functions dependencies
+      - name: Install functions dependencies
         run: npm ci
-        working-directory: ./functions
-      - name: Run functions unittests
-        run: npm run test
         working-directory: ./functions
       - name: Set tasker app id config to functions
         uses: w9jds/firebase-action@master
@@ -44,6 +41,9 @@ jobs:
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           PROJECT_ID: ${{ secrets.REACT_APP_FIREBASE_PROJECT_ID_STAGING }}
+      - name: Run functions unittests
+        run: npm run test
+        working-directory: ./functions
       - name: Deploy firebase to staging env
         uses: w9jds/firebase-action@master
         with:
