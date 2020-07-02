@@ -21,6 +21,17 @@ const userRecord = {
   role: 1
 };
 
+const userBalance = {
+  total: 12345.00,
+  records: [
+    { date: '2020-06-06 12:12:12', description: 'Did something', amount: 50.00 },
+    { date: '2020-06-06 11:12:12', description: 'Bought something', amount: -51 },
+    { date: '2020-06-06 10:12:12', description: 'Did something', amount: 49.99 },
+    { date: '2020-06-06 09:12:12', description: 'Bought something', amount: 50 },
+    { date: '2020-06-06 08:12:12', description: 'Did something', amount: 52 }
+  ]
+};
+
 class Auth extends Component {
 
   authUser = null;
@@ -76,6 +87,12 @@ class Firebase {
   addUserData = jest.fn(user => {
     return new Promise((resolve) => {
       resolve(user);
+    });
+  });
+
+  getUserBalance = jest.fn((_github, _records) => {
+    return new Promise((resolve) => {
+      resolve(userBalance);
     });
   });
 }

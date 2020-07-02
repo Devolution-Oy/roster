@@ -5,38 +5,15 @@ import {
   BrowserRouter as Router
 } from 'react-router-dom';
 import Navbar from './Navbar';
-import * as ROLES from '../../constants/roles';
 import { AuthContext } from '../Session';
 import Firebase, { FirebaseContext } from '../Firebase';
+import { normaluser, adminuser } from '../../test_data';
 
 jest.mock('../GithubLogin/GithubLoginButton');
 jest.mock('../Session/withAuthorization');
 jest.mock('../Session/withAuthentication');
 jest.mock('../Firebase/firebase');
 
-const adminuser = {
-  uid: 'test',
-  data: {
-    displayName: 'tester',
-    email: 'test@test.fi',
-    githubUser: 'testuser',
-    photo: 'https://photo.url.fi',
-    projects: [],
-    role: ROLES.ADMIN
-  }
-};
-
-const normaluser = {
-  uid: 'test',
-  data: {
-    displayName: 'tester',
-    email: 'test@test.fi',
-    githubUser: 'testuser',
-    photo: 'https://photo.url.fi',
-    projects: [],
-    role: ROLES.USER
-  }
-};
 
 let container = null;
 beforeEach(() => {
