@@ -1,0 +1,16 @@
+table {
+  width: 100%;
+}
+
+.td_amount {
+  text-align: right;
+  color: green;
+}
+
+.td_amount[red] {
+  color: red;
+}
+
+label {
+  width: 100%;
+}
