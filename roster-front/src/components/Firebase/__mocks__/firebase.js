@@ -92,7 +92,7 @@ class Firebase {
 
   getUserBalance = jest.fn((_github, _records) => {
     return new Promise((resolve) => {
-      resolve(userBalance);
+      resolve({data: userBalance});
     });
   });
 }
