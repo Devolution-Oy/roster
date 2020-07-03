@@ -104,27 +104,10 @@ class Firebase {
     return this.auth.signInWithEmailAndPassword(email, password);
   }
 
-  getUserBalance = (_github, _recordsCount) => {
-    const userBalance = {
-      total: 12345.00,
-      records: [
-        { date: '2020-06-06 12:12:12', description: 'Did something', amount: 50 },
-        { date: '2020-06-06 11:12:12', description: 'Bought something', amount: -51.01 },
-        { date: '2020-06-06 10:12:12', description: 'Did something', amount: 49.99 },
-        { date: '2020-06-06 09:12:12', description: 'Bought something', amount: -50.02 },
-        { date: '2020-06-06 08:12:12', description: 'Did something', amount: 52 }
-      ]
-    };
-
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        // TODO: Implement firebase function for fetching balance records
-        // TODO: Call firebase function to fetch data from database
-        resolve(userBalance);
-      }, 5000);
-    });
-    // const getBalance = functions.httpsCallable('getBalance');
-    // return getBalance(github, recordsCount);
+  getUserBalance = (github) => {
+    const getBalance = this.functions.httpsCallable('getUserBalance');
+    console.log('Calling get balance');
+    return getBalance({user: github});
   };
 }
 

@@ -5,7 +5,8 @@ import './BalanceView.css';
 import { withFirebase} from '../Firebase'; 
 
 // TODO: Add style for the balance view
-const DEFAULT_RECORD_COUNT = 5;
+
+// TODO: Add expandable scroll area for the records
 
 const BalanceViewTotalRow = amount => {
   const amountValue = amount.amount;
@@ -37,18 +38,18 @@ class BalanceView extends Component {
     };
   }
 
-  fetchBalance = (amount) => {
+  fetchBalance = () => {
     this.setState({loading: true});
-    this.props.firebase.getUserBalance(this.props.user.data.githubUser, amount)
-      .then(balance => {
-        this.setState({ balance: balance, loading: false });
+    this.props.firebase.getUserBalance(this.props.user.data.githubUser)
+      .then(res => {
+        this.setState({ balance: res.data, loading: false });
       }).catch(error => {
         this.setState({ error, loading: false} );
       });
   };
 
   componentDidMount() {
-    this.fetchBalance(DEFAULT_RECORD_COUNT);
+    this.fetchBalance();
   }
 
   render() {
@@ -70,6 +71,7 @@ class BalanceView extends Component {
       <div id='balance_view'>
         <BalanceViewTotalRow amount={balance.total} />
         <hr />
+        
         <div id='balance_records'>
           {
             balance.records.map((record, i) => {
