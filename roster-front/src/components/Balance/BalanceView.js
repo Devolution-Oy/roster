@@ -14,19 +14,31 @@ const BalanceViewTotalRow = amount => {
   const amountValue = amount.amount;
   return (
     <div id='balanceview_total_row'>
-      <label className='label__total_description' id='description_total'>Account&apos;s total balance</label>
-      <label className='label__total_sum' id='sum_total'>{amountValue.toFixed(2)} €</label><br />
+      <table>
+        <tbody>
+          <tr>
+            <td><label className='label__total_description' id='description_total'>Account&apos;s total balance</label></td>
+            <td className='td_amount'><label className='label__total_sum' id='sum_total'>{amountValue.toFixed(2)} €</label><br /></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 };
 
 const BalanceRecord = (record) => {
   return (
-    <div id={'balance_record_' + record.index} className='balance_record'>
-      <label id={'date_recent_' + record.index} >{record.record.date}</label>
-      <label id={'description_recent_' + record.index} >{record.record.description}</label>
-      <label id={'amount_recent_' + record.index}>{record.record.amount.toFixed(2)} €</label><br />
-    </div>);
+    <tr>
+      <td>
+        <label id={'date_recent_' + record.index} >{record.record.date}</label>
+      </td>
+      <td>
+        <label id={'description_recent_' + record.index} >{record.record.description}</label>
+      </td>
+      <td className='td_amount' red={record.record.amount < 0 ? 'true' : undefined}>
+        <label id={'amount_recent_' + record.index}>{record.record.amount.toFixed(2)} €</label><br />
+      </td>
+    </tr>);
 };
 
 class BalanceView extends Component {
@@ -51,7 +63,9 @@ class BalanceView extends Component {
   };
 
   componentDidMount() {
-    this.fetchBalance();
+    if (!this.state.balance) {
+      this.fetchBalance();
+    }
   }
 
   render() {
@@ -77,11 +91,15 @@ class BalanceView extends Component {
         <div className='balance_records'>
           <ScrollBar component='div' >
             <div className='balance_records_content'>
-              {
-                balance.records.map((record, i) => {
-                  return (<BalanceRecord key={i} record={record} index={i} />);
-                })
-              }
+              <table>
+                <tbody>
+                  {
+                    balance.records.map((record, i) => {
+                      return (<BalanceRecord key={i} record={record} index={i} />);
+                    })
+                  }
+                </tbody>
+              </table>
             </div>
           </ScrollBar>
         </div>
