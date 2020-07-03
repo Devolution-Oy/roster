@@ -27,7 +27,6 @@ module.exports = async(data, context) => {
     .orderBy('timestamp', 'desc')
     .get()
     .then(query => {
-
       var records = [];
       var balance = 0;
       query.forEach(entry => {
