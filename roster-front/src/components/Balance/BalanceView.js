@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
-import './BalanceView.css';
+import ScrollBar from 'react-perfect-scrollbar';
 import { withFirebase} from '../Firebase'; 
+
+import 'react-perfect-scrollbar/dist/css/styles.css';
+import './BalanceView.css';
 
 // TODO: Add style for the balance view
 
-// TODO: Add expandable scroll area for the records
+// TODO: Add resizable element box for balance records
 
 const BalanceViewTotalRow = amount => {
   const amountValue = amount.amount;
@@ -71,13 +73,17 @@ class BalanceView extends Component {
       <div id='balance_view'>
         <BalanceViewTotalRow amount={balance.total} />
         <hr />
-        
-        <div id='balance_records'>
-          {
-            balance.records.map((record, i) => {
-              return (<BalanceRecord key={i} record={record} index={i} />);
-            })
-          }
+
+        <div className='balance_records'>
+          <ScrollBar component='div' >
+            <div className='balance_records_content'>
+              {
+                balance.records.map((record, i) => {
+                  return (<BalanceRecord key={i} record={record} index={i} />);
+                })
+              }
+            </div>
+          </ScrollBar>
         </div>
       </div>
     );
