@@ -24,7 +24,7 @@ afterEach(() => {
 
 describe('Add post custom record popup', () => {
 
-  it('Loads user list from firestore', () => {
+  it('Loads users and projects lists from firestore', () => {
     act(()=> {
       render(
         <FirebaseContext.Provider value={firebase}>
@@ -33,6 +33,7 @@ describe('Add post custom record popup', () => {
         , container
       );
       expect(firebase.getUsers).toHaveBeenCalled();
+      expect(firebase.getProjects).toHaveBeenCalled();
     });
   });
 });
