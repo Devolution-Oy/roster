@@ -13,8 +13,8 @@ class UserPage extends Component {
         {authUser => (
           <div>
             <h1>User page content will be shown here</h1>
-            <UserInfo authUser={authUser} />
             <BalanceView user={authUser} />
+            <UserInfo authUser={authUser} />
           </div>
         )}
       </AuthContext.Consumer>
