@@ -25,11 +25,15 @@ class AddRecordPopup extends Component {
     return this.props.firebase.getUsers();
   }
 
+  getProjects = () => {
+    console.log('fetching projects');
+    return this.props.firebase.getProjects();
+  }
+
   componentDidMount() {
     this.setState({loading: true});
-    Promise.all([this.getUsers()]).then((values) => {
-      console.log('resolved all');
-      this.setState({users: values[0]});
+    Promise.all([this.getUsers(), this.getProjects()]).then((values) => {
+      this.setState({ users: values[0], projects: values[1] });
 
     }).catch(error => {
       this.setState({error: error});

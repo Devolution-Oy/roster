@@ -3,7 +3,7 @@ import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/functions';
 
-import { users } from '../../test_data/index.js';
+import { users, projects } from '../../test_data/index.js';
 
 const prodConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_KEY,
@@ -118,6 +118,16 @@ class Firebase {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(users);
+      }, 5000);
+    });
+  }
+
+  getProjects = () => {
+    console.log('Calling get projects');
+    // TODO: Implment and call firebase functions getProjects
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(projects);
       }, 5000);
     });
   }

@@ -17,7 +17,7 @@ export const AddRecord = (props) => {
   return (
     <div id='form_add_record'>
       <label>User</label>
-      <select>
+      <select id='select_user'>
         {
           users.map((user, i) => {
             return (<option key={i}>{user.data.githubUser}</option>);
@@ -25,6 +25,14 @@ export const AddRecord = (props) => {
         }
       </select>
       <label>Project</label>
+      <select id='select_project'>
+        {
+          projects.map((project, i) => {
+            return (<option key={i}>{project}</option>);
+          })
+        }
+      </select>
+      
       <label>Description</label>
       <label>Issue</label>
     </div>

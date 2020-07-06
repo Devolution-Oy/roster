@@ -63,3 +63,7 @@ export const users = [
   test_user2,
   test_user3
 ];
+
+export const projects = [
+  'project1', 'project2', 'project3'
+];
