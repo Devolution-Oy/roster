@@ -5,9 +5,11 @@ import { act, Simulate } from 'react-dom/test-utils';
 import { AuthContext } from '../../components/Session';
 import AdminPage from './Admin';
 import { normaluser, adminuser} from '../../test_data';
+import Firebase, { FirebaseContext } from '../../components/Firebase';
 
 jest.mock('../../components/Session/withAuthorization');
 jest.mock('../../components/Session/withAuthentication');
+jest.mock('../../components/Firebase/firebase');
 
 
 let container = null;
@@ -26,10 +28,12 @@ describe('Admin level user can see content', () => {
   it('Admin page render when user has ROLE ADMIN,', () => {
     act(() => {
       render(
-        <AuthContext.Provider value={adminuser}>
-          <AdminPage />
-        </AuthContext.Provider>,
-        container
+        <FirebaseContext.Provider value={new Firebase()}>
+          <AuthContext.Provider value={adminuser}>
+            <AdminPage />
+          </AuthContext.Provider>
+        </FirebaseContext.Provider>
+        , container
       );
     });
     expect(container.querySelector('.admin-header').textContent).toBe('Admin page content');
@@ -38,10 +42,12 @@ describe('Admin level user can see content', () => {
   it('Admin page does not render when user has ROLE USER,', () => {
     act(() => {
       render(
-        <AuthContext.Provider value={normaluser}>
-          <AdminPage />
-        </AuthContext.Provider>,
-        container
+        <FirebaseContext.Provider value={new Firebase()}>
+          <AuthContext.Provider value={normaluser}>
+            <AdminPage />
+          </AuthContext.Provider>
+        </FirebaseContext.Provider>
+        , container
       );
     });
     expect(container.querySelector('.admin-header')).toBeNull();
@@ -54,10 +60,12 @@ describe('Admin user can add custom balance records', () => {
      + 'button is clicked', async () => {
     act(() => {
       render(
-        <AuthContext.Provider value={adminuser}>
-          <AdminPage />
-        </AuthContext.Provider>,
-        container
+        <FirebaseContext.Provider value={new Firebase}>
+          <AuthContext.Provider value={adminuser}>
+            <AdminPage />
+          </AuthContext.Provider>
+        </FirebaseContext.Provider>
+        , container
       );
     });
     const addRecord = document.getElementById('btn_add_record');
