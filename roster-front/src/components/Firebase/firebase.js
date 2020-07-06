@@ -3,7 +3,7 @@ import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/functions';
 
-import { users, projects } from '../../test_data/index.js';
+import { projects } from '../../test_data/index.js';
 
 const prodConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_KEY,
@@ -104,7 +104,7 @@ class Firebase {
 
   testLogin = (email, password) => {
     return this.auth.signInWithEmailAndPassword(email, password);
-  }
+  };
 
   getUserBalance = (github) => {
     const getBalance = this.functions.httpsCallable('getUserBalance');
@@ -113,14 +113,9 @@ class Firebase {
   };
 
   getUsers = () => {
-    console.log('Calling get users');
-    // TODO: Implment and call firebase functions getUsers
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(users);
-      }, 5000);
-    });
-  }
+    const getUsers = this.functions.httpsCallable('getUsers');
+    return getUsers();
+  };
 
   getProjects = () => {
     console.log('Calling get projects');
