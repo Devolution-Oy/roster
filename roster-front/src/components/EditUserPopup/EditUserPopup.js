@@ -64,6 +64,7 @@ class UserEditPopupBase extends Component {
       // TODO: Add guidance text when a field is not valid
     return (
       <Modal
+        id='modal_edit_user'
         title='Edit User Info'
         onCancel={this.props.closeEdit}
         onAccept={this.updateUser}

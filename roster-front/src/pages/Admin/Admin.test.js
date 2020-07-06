@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
-import { act } from 'react-dom/test-utils';
+import { act, Simulate } from 'react-dom/test-utils';
 
 import { AuthContext } from '../../components/Session';
 import AdminPage from './Admin';
@@ -45,5 +45,23 @@ describe('Admin level user can see content', () => {
       );
     });
     expect(container.querySelector('.admin-header')).toBeNull();
+  });
+
+});
+
+describe('Admin user can add custom balance records', () => {
+  it('Add custom balance modal popup is opened when "Add Record"'
+     + 'button is clicked', async () => {
+    act(() => {
+      render(
+        <AuthContext.Provider value={adminuser}>
+          <AdminPage />
+        </AuthContext.Provider>,
+        container
+      );
+    });
+    const addRecord = document.getElementById('btn_add_record');
+    await Simulate.click(addRecord);
+    expect(document.getElementById('modal_add_record')).toBeTruthy();
   });
 });

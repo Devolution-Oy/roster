@@ -31,6 +31,7 @@ describe('User edit window',() => {
     act(() => {
       render(
         <Modal
+          id='modal_test_modal'
           title='Test title'
           onAccept={onAcceptCB}
           accept="AcceptText"
@@ -56,6 +57,7 @@ describe('User edit window',() => {
     act(() => {
       render(
         <Modal
+          id='modal_test_modal'
           title='Test title'
           onAccept={onAcceptCB}
           accept="AcceptText"
