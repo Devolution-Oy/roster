@@ -3,6 +3,8 @@ import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/functions';
 
+import { users } from '../../test_data/index.js';
+
 const prodConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -109,6 +111,16 @@ class Firebase {
     console.log('Calling get balance');
     return getBalance({user: github});
   };
+
+  getUsers = () => {
+    console.log('Calling get users');
+    // TODO: Implment and call firebase functions getUsers
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(users);
+      }, 5000);
+    });
+  }
 }
 
 export default Firebase;

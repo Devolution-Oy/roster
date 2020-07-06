@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { users } from '../../../test_data/index.js';
 
 const user = {
   uid: 'LoR1xY535HP6gNJNRBokMfhD8343',
@@ -93,6 +94,13 @@ class Firebase {
   getUserBalance = jest.fn((_github, _records) => {
     return new Promise((resolve) => {
       resolve({data: userBalance});
+    });
+  });
+
+  getUsers = jest.fn(() => {
+    return new Promise((resolve) => {
+      console.log('firebse mock get users');
+      resolve(users);
     });
   });
 }
