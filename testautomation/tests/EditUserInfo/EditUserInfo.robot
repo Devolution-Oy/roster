@@ -91,7 +91,7 @@ Input and check
     [Arguments]    ${locator}    ${text}
     Clear element text    ${locator}
     Input text    ${locator}     ${text}
-    Set focus to element    ${locator}
+    Set focus to element    xpath=.//div[@id='modal_edit_user']
     Element text should be    ${locator}    ${text}
 
 Revert user info
