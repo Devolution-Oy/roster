@@ -22,7 +22,8 @@ class UserInfo extends Component {
 
   render() {
     return (
-      <div>
+      <div className='user_info'>
+        <h2>My Profile</h2>
         <UserInfoTable showEdit={this.showEdit} authUser={this.props.authUser} />
         {this.state.showEdit &&
         <div>
