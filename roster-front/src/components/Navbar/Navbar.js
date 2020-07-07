@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import './Navbar.css';
-import logo from '../../roster-logo.jpg';
+import logo from '../../roster-logo.png';
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
 import { AuthContext} from '../Session'; 
