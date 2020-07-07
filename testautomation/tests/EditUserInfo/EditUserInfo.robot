@@ -70,24 +70,24 @@ User info are shown
     Page should contain element    xpath=.//button[@id='btn_edit_user']
 
 Edit user info
-    [Arguments]    ${name}    ${email}    ${orignal_name}    ${original_email}
+    [Arguments]    ${name}    ${email}    ${existing_name}    ${existing_email}
     SeleniumLibrary.Click element       xpath=.//button[@id='btn_edit_user']
-    User edit dialog is shown    ${original_name}    ${original_email}
+    User edit dialog is shown    ${existing_name}    ${existing_email}
     Clear element text    xpath=.//input[@id='input_edit_name']
     Clear element text    xpath=.//input[@id='input_edit_email']
     Input text    xpath=.//input[@id='input_edit_name']    ${name}
     Input text    xpath=.//input[@id='input_edit_email']    ${email}
 
 User edit own information but does not confirm dialog
-    [Arguments]    ${name}    ${email}
-    Edit user info    ${name}    ${email}    ${original_name}    ${original_email}
+    [Arguments]    ${name}    ${email}    ${existing_name}    ${existing_email}
+    Edit user info    ${name}    ${email}    ${existing_name}    ${existing_email}
     Click element    xpath=.//button[@class='btn_accept']
     Handle Alert     DISMISS
 
 User edit own information
     [Documentation]    Assume that user page is shown
-    [Arguments]    ${name}    ${email}    ${orignal_name}    ${original_email}
-    Edit user info    ${name}    ${email}    ${orignal_name}    ${original_email}
+    [Arguments]    ${name}    ${email}    ${existing_name}    ${existing_email}
+    Edit user info    ${name}    ${email}    ${existing_name}    ${existing_email}
     Save and confirm edit
 
 Input and check
