@@ -28,7 +28,7 @@ User cancel information edit
 User edit information but unconfirm the alert box
     GIVEN User is logged in
     WHEN User edit own information but does not confirm dialog    ${EDITED_USER_NAME}    ${EDITED_EMAIL}    ${ORIGINAL_NAME}    ${ORIGINAL_EMAIL}
-    THEN User edit dialog is shown
+    THEN User edit dialog is shown    ${ORIGINAL_NAME}    ${ORIGINAL_EMAIL}
     [Teardown]    Click element    xpath=.//button[@class='btn_accept']
 
 *** Keywords ***
