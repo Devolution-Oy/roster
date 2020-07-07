@@ -46,8 +46,8 @@ Save and confirm edit
 User edit dialog is shown
     [Arguments]    ${name}    ${email}
     Wait until page contains element    xpath=.//div[@id='form_edit_user']
-    Wait until page contains element    xpath=.//input[@id='input_edit_name' and text()='${name}']
-    Page should contain element         xpath=.//input[@id='input_edit_email' and text()='${email}']
+    Wait until page contains element    xpath=.//input[@id='input_edit_name' and @value='${name}']
+    Page should contain element         xpath=.//input[@id='input_edit_email' and @value='${email}']
     Page should contain element         xpath=.//select[@id='select_edit_role' and @disabled]
     Page should contain element         xpath=.//input[@id='input_edit_github' and @disabled]
     Page should contain element         xpath=.//button[@class='btn_cancel']
