@@ -14,12 +14,19 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #96afbe;
 }
 
+a {
+  color: inherit;
+}
+
+body {
+  align-content: center;
+}
 button {
   margin: 2px;
-  height: 40px;
+  min-height: 40px;
   min-width: 100px;
   background-color: #efefef;
 }
@@ -47,16 +54,6 @@ label {
   padding: 5px 0 0 0;
 }
 
-#div_user_info {
-  margin: 0;
-  display: grid;
-  width: 300px;
-}
-
-#form_edit_user {
-  display: grid;
-  margin: 2px 2px 2px 2px;
-}
 input,
 select {
   margin: 0px;

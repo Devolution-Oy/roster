@@ -4,6 +4,8 @@ import UserEditPopup from '../EditUserPopup/EditUserPopup';
 import Backdrop from '../Backdrop';
 import { UserInfoTable } from './UserInfoTable';
 
+import './UserInfo.css';
+
 
 class UserInfo extends Component {
   state = {
