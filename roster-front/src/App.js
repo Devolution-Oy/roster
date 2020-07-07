@@ -19,10 +19,10 @@ const App = () => (
   <Router>
     <div>
       <Navbar />
-      <main className="main-content">
+      <main className='main-content'>
         <Route exact path={ROUTES.LANDING} component={FrontPage} />
-        <Route exact path={ROUTES.USER}    component={UserPage} />
-        <Route exact path={ROUTES.ADMIN}   component={AdminPage} />
+        <Route exact path={ROUTES.USER} component={UserPage} />
+        <Route exact path={ROUTES.ADMIN} component={AdminPage} />
         <Route exact path={ROUTES.TEST_LOGIN} component={TestLoginPage} />
       </main>
     </div>
