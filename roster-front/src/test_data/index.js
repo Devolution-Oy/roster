@@ -65,5 +65,7 @@ export const users = [
 ];
 
 export const projects = [
-  'project1', 'project2', 'project3'
+  { name: 'project1', budget: 15000},
+  { name: 'project2', budget: 5000},
+  { name: 'project3', budget: 7512.00}
 ];

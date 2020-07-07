@@ -33,7 +33,7 @@ class AddRecordPopup extends Component {
   componentDidMount() {
     this.setState({loading: true});
     Promise.all([this.getUsers(), this.getProjects()]).then((values) => {
-      this.setState({ users: values[0].data, projects: values[1] });
+      this.setState({ users: values[0].data, projects: values[1].data });
 
     }).catch(error => {
       this.setState({error: error});
