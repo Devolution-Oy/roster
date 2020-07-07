@@ -2,7 +2,6 @@
 Documentation    User info editing test cases
 Resource         ${PROJECT_ROOT}${/}resources${/}Setup.robot
 
-Suite Setup      Set selenium speed    0.5s
 Suite Teardown   Close All Browsers
 Force Tags       set-edit-user-info
 
@@ -45,9 +44,10 @@ Save and confirm edit
     Handle Alert
 
 User edit dialog is shown
+    [Arguments]    ${name}    ${email}
     Wait until page contains element    xpath=.//div[@id='form_edit_user']
-    Page should contain element         xpath=.//input[@id='input_edit_name']
-    Page should contain element         xpath=.//input[@id='input_edit_email']
+    Wait until page contains element    xpath=.//input[@id='input_edit_name' and text()='${name}']
+    Page should contain element         xpath=.//input[@id='input_edit_email' and text()='${email}']
     Page should contain element         xpath=.//select[@id='select_edit_role' and @disabled]
     Page should contain element         xpath=.//input[@id='input_edit_github' and @disabled]
     Page should contain element         xpath=.//button[@class='btn_cancel']
@@ -69,22 +69,25 @@ User info are shown
     Page should contain element    xpath=.//label[@id='user_role']
     Page should contain element    xpath=.//button[@id='btn_edit_user']
 
-User edit own information but does not confirm dialog
-    [Arguments]   ${name}    ${email}
+Edit user info
+    [Arguments]    ${name}    ${email}    ${orignal_name}    ${original_email}
     SeleniumLibrary.Click element       xpath=.//button[@id='btn_edit_user']
-    User edit dialog is shown
-    Wait until keyword succeeds   3x    0.5s    Input and check    xpath=.//input[@id='input_edit_name']    ${name}
-    Wait until keyword succeeds   3x    0.5s    Input and check    xpath=.//input[@id='input_edit_email']    ${email}
+    User edit dialog is shown    ${original_name}    ${original_email}
+    Clear element text    xpath=.//input[@id='input_edit_name']
+    Clear element text    xpath=.//input[@id='input_edit_email']
+    Input text    xpath=.//input[@id='input_edit_name']    ${name}
+    Input text    xpath=.//input[@id='input_edit_email']    ${email}
+
+User edit own information but does not confirm dialog
+    [Arguments]    ${name}    ${email}
+    Edit user info    ${name}    ${email}    ${original_name}    ${original_email}
     Click element    xpath=.//button[@class='btn_accept']
     Handle Alert     DISMISS
 
 User edit own information
     [Documentation]    Assume that user page is shown
-    [Arguments]   ${name}    ${email}
-    SeleniumLibrary.Click element       xpath=.//button[@id='btn_edit_user']
-    User edit dialog is shown
-    Wait until keyword succeeds    3x    0.5s   Input and check    xpath=.//input[@id='input_edit_name']    ${name}
-    Wait until keyword succeeds    3x    0.5s   Input and check    xpath=.//input[@id='input_edit_email']    ${email}
+    [Arguments]    ${name}    ${email}    ${orignal_name}    ${original_email}
+    Edit user info    ${name}    ${email}    ${orignal_name}    ${original_email}
     Save and confirm edit
 
 Input and check
@@ -95,6 +98,6 @@ Input and check
     Element text should be    ${locator}    ${text}
 
 Revert user info
-    User edit own information    ${ORIGINAL_NAME}    ${ORIGINAL_EMAIL}
+    User edit own information    ${ORIGINAL_NAME}    ${ORIGINAL_EMAIL}    ${EDITED_USER_NAME}     ${EDITED_EMAIL}
     # TODO: Add Firebase python library and call addUser from there
 
