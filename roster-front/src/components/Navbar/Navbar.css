@@ -66,3 +66,54 @@
 .navbar__item a:hover{
     text-decoration: none;
 }
+
+@media only screen and (max-width: 600px) {
+.navbar {
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: black;
+    display: inline-block;
+    align-items: center;
+    height: 75px;
+    transition: top 0.3s;
+}
+
+.navbar__logo img {
+    width: 100%;
+    align-items: center;
+}
+
+.navbar__items {
+    margin: auto;
+}
+
+.navbar__login {
+    width: 100%;
+}
+
+.navbar__item ul {
+    display: inline-block;
+    width: 100%;
+    position: relative;
+    list-style: none;
+    padding: 0;
+    margin: 0px;
+    background: #c7d5dd;
+    height: 100%;
+}
+
+.navbar__item li
+{
+    padding: 0 0 0 0;
+    margin: 0;
+    text-align: center;
+    width: 100%;
+    margin: 0px;
+}
+
+#btn_logout {
+    width: 100%;
+}
+}
