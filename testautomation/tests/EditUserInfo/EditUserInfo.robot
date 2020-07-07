@@ -73,10 +73,8 @@ User edit own information but does not confirm dialog
     [Arguments]   ${name}    ${email}
     SeleniumLibrary.Click element       xpath=.//button[@id='btn_edit_user']
     User edit dialog is shown
-    Clear element text    xpath=.//input[@id='input_edit_name']
-    Clear element text    xpath=.//input[@id='input_edit_email']
-    Input text    xpath=.//input[@id='input_edit_name']     ${name}
-    Input text    xpath=.//input[@id='input_edit_email']    ${email}
+    Wait until keyword succeeds   3x    0.5s    Input and check    xpath=.//input[@id='input_edit_name']    ${name}
+    Wait until keyword succeeds   3x    0.5s    Input and check    xpath=.//input[@id='input_edit_email']    ${email}
     Click element    xpath=.//button[@class='btn_accept']
     Handle Alert     DISMISS
 
@@ -85,11 +83,15 @@ User edit own information
     [Arguments]   ${name}    ${email}
     SeleniumLibrary.Click element       xpath=.//button[@id='btn_edit_user']
     User edit dialog is shown
-    Clear element text    xpath=.//input[@id='input_edit_name']
-    Clear element text    xpath=.//input[@id='input_edit_email']
-    Input text    xpath=.//input[@id='input_edit_name']     ${name}
-    Input text    xpath=.//input[@id='input_edit_email']    ${email}
+    Wait until keyword succeeds    3x    0.5s   Input and check    xpath=.//input[@id='input_edit_name']    ${name}
+    Wait until keyword succeeds    3x    0.5s   Input and check    xpath=.//input[@id='input_edit_email']    ${email}
     Save and confirm edit
+
+Input and check
+    [Arguments]    ${locator}    ${text}
+    Clear element text    ${locator}
+    Input text    ${locator}     ${text}
+    Element text should be    ${locator}    ${text}
 
 Revert user info
     User edit own information    ${ORIGINAL_NAME}    ${ORIGINAL_EMAIL}
