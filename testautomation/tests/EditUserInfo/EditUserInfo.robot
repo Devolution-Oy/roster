@@ -91,6 +91,7 @@ Input and check
     [Arguments]    ${locator}    ${text}
     Clear element text    ${locator}
     Input text    ${locator}     ${text}
+    Set focus to element    ${locator}
     Element text should be    ${locator}    ${text}
 
 Revert user info
