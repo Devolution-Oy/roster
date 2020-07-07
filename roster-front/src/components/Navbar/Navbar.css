@@ -1,24 +1,22 @@
 .navbar {
-    position: sticky;
+    position: relative;
     left: 0;
     top: 0;
     width: 100%;
-    height: 70px;
     background: black;
-    padding: 0px 1rem;
     display: flex;
     align-items: center;
+    height: 75px;
 }
 
 .navbar__logo img {
     margin: 0;
-    width: 200px;
+    width: 300px;
     height: 50px;
-    align: center;
 }
 
 .navbar__items {
-    margin: 0 auto;
+    margin: auto;
 }
 
 .navbar__login {
@@ -26,34 +24,45 @@
 }
 
 .navbar__item ul {
-    display: flex;
+    display: inline-flex;
+    position: relative;
     list-style: none;
     padding: 0;
-    margin: 10px;
-    align-items: center;
-    background: white;
+    margin: 0px;
+    background: #c7d5dd;
+    height: 100%;
 }
 
 .navbar__item li
 {
-    padding: 10px 0 0 0;
-    margin: 0 2rem;
-    height: 30px;
+    padding: 0 0 0 0;
+    margin: 0;
     text-align: center;
-    min-width: 50px;
+    width: 150px;
+    margin: 0px;
 }
 
 .navbar__item li:hover {
-    background: #efefef;
+    background: #ecbc7d;
 }
 
 .navbar__item a,
-.navbar__item button 
+.navbar__item button
 {
+    height: 100%;
+    width: 100%;
     margin: 0;
     text-decoration: none;
     border: none;
     font: inherit;
     background: transparent;
     cursor: pointer;
+}
+
+.navbar__item a:link {
+    text-decoration: none;
+}
+
+.navbar__item a:hover{
+    text-decoration: none;
 }
