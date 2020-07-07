@@ -15,7 +15,7 @@ ${ORIGINAL_EMAIL}     roster.test@devolution.fi
 User can edit own user information
     [Setup]   Open roster
     GIVEN User is logged in
-    WHEN User edit own information    ${EDITED_USER_NAME}    ${EDITED_EMAIL}
+    WHEN User edit own information    ${EDITED_USER_NAME}    ${EDITED_EMAIL}    ${ORIGINAL_NAME}    ${ORIGINAL_EMAIL}
     THEN New user info is saved into database
     [Teardown]   Revert user info
 
@@ -27,7 +27,7 @@ User cancel information edit
 # TODO: Add test case for unconfirm
 User edit information but unconfirm the alert box
     GIVEN User is logged in
-    WHEN User edit own information but does not confirm dialog    ${EDITED_USER_NAME}    ${EDITED_EMAIL}
+    WHEN User edit own information but does not confirm dialog    ${EDITED_USER_NAME}    ${EDITED_EMAIL}    ${ORIGINAL_NAME}    ${ORIGINAL_EMAIL}
     THEN User edit dialog is shown
     [Teardown]    Click element    xpath=.//button[@class='btn_accept']
 
