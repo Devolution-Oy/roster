@@ -29,7 +29,7 @@ export const AddRecord = (props) => {
       <select id='select_project'>
         {
           projects.map((project, i) => {
-            return (<option key={i}>{project}</option>);
+            return (<option key={i}>{project.name}</option>);
           })
         }
       </select>
@@ -49,6 +49,9 @@ AddRecord.propTypes = {
     photo: PropTypes.string.isRequired,
     projects: PropTypes.array.isRequired
   })),
-  projects: PropTypes.arrayOf(PropTypes.string),
+  projects: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string,
+    budget: PropTypes.number
+  })),
   error: PropTypes.object
 };
