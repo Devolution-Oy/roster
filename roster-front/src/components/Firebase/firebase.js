@@ -120,6 +120,12 @@ class Firebase {
     const getProjects = this.functions.httpsCallable('getProjects');
     return getProjects();
   }
+
+  postCustomRecord = () => {
+    // TODO: Implement firebase function for custom record
+    const postCustomRecord = this.functions.httpsCallable('postCustomRecord');
+    return postCustomRecord();
+  }
 }
 
 export default Firebase;
