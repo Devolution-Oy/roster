@@ -100,14 +100,21 @@ class Firebase {
   getUsers = jest.fn(() => {
     return new Promise((resolve) => {
       console.log('firebse mock get users');
-      resolve(users);
+      resolve({data: users});
     });
   });
 
   getProjects = jest.fn(() => {
     return new Promise((resolve) => {
       console.log('firebse mock get projects');
-      resolve(projects);
+      resolve({data: projects});
+    });
+  });
+
+  postCustomRecord = jest.fn(() => {
+    console.log('firebase mock postCustomrecordA');
+    return new Promise((resolve) => {
+      resolve({ status: 200, message: 'OK' });
     });
   });
 }

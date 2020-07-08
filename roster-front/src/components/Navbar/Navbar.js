@@ -42,11 +42,11 @@ export const NavigationNonAuth = () => (
 
 export const NavigationAuth = () => (
   <ul>
-    <li><button><Link className='linkLanding' to={ROUTES.LANDING}> Front </Link></button></li>
-    <li><button><Link className='linkUser' to={ROUTES.USER}> User </Link></button></li>
+    <li><Link className='linkLanding' to={ROUTES.LANDING}> Front </Link></li>
+    <li><Link className='linkUser' to={ROUTES.USER}> User </Link></li>
     <AuthContext.Consumer>
       {authUser => authUser.data.role === ROLES.ADMIN ?
-        <li><button><Link className='linkAdmin' to={ROUTES.ADMIN}> Admin </Link></button></li> : null}
+        <li><Link className='linkAdmin' to={ROUTES.ADMIN}> Admin </Link></li> : null}
     </AuthContext.Consumer>
   </ul>
 );
