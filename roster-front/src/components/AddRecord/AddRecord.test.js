@@ -28,16 +28,16 @@ const flushPromises = () => new Promise(setImmediate);
 describe('Add post custom record popup', () => {
 
   it('Loads users and projects lists from firestore', () => {
-    act(()=> {
+    act(() => {
       render(
         <FirebaseContext.Provider value={firebase}>
           <AddRecord closeAddRecord={closeAddRecord} />
         </FirebaseContext.Provider>
         , container
       );
-      expect(firebase.getUsers).toHaveBeenCalled();
-      expect(firebase.getProjects).toHaveBeenCalled();
     });
+    expect(firebase.getUsers).toHaveBeenCalled();
+    expect(firebase.getProjects).toHaveBeenCalled();
   });
 
   it('Calls firebase.postCustomRecord when dialog is accepted',async () => {
