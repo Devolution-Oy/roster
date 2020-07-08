@@ -25,11 +25,13 @@ button {
   margin: 2px;
   min-height: 40px;
   min-width: 100px;
-  background-color: #efefef;
+  background: #4c96c4;
+  color: white;
+  border: none;
 }
 
 button:hover {
-  background-color: #fefefe;
+  background: #96afbe;
 }
 
 .main-content {
