@@ -73,3 +73,22 @@ describe('Admin user can add custom balance records', () => {
     expect(document.getElementById('modal_add_record')).toBeTruthy();
   });
 });
+
+describe('Admin user can create/update project', () => {
+  it('Open project update modal when "Projects" button is clicked', async () => {
+    act(() => {
+      render(
+        <FirebaseContext.Provider value={new Firebase}>
+          <AuthContext.Provider value={adminuser}>
+            <AdminPage />
+          </AuthContext.Provider>
+        </FirebaseContext.Provider>
+        , container
+      );
+    });
+    const btnProject = document.getElementById('btn_projects');
+    await Simulate.click(btnProject);
+    expect(document.getElementById('modal_projects')).toBeTruthy();
+
+  });
+});
