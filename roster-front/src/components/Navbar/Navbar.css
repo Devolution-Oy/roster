@@ -1,70 +1,72 @@
 .navbar {
-    position: relative;
-    left: 0;
-    top: 0;
-    width: 100%;
-    background: black;
-    display: flex;
-    align-items: center;
-    height: 75px;
+  position: relative;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background: black;
+  display: flex;
+  align-items: center;
+  height: 75px;
 }
 
 .navbar__logo img {
-    margin: 0;
-    width: 300px;
-    height: 50px;
+  margin: 0;
+  width: 300px;
 }
 
 .navbar__items {
-    margin: auto;
+  margin: auto;
 }
 
-.navbar__login {
-    width: 300px;
+.navbar__spacer {
+  width: 300px;
 }
 
 .navbar__item ul {
-    display: inline-flex;
-    position: relative;
-    list-style: none;
-    padding: 0;
-    margin: 0px;
-    height: 100%;
-    color: #ffffff;
+  display: inline-flex;
+  position: relative;
+  list-style: none;
+  padding: 0;
+  margin: 0px;
+  height: 100%;
+  color: #ffffff;
 }
 
 .navbar__item li
 {
-    padding: 0 0 0 0;
-    margin: 0;
-    text-align: center;
-    width: 150px;
-    margin: 0px;
+  padding: 0 0 0 0;
+  margin: 0;
+  text-align: center;
+  width: 150px;
+  margin: 0px;
 }
 
 .navbar__item li:hover {
-    color: #ec6608;
+  color: #ec6608;
 }
 
 .navbar__item a,
 .navbar__item button
 {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    text-decoration: none;
-    border: none;
-    font: inherit;
-    background: transparent;
-    cursor: pointer;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  text-decoration: none;
+  border: none;
+  font: inherit;
+  background: transparent;
+  cursor: pointer;
 }
 
-.navbar__item a:link {
-    text-decoration: none;
+.navbar__item a:link,
+.navbar__item button:link {
+  text-decoration: none;
 }
 
-.navbar__item a:hover{
-    text-decoration: none;
+.navbar__item a:hover,
+.navbar__item button:hover {
+  color: #ec6608;
+  text-decoration: none;
 }
 
 @media only screen and (max-width: 600px) {
@@ -100,8 +102,6 @@
     list-style: none;
     padding: 0;
     margin: 0px;
-    background: #c7d5dd;
-    height: 100%;
 }
 
 .navbar__item li
@@ -111,6 +111,7 @@
     text-align: center;
     width: 100%;
     margin: 0px;
+    min-height: 40px;
 }
 
 #btn_logout {
