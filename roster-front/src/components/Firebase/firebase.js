@@ -122,7 +122,6 @@ class Firebase {
   }
 
   postCustomRecord = (record) => {
-    // TODO: Implement firebase function for custom record
     const postCustomRecord = this.functions.httpsCallable('postCustomRecord');
     return postCustomRecord(record);
   }
