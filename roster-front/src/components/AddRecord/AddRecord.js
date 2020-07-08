@@ -23,10 +23,11 @@ class AddRecordPopup extends Component {
       users: null,
       projects: null,
       error: null,
+      sending: null,
       project: null,
       user: null,
       amount: 0,
-      issue: 0,
+      issue: '',
       description: ''
     };  
   }
@@ -36,19 +37,22 @@ class AddRecordPopup extends Component {
     const record = {
       project: this.state.project,
       description: this.state.description,
-      amount: this.state.amount,
+      amount: Number(this.state.amount),
       issue: this.state.issue,
       githubUser: this.state.user,
-      timestamp: Date.UTC()
+      timestamp: Date.now()
     };
 
     console.log(record);
     if (window.confirm('Add a new balance "'+ record.description + '" record for user "' + record.githubUser +'"?')) {
+      this.setState({sending: 'Sending...'});
       this.props.firebase.postCustomRecord(record).then(_res => {
         console.log('Sent custom record');
+        this.setState({sending: null});
         this.props.closeAddRecord();
       }).catch(error => {
         window.alert(error.message);
+        this.setState({sending: null});
       });
     } 
   };
@@ -80,6 +84,21 @@ class AddRecordPopup extends Component {
     const users = this.state.users;
     const projects = this.state.projects;
     const error = this.state.error;
+    const sending = this.state.sending;
+    if (sending) {
+      return (
+        <Modal
+          id='modal_add_record'
+          title='Add Custom Record'
+          onCancel={this.props.closeAddRecord}
+          onAccept={this.addRecord}
+          accept='Confirm'
+          disabled={true}>
+          <p>{sending}</p>
+        </Modal>
+      );
+
+    }
     if (!users || !projects) {
       console.log('No users or projects');
       return (
@@ -110,6 +129,7 @@ class AddRecordPopup extends Component {
       );
     }
     return (
+      // TODO: Set input value if state is not null for the input
       <Modal
         id='modal_add_record'
         title='Add Custom Record'
