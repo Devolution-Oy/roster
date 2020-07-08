@@ -4,6 +4,7 @@ import { withAuthorization } from '../../components/Session';
 import * as ROLES from '../../constants/roles';
 import Backdrop from '../../components/Backdrop/Backdrop';
 import AddRecordPopup from '../../components/AddRecord';
+import UpdateProject from '../../components/UpdateProject';
 
 
 class AdminPage extends Component {
@@ -25,15 +26,29 @@ class AdminPage extends Component {
     this.setState({showAddRecord: false});
   }
 
+  showProjects = () => {
+    this.setState({showProjects: true});
+  }
+
+  closeProjects = () => {
+    this.setState({showProjects: false});
+  }
   render() {
     return (
       <div>
         <h1 className='admin-header'>Admin page content</h1>
         <button onClick={this.showAddRecord} id='btn_add_record'>Add Record</button>
+        <button onClick={this.showProjects} id='btn_projects'>Edit Projects</button>
         {this.state.showAddRecord &&
           <div>
             <Backdrop />
             <AddRecordPopup closeAddRecord={this.closeAddRecord} />
+          </div>}
+        {
+          this.state.showProjects && 
+          <div>
+            <Backdrop />
+            <UpdateProject closeProjects={this.closeProjects} />
           </div>
         }
       </div>
