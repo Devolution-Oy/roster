@@ -34,7 +34,7 @@ class UpdateProject extends Component {
       name: this.state.project,
       budget: Number(this.state.budget)
     };
-    if (window.confirm('Updating project"' + data.project + '"\n"' +
+    if (window.confirm('Updating project"' + data.name + '"\n"' +
       'Budget: ' + data.budget)) {
       this.props.firebase.updateProject(data).then(() => {
         this.setState({ updating: null });
