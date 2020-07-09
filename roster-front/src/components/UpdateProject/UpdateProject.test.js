@@ -35,4 +35,15 @@ describe('Projects modal', () => {
     expect(document.getElementById('input_project')).toBeTruthy();
     expect(document.getElementById('input_budget')).toBeTruthy();
   });
+
+  it('Loads existing project from firebase', () => {
+    act(() => {
+      render(
+        <FirebaseContext.Provider value={firebase}>
+          <UpdateProject closeProjects={closeProjects} />
+        </FirebaseContext.Provider>
+        , container);
+    });
+    expect(firebase.getProjects).toHaveBeenCalled();
+  });
 });

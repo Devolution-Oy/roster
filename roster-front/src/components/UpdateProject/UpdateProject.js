@@ -1,17 +1,35 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { withFirebase} from '../Firebase';
 import Modal from '../Modal';
 
 class UpdateProject extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      projects: null,
+      loading: null,
+      error: null
+    };
+  }
 
   componentDidMount() {
-    // TODO: Load existing projects from firestore
+    this.setState({loading: 'Loading projects...'});
+    this.props.firebase.getProjects().then(projects => {
+      this.setState({projects: projects});
+      this.setState({loading: null});
+      console.log(this.state.projects);
+    }).catch(error => {
+      this.setState({error: error.message});
+      this.setState({loading: null});
+    });
   }
   updateProject = () => {
     this.props.closeProjects();
   }
-  // TODO: Add project update form
+
+  // TODO: Render loading, error and existing projects
   render() {
     return(
       <Modal
@@ -36,7 +54,8 @@ class UpdateProject extends Component {
 }
 
 UpdateProject.propTypes = {
-  closeProjects: PropTypes.func.isRequired
+  closeProjects: PropTypes.func.isRequired,
+  firebase: PropTypes.object.isRequired
 };
 
-export default UpdateProject;
+export default withFirebase(UpdateProject);
