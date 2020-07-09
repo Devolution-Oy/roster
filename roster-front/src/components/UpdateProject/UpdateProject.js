@@ -28,7 +28,7 @@ class UpdateProject extends Component {
   }
 
   updateProject = () => {
-    // TODO: Call firebase update project function to update/create a project
+    // TODO: Call firebase updateProject from front-end
     this.props.closeProjects();
   }
 
