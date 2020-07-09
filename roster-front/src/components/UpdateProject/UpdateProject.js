@@ -11,6 +11,7 @@ class UpdateProject extends Component {
       projects: null,
       loading: null,
       error: null,
+      updating: null,
       project: null,
       budget: 0
     };
@@ -28,8 +29,21 @@ class UpdateProject extends Component {
   }
 
   updateProject = () => {
-    // TODO: Call firebase updateProject from front-end
-    this.props.closeProjects();
+    this.setState({updating: 'Updating projects...'});
+    const data = {
+      name: this.state.project,
+      budget: Number(this.state.budget)
+    };
+    if (window.confirm('Updating project"' + data.name + '"\n"' +
+      'Budget: ' + data.budget)) {
+      this.props.firebase.updateProject(data).then(() => {
+        this.setState({ updating: null });
+        this.props.closeProjects();
+      }).catch(err => {
+        this.setState({ updating: null });
+        this.setState({ error: err.message });
+      });
+    }
   }
 
   getProjectBudget = name => {
@@ -56,6 +70,22 @@ class UpdateProject extends Component {
     const budget = this.state.budget;
     const loading = this.state.loading;
     const error = this.state.error;
+    const updating = this.updating;
+
+    if (updating) {
+      return (
+        <Modal
+          id='modal_projects'
+          title='Create / Update Project'
+          onCancel={this.props.closeProjects}
+          onAccept={this.updateProject}
+          accept='Confirm'
+          disabled={true}>
+          <p>{updating}</p>
+        </Modal>
+      );
+    }
+
     if (loading) {
       return (
         <Modal
