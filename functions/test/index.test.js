@@ -52,10 +52,10 @@ describe('User records are stored into firestore',() => {
         token: '123456'
       },
     }).then(res => {
-      chai.assert.equal(res, true);
+      return chai.assert.equal(res, true);
     }).catch(err => {
       console.log(err);
-      chai.assert.fail('Shouldn\'t be here');
+      throw chai.assert.fail('Shouldn\'t be here');
     });
   });
 });

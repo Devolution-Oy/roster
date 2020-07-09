@@ -43,10 +43,10 @@ describe('Update project', () => {
         token: '123456'
       }
     }).then(res => {
-      chai.assert.equal(res, true);
+      return chai.assert.equal(res, true);
     }).catch(err => {
       console.log(err.message);
-      chai.assert.fail('Shouldn\'t be here');
+      throw chai.assert.fail('Shouldn\'t be here');
     });
   });
 
@@ -54,9 +54,9 @@ describe('Update project', () => {
     wrapped(data, {
     }).then(res => {
       console.log(res);
-      chai.assert.fail('Shouldn\'t be here');
+      throw chai.assert.fail('Shouldn\'t be here');
     }).catch(err => {
-      chai.assert.equal(err.message,'Unauthenticated');
+      return chai.assert.equal(err.message,'Unauthenticated');
     });
   });
 
@@ -72,9 +72,9 @@ describe('Update project', () => {
       }
     }).then(res => {
       console.log(res);
-      chai.assert.fail('Shouldn\'t be here');
+      throw chai.assert.fail('Shouldn\'t be here');
     }).catch(err => {
-      chai.assert.equal(err.message, 'Check the input data!');
+      return chai.assert.equal(err.message, 'Check the input data!');
     });
   });
 });
