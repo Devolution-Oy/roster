@@ -60,3 +60,5 @@ export const projects = [
   { name: 'project2', budget: 5000},
   { name: 'project3', budget: 7512.00}
 ];
+
+export const flushPromises = () => new Promise(setImmediate);
