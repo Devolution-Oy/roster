@@ -14,3 +14,7 @@ table {
 label {
   width: 100%;
 }
+
+.balance_records {
+  height: 300px;
+}
