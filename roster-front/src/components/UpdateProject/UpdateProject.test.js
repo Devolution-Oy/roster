@@ -54,4 +54,24 @@ describe('Projects modal', () => {
     Simulate.change(projectInput, { target: { name: 'project', value: 'project1' }}); 
     expect(document.getElementById('input_budget').value).toBe('15000.00');
   });
+
+  it('Calls firebase update project when data is submitted', async () => {
+    act(() => {
+      render(
+        <FirebaseContext.Provider value={firebase}>
+          <UpdateProject closeProjects={closeProjects} />
+        </FirebaseContext.Provider>
+        , container);
+    });
+
+    await flushPromises();
+    const projectInput = document.getElementById('input_project');
+    const budgetInput = document.getElementById('input_budget');
+    Simulate.change(projectInput, { target: { name: 'project', value: 'project1' }}); 
+    expect(document.getElementById('input_budget').value).toBe('15000.00');
+    Simulate.change(budgetInput, { target: { name: 'budget', value: 10000.20 }}); 
+    const btnConfirm = container.querySelector('.btn_accept');
+    await Simulate.click(btnConfirm);
+    expect(firebase.updateProject).toHaveBeenCalledWith({name: 'project1', budget: 10000.20 });
+  });
 });

@@ -125,6 +125,11 @@ class Firebase {
     const postCustomRecord = this.functions.httpsCallable('postCustomRecord');
     return postCustomRecord(record);
   }
+
+  updateProject = project => {
+    const updateProject = this.functions.httpsCallable('updateProject');
+    return updateProject(project);
+  }
 }
 
 export default Firebase;

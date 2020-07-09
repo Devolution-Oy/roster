@@ -112,11 +112,20 @@ class Firebase {
   });
 
   postCustomRecord = jest.fn(() => {
-    console.log('firebase mock postCustomrecordA');
+    console.log('firebase mock postCustomrecord');
     return new Promise((resolve) => {
       resolve({ status: 200, message: 'OK' });
     });
   });
+
+  updateProject = jest.fn((data) => {
+    console.log('firebase mock postCustomrecord');
+    if (!data.project && data.balance)
+      throw 'Error';
+    return new Promise((resolve) => {
+      resolve({ status: 200, message: 'OK' });
+    });
+  })
 }
 
 export default Firebase;
