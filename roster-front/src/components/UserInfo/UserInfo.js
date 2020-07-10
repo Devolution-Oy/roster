@@ -43,6 +43,7 @@ UserInfo.propTypes = {
       email: PropTypes.string.isRequired,
       githubUser: PropTypes.string.isRequired,
       role: PropTypes.number.isRequired, 
+      projects: PropTypes.arrayOf(PropTypes.string).isRequired
     })
   })
 };
