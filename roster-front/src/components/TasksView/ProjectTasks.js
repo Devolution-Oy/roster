@@ -16,6 +16,7 @@ class ProjectTasks extends Component {
   render() {
     const name = this.state.name;
     const id = this.state.name + '_tasks';
+    // TODO: Get project's tasks from github
     return (
       <div id={id}>
         <h3>{name}</h3>
