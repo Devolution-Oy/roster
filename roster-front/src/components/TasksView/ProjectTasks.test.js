@@ -2,8 +2,7 @@ import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 
-import AssignedTasks from './AssignedTasks';
-import { normaluser } from '../../test_data';
+import ProjectTasks from './ProjectTasks';
 
 let container = null;
 beforeEach(() => {
@@ -21,13 +20,9 @@ describe('Assigned tasks container', () => {
   it('Has header and own part for each github projects', () => {
     act(() => {
       render(
-        <AssignedTasks projects={normaluser.data.projects} />
+        <ProjectTasks name='project1' />
         , container);
     });
-    expect(document.getElementById('div_assigned_tasks')).toBeTruthy();
-    expect(document.getElementById('header_my_tasks')).toBeTruthy();
     expect(document.getElementById('project1_tasks')).toBeTruthy();
-    expect(document.getElementById('project2_tasks')).toBeTruthy();
-    expect(document.getElementById('project3_tasks')).toBeTruthy();
   });
 });

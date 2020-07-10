@@ -4,6 +4,7 @@ import './User.css';
 import { AuthContext, withAuthorization } from '../../components/Session';
 import UserInfo from '../../components/UserInfo';
 import BalanceView from '../../components/Balance';
+import AssignedTasks from '../../components/TasksView/AssignedTasks';
 
 
 class UserPage extends Component {
@@ -15,6 +16,7 @@ class UserPage extends Component {
             <h1>User page content will be shown here</h1>
             <BalanceView user={authUser} />
             <UserInfo authUser={authUser} />
+            <AssignedTasks projects={authUser.data.projects} />
           </div>
         )}
       </AuthContext.Consumer>

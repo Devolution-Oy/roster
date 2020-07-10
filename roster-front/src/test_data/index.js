@@ -19,7 +19,7 @@ export const normaluser = {
     email: 'test@test.fi',
     githubUser: 'testuser',
     photo: 'https://photo.url.fi',
-    projects: [],
+    projects: ['project1', 'project2', 'project3'],
     role: ROLES.USER
   }
 };

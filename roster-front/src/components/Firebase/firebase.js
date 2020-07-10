@@ -97,6 +97,7 @@ class Firebase {
   }
 
   getUserData = uid => {
+    // TODO: Get also user's projects. Required for #136
     const getUser = this.functions.httpsCallable('getUser');
     return getUser({uid: uid});
   };
