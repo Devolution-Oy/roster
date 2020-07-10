@@ -1,14 +1,14 @@
-.user_info {
+.assigned_tasks {
   margin: 0;
   display: grid;
   width: 300px;
 }
 
 @media only screen and (min-width: 1500px) {
-.user_info {
+.assigned_tasks {
   position: absolute;
   top: 75px;
-  left: 0;
+  right: 0;
   background: white;
   padding: 10px;
   margin: 10px;
