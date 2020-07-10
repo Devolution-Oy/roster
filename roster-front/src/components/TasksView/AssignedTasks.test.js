@@ -16,7 +16,6 @@ afterEach(() => {
   container.remove();
   container = null;
 });
-
 describe('Assigned tasks container', () => {
   it('Has header and own part for each github projects', () => {
     act(() => {
