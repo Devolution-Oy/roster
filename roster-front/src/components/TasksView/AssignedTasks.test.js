@@ -20,7 +20,9 @@ describe('Assigned tasks container', () => {
   it('Has header and own part for each github projects', () => {
     act(() => {
       render(
-        <AssignedTasks projects={normaluser.data.projects} />
+        <AssignedTasks
+          projects={normaluser.data.projects}
+          user={normaluser.data.githubUser}/>
         , container);
     });
     expect(document.getElementById('div_assigned_tasks')).toBeTruthy();

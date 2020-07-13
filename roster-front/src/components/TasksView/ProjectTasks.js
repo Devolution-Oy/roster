@@ -1,6 +1,6 @@
-
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import GithubRequests from '../GithubRequests';
 
 class ProjectTasks extends Component {
   constructor(props) {
@@ -9,27 +9,55 @@ class ProjectTasks extends Component {
       tasks: null,
       loading: null,
       error: null,
-      name: props.name
+      name: props.name,
+      user: props.user
     };
+  }
+
+  componentDidMount() {
+    this.setState({loading: 'Fetching tasks...'});
+    GithubRequests.getIssues(this.state.name, this.state.user).then(res => {
+      console.log(res.data);
+      this.setState({tasks: res.data});
+      this.setState({loading: null});
+    }).catch(err => {
+      console.log(err.message);
+      this.setState({loading: null});
+    });
   }
 
   render() {
     const name = this.state.name;
     const id = this.state.name + '_tasks';
-    // TODO: Get project's tasks from github
+    const loading = this.state.loading;
+    const tasks = this.state.tasks;
+
+    if (loading) {
+      return (
+        <div id={id}>
+          <h3>{name}</h3>
+          <p>{loading}</p>
+        </div>
+      );
+    }
+    // TODO: Add labels and some style for the task presentation
     return (
       <div id={id}>
         <h3>{name}</h3>
-        <label>Task1</label>
-        <label>Task2</label>
-        <label>Task3</label>
+        {tasks ? tasks.map((task, i) => {
+          return (
+            <label key={i}>{task.title}</label>
+          );
+        }) : <p>No open tasks</p>
+        }
       </div>
     );
   }
 }
 
 ProjectTasks.propTypes = {
-  name: PropTypes.string.isRequired
+  name: PropTypes.string.isRequired,
+  user: PropTypes.string.isRequired
 };
 
 export default ProjectTasks;

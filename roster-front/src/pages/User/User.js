@@ -16,7 +16,7 @@ class UserPage extends Component {
             <h1>User page content will be shown here</h1>
             <BalanceView user={authUser} />
             <UserInfo authUser={authUser} />
-            <AssignedTasks projects={authUser.data.projects} />
+            <AssignedTasks projects={authUser.data.projects} user={authUser.data.githubUser} />
           </div>
         )}
       </AuthContext.Consumer>

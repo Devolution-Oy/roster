@@ -61,4 +61,9 @@ export const projects = [
   { name: 'project3', budget: 7512.00}
 ];
 
+export const githubTasks = [
+  { title: 'Task test title1'},
+  { title: 'Task test title2'}
+];
+
 export const flushPromises = () => new Promise(setImmediate);
