@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import GithubRequests from '../GithubRequests';
+import TaskItem from './TaskItem';
 
 class ProjectTasks extends Component {
   constructor(props) {
@@ -46,7 +47,7 @@ class ProjectTasks extends Component {
         <h3>{name}</h3>
         {tasks ? tasks.map((task, i) => {
           return (
-            <label key={i}>{task.title}</label>
+            <TaskItem key={i} title={task.title} labels={task.labels} />
           );
         }) : <p>No open tasks</p>
         }
