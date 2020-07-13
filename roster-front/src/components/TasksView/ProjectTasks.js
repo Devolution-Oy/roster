@@ -40,7 +40,7 @@ class ProjectTasks extends Component {
         </div>
       );
     }
-    // TODO: Get project's tasks from github
+    // TODO: Add labels and some style for the task presentation
     return (
       <div id={id}>
         <h3>{name}</h3>
