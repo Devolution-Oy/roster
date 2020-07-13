@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getIssues } from '../GithubRequests';
+import GithubRequests from '../GithubRequests';
 
 class ProjectTasks extends Component {
   constructor(props) {
@@ -16,7 +16,7 @@ class ProjectTasks extends Component {
 
   componentDidMount() {
     this.setState({loading: 'Fetching tasks...'});
-    getIssues(this.state.name, this.state.user).then(res => {
+    GithubRequests.getIssues(this.state.name, this.state.user).then(res => {
       console.log(res.data);
       this.setState({tasks: res.data});
       this.setState({loading: null});
