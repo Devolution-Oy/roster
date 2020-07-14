@@ -97,7 +97,6 @@ class Firebase {
   }
 
   getUserData = uid => {
-    // TODO: Get also user's projects. Required for #136
     const getUser = this.functions.httpsCallable('getUser');
     return getUser({uid: uid});
   };
@@ -118,9 +117,9 @@ class Firebase {
   };
 
   // TODO: If user parameter, fetch only projects that the user is contributing
-  getProjects = () => {
+  getProjects = (user) => {
     const getProjects = this.functions.httpsCallable('getProjects');
-    return getProjects();
+    return getProjects(user);
   }
 
   postCustomRecord = (record) => {
