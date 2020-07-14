@@ -116,7 +116,7 @@ class Firebase {
     return getUsers();
   };
 
-  // TODO: If user parameter, fetch only projects that the user is contributing
+  // TODO: Implent user filter on firebase getProjects function
   getProjects = (user) => {
     const getProjects = this.functions.httpsCallable('getProjects');
     return getProjects(user);
