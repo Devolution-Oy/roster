@@ -18,31 +18,29 @@ const validRecord = {
 };
 
 describe('User records are stored into firestore',() => {
-  let oldFirestore;
   let myFunctions;
   before(() => {
-    oldFirestore = admin.firestore;
+    sandbox.stub(admin, 'initializeApp');
     myFunctions = require('../index.js');
   });
 
   after(() => {
-    admin.firestore = oldFirestore;
     test.cleanup();
     sandbox.restore();
   });
-
   const collectionStub = sandbox.stub();
   const firestoreStub = sandbox.stub();
   const collectionArg = 'users';
   const docStub = sandbox.stub();
   const setStub = sandbox.stub();
 
-  Object.defineProperty(admin, 'firestore', { get: () => firestoreStub });
+  sandbox.stub(admin, 'firestore').get(() => firestoreStub);
   firestoreStub.returns({ collection: collectionStub });
   collectionStub.withArgs(collectionArg).returns({ doc: docStub });
   docStub.withArgs(validRecord.uid).returns({ set: setStub });
-  setStub.withArgs(validRecord.data).returns( new Promise(resolve => {
-    resolve(true);}));
+  setStub.withArgs(validRecord.data).returns(new Promise(resolve => {
+    resolve(true);
+  }));
 
   it('Valid user data from authenticated user is writtend to firestore', () => {
     const wrapped = test.wrap(myFunctions.addUser);

@@ -8,15 +8,13 @@ const sandbox = sinon.createSandbox();
 describe('Update project', () => {
   let myFunctions;
   let wrapped;
-  let oldFirestore;
   before(() => {
-    oldFirestore = admin.firestore;
+    sandbox.stub(admin, 'initializeApp');
     myFunctions = require('../index.js');
     wrapped = test.wrap(myFunctions.updateProject);
   });
 
   after(() => {
-    admin.firestore = oldFirestore;
     test.cleanup();
     sandbox.restore();
   });
@@ -27,16 +25,16 @@ describe('Update project', () => {
   const collectionArg = 'projects';
   const stubDoc = sandbox.stub();
   const stubSet = sinon.stub();
-  sandbox.stub(admin, 'firestore').returns(stubFirestore);
+  sandbox.stub(admin, 'firestore').get(() => stubFirestore);
   stubFirestore.returns({ collection: stubCollection });
-  stubCollection.withArgs(collectionArg).returns({doc: stubDoc});
-  stubDoc.withArgs('project1').returns({set: stubSet});
+  stubCollection.withArgs(collectionArg).returns({ doc: stubDoc });
+  stubDoc.withArgs('project1').returns({ set: stubSet });
   stubSet.withArgs(data).returns(new Promise((resolve) => {
     resolve(true);
   }));
 
-  it('Calls firestore document set() when data is correct', () => {
-    wrapped(data, {
+  it('Calls firestore document set() when data is correct', async () => {
+    await wrapped(data, {
       auth:
       {
         uid: 'LoR1xY535HP6gNJNRBokMfhD8343',
@@ -50,21 +48,21 @@ describe('Update project', () => {
     });
   });
 
-  it('Throws authentication error, if context does not authentication', () => {
-    wrapped(data, {
+  it('Throws authentication error, if context does not authentication', async () => {
+    await wrapped(data, {
     }).then(res => {
       console.log(res);
       throw chai.assert.fail('Shouldn\'t be here');
     }).catch(err => {
-      return chai.assert.equal(err.message,'Unauthenticated');
+      return chai.assert.equal(err.message, 'Unauthenticated');
     });
   });
 
-  it('Throws invalid data error, if data does not contain budget', () => {
+  it('Throws invalid data error, if data does not contain budget', async () => {
     const invalid = {
       name: 'test'
     };
-    wrapped(invalid, {
+    await wrapped(invalid, {
       auth:
       {
         uid: 'LoR1xY535HP6gNJNRBokMfhD8343',
