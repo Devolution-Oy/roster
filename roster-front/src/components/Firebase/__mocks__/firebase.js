@@ -104,10 +104,13 @@ class Firebase {
     });
   });
 
-  getProjects = jest.fn(() => {
+  getProjects = jest.fn((user) => {
+    const userProjects = projects.filter((project) => {
+      return (project.contributors.includes(user) || !user);
+    });
     return new Promise((resolve) => {
       console.log('firebse mock get projects');
-      resolve({data: projects});
+      resolve({data: userProjects});
     });
   });
 

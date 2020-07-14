@@ -5,9 +5,8 @@ export const adminuser = {
   data: {
     displayName: 'tester',
     email: 'test@test.fi',
-    githubUser: 'testuser',
+    githubUser: 'testuser2',
     photo: 'https://photo.url.fi',
-    projects: [],
     role: ROLES.ADMIN
   }
 };
@@ -17,9 +16,8 @@ export const normaluser = {
   data: {
     displayName: 'tester',
     email: 'test@test.fi',
-    githubUser: 'testuser',
+    githubUser: 'testuser1',
     photo: 'https://photo.url.fi',
-    projects: ['project1', 'project2', 'project3'],
     role: ROLES.USER
   }
 };
@@ -29,7 +27,6 @@ const test_user1 = {
   email: 'test1@test.fi',
   githubUser: 'testuser1',
   photo: 'https://photo.url.fi',
-  projects: [],
   role: ROLES.USER
 };
 const test_user2 = {
@@ -37,7 +34,6 @@ const test_user2 = {
   email: 'test2@test.fi',
   githubUser: 'testuser2',
   photo: 'https://photo.url.fi',
-  projects: [],
   role: ROLES.USER
 };
 const test_user3 = {
@@ -45,7 +41,6 @@ const test_user3 = {
   email: 'test3@test.fi',
   githubUser: 'testuser3',
   photo: 'https://photo.url.fi',
-  projects: [],
   role: ROLES.USER
 };
 
@@ -56,9 +51,33 @@ export const users = [
 ];
 
 export const projects = [
-  { name: 'project1', budget: 15000, github: true},
-  { name: 'project2', budget: 5000, github: true},
-  { name: 'project3', budget: 7512.00, github: false}
+  { 
+    name: 'project1',
+    budget: 15000,
+    github: true,
+    contributors: [
+      'testuser1',
+      'testuser2',
+      'testuser3',
+    ]
+  },
+  {
+    name: 'project2',
+    budget: 5000,
+    github: true,
+    contributors: [
+      'testuser2',
+      'testuser3',
+    ]
+  },
+  {
+    name: 'project3',
+    budget: 7512.00,
+    github: false,
+    contributors: [
+      'testuser3',
+    ]
+  }
 ];
 
 export const githubTasks = [

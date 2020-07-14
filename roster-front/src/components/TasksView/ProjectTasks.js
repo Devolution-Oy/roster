@@ -18,7 +18,6 @@ class ProjectTasks extends Component {
   componentDidMount() {
     this.setState({loading: 'Fetching tasks...'});
     GithubRequests.getIssues(this.state.name, this.state.user).then(res => {
-      console.log(res.data);
       this.setState({tasks: res.data});
       this.setState({loading: null});
     }).catch(err => {
