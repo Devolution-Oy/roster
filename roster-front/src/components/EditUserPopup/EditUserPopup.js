@@ -34,7 +34,6 @@ class UserEditPopupBase extends Component {
           email: this.state.email,
           githubUser: this.state.github,
           photo: this.props.user.data.photo,
-          projects: this.props.user.data.projects,
           role: this.state.role
         }
       };
@@ -97,7 +96,6 @@ UserEditPopupBase.propTypes = {
       githubUser: PropTypes.string.isRequired,
       role: PropTypes.number.isRequired, 
       photo: PropTypes.string.isRequired,
-      projects: PropTypes.array.isRequired
     }),
     update: PropTypes.func.isRequired
   }),

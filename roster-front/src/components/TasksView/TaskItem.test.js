@@ -25,7 +25,9 @@ describe('TaskItem',() => {
     {
       title: 'UX',
       color: '00ff00'
-    }];
+    }
+  ];
+
   it('Shows task title and labels', () => {
     act(() => {
       render(

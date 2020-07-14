@@ -18,7 +18,7 @@ class TaskItem extends Component {
               <div style={style} key={i} className='task_label'>
                 <label>{label.name}</label>
               </div>);
-          }) : null}
+          }) : null }
         </div>
       </div>
     );

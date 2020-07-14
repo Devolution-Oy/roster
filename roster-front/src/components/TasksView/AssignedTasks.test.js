@@ -35,7 +35,7 @@ describe('Assigned tasks container', () => {
     expect(document.getElementById('div_assigned_tasks')).toBeTruthy();
     expect(document.getElementById('header_my_tasks')).toBeTruthy();
     expect(document.getElementById('project1_tasks')).toBeTruthy();
-    expect(document.getElementById('project2_tasks')).toBeTruthy();
+    expect(document.getElementById('project2_tasks')).not.toBeTruthy();
     expect(document.getElementById('project3_tasks')).not.toBeTruthy();
   });
 });
