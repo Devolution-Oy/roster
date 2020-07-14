@@ -2,16 +2,11 @@ const test = require('firebase-functions-test')();
 const admin = require('firebase-admin');
 const sinon = require('sinon');
 const chai = require('chai');
+const updateProject = require('../updateProject');
 const sandbox = sinon.createSandbox();
 
-
 describe('Update project', () => {
-  let myFunctions;
-  let wrapped;
   before(() => {
-    sandbox.stub(admin, 'initializeApp');
-    myFunctions = require('../index.js');
-    wrapped = test.wrap(myFunctions.updateProject);
   });
 
   after(() => {
@@ -34,7 +29,7 @@ describe('Update project', () => {
   }));
 
   it('Calls firestore document set() when data is correct', async () => {
-    await wrapped(data, {
+    await updateProject(data, {
       auth:
       {
         uid: 'LoR1xY535HP6gNJNRBokMfhD8343',
@@ -49,7 +44,7 @@ describe('Update project', () => {
   });
 
   it('Throws authentication error, if context does not authentication', async () => {
-    await wrapped(data, {
+    await updateProject(data, {
     }).then(res => {
       console.log(res);
       throw chai.assert.fail('Shouldn\'t be here');
@@ -62,7 +57,7 @@ describe('Update project', () => {
     const invalid = {
       name: 'test'
     };
-    await wrapped(invalid, {
+    await updateProject(invalid, {
       auth:
       {
         uid: 'LoR1xY535HP6gNJNRBokMfhD8343',
