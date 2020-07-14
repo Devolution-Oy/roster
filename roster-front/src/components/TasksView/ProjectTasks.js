@@ -41,7 +41,6 @@ class ProjectTasks extends Component {
         </div>
       );
     }
-    // TODO: Add labels and some style for the task presentation
     return (
       <div id={id}>
         <h3>{name}</h3>
