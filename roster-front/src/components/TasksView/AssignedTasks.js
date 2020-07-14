@@ -35,11 +35,19 @@ class AssignedTasks extends Component {
     const error = this.state.error;
 
     if (loading) {
-      return <p>Loading projects...</p>;
+      return (
+        <div className='assigned_tasks' id='div_assigned_tasks'>
+          <p>Loading projects...</p>
+        </div>
+      );
     }
 
     if (error) {
-      return <p>{error}</p>;
+      return (
+        <div className='assigned_tasks' id='div_assigned_tasks'>
+          <p>{error}</p>
+        </div>
+      );
     }
     return (
       <div className='assigned_tasks' id='div_assigned_tasks'>
