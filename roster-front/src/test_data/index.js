@@ -56,9 +56,9 @@ export const users = [
 ];
 
 export const projects = [
-  { name: 'project1', budget: 15000},
-  { name: 'project2', budget: 5000},
-  { name: 'project3', budget: 7512.00}
+  { name: 'project1', budget: 15000, github: true},
+  { name: 'project2', budget: 5000, github: true},
+  { name: 'project3', budget: 7512.00, github: false}
 ];
 
 export const githubTasks = [

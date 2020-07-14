@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './AssignedTasks.css';
+import { withFirebase} from '../Firebase';
 
 import ProjectTasks from './ProjectTasks';
 
@@ -14,12 +15,13 @@ class AssignedTasks extends Component {
   }
 
   componentDidMount() {
-    this.setState({projects: this.props.projects});
     this.setState({user: this.props.user});
+    this.props.firebase.getProjects(this.props.user.githubUser).then(res => {
+      this.setState({projects: res.data});
+    });
   }
 
   render() {
-    // TODO: Loop projects and render my tasks in each project
     const projects = this.state.projects;
     const user = this.state.user;
     return (
@@ -27,7 +29,11 @@ class AssignedTasks extends Component {
         <h2 id='header_my_tasks'>My tasks</h2>
         {
           projects ? projects.map((project, i) => {
-            return (<ProjectTasks key={i} name={project} user={user} />);
+            if (project.github) {
+              return (<ProjectTasks key={i} name={project.name} user={user} />);
+            }
+            else
+              return null;
           }) : null
         }
       </div>
@@ -36,8 +42,8 @@ class AssignedTasks extends Component {
 }
 
 AssignedTasks.propTypes = {
-  projects: PropTypes.arrayOf(PropTypes.string).isRequired,
+  firebase: PropTypes.object.isRequired,
   user: PropTypes.PropTypes.string.isRequired
 };
 
-export default AssignedTasks;
+export default withFirebase(AssignedTasks);
