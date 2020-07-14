@@ -5,6 +5,7 @@ const chai = require('chai');
 const updateProject = require('../updateProject');
 const sandbox = sinon.createSandbox();
 
+// TODO: Refactor updateProject unit tests
 describe('Update project', () => {
   before(() => {
   });

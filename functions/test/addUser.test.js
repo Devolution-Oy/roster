@@ -14,7 +14,7 @@ const validRecord = {
   } 
 };
 
-
+// TODO: Add unit tests for error cases
 describe('User records are stored into firestore',() => {
   var sandbox;
   beforeEach(() => {
