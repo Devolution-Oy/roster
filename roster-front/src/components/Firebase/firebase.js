@@ -116,7 +116,6 @@ class Firebase {
     return getUsers();
   };
 
-  // TODO: Implent user filter on firebase getProjects function
   getProjects = (user) => {
     const getProjects = this.functions.httpsCallable('getProjects');
     return getProjects(user);
