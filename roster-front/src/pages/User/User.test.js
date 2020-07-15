@@ -4,7 +4,7 @@ import { act, Simulate } from 'react-dom/test-utils';
 
 import { AuthContext } from '../../components/Session';
 import UserPage from './User';
-import { normaluser } from '../../test_data';
+import { normaluser, projects, adminuser } from '../../test_data';
 import Firebase, { FirebaseContext } from '../../components/Firebase';
 
 jest.mock('../../components/Session/withAuthorization');
@@ -62,5 +62,20 @@ describe('User info', () => {
     const btnClose = container.querySelector('.btn_cancel');
     Simulate.click(btnClose);
     expect(document.getElementById('form_edit_user')).not.toBeTruthy();
+  });
+
+  it('Shows render project view for all user\'s projects', () => {
+    act(() => {
+      render(
+        <FirebaseContext.Provider value={new Firebase()}>
+          <AuthContext.Provider value={{ ...adminuser, update: updateUser }}>
+            <UserPage projects={projects} />
+          </AuthContext.Provider>
+        </FirebaseContext.Provider>, container
+      );
+    });
+    expect(document.getElementById('project_view_project1')).toBeTruthy();
+    expect(document.getElementById('project_view_project2')).toBeTruthy();
+    expect(document.getElementById('project_view_project3')).not.toBeTruthy();
   });
 });

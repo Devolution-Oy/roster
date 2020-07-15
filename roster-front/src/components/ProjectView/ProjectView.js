@@ -18,8 +18,9 @@ class ProjectView extends Component {
     // TODO: Create subcomponent for closed tasks
     // TODO: Create subcomponent for implementation tasks
     const project = this.state.project;
+    const viewId = 'project_view_' + project.name;
     return (
-      <div className='project_view'>
+      <div id={viewId} className='project_view'>
         <div className='project_header_row'>
           <h3 className='project_header'>{project.name}</h3>
           <h3 className='project_budget'>{project.budget} €</h3>
@@ -43,7 +44,7 @@ class ProjectView extends Component {
 ProjectView.propTypes = {
   project: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    budget: PropTypes.string.isRequired,
+    budget: PropTypes.number.isRequired,
     github: PropTypes.bool,
     contributors: PropTypes.arrayOf(PropTypes.string).isRequired
   })
