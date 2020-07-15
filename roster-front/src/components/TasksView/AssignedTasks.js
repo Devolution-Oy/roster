@@ -9,46 +9,15 @@ class AssignedTasks extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      projects: null,
-      user: null,
-      loading: true,
-      errror: null
+      projects: props.projects,
+      user: props.user
     };
-  }
-
-  componentDidMount() {
-    this.setState({ user: this.props.user });
-    this.setState({ loading: true });
-    this.props.firebase.getProjects(this.props.user).then(res => {
-      this.setState({ projects: res.data });
-      this.setState({ loading: false });
-    }).catch(err => {
-      this.setState({ error: err.message });
-      this.setState({ loading: false });
-    });
   }
 
   render() {
     const projects = this.state.projects;
     const user = this.state.user;
-    const loading = this.state.loading;
-    const error = this.state.error;
 
-    if (loading) {
-      return (
-        <div className='assigned_tasks' id='div_assigned_tasks'>
-          <p>Loading projects...</p>
-        </div>
-      );
-    }
-
-    if (error) {
-      return (
-        <div className='assigned_tasks' id='div_assigned_tasks'>
-          <p>{error}</p>
-        </div>
-      );
-    }
     return (
       <div className='assigned_tasks' id='div_assigned_tasks'>
         <h2 id='header_my_tasks'>My tasks</h2>
@@ -67,8 +36,13 @@ class AssignedTasks extends Component {
 }
 
 AssignedTasks.propTypes = {
-  firebase: PropTypes.object.isRequired,
-  user: PropTypes.PropTypes.string.isRequired
+  user: PropTypes.PropTypes.string.isRequired,
+  projects: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    budget: PropTypes.number.isRequired,
+    github: PropTypes.bool,
+    contributors: PropTypes.arrayOf(PropTypes.string).isRequired
+  }))
 };
 
 export default withFirebase(AssignedTasks);

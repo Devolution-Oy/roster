@@ -9,6 +9,7 @@ jest.mock('./components/Firebase/firebase');
 jest.mock('./components/Session/withAuthorization');
 jest.mock('./components/Session/withAuthentication');
 
+const firebase = new Firebase();
 let container = null;
 beforeEach(() => {
   container = document.createElement('div');
@@ -21,11 +22,25 @@ afterEach(() => {
   container = null;
 });
 
-test('The App renders', () => {
-  act(() => {
-    render(
-      <FirebaseContext.Provider value={new Firebase()}>
-        <App />;
-      </FirebaseContext.Provider>, container);
+describe('The roster APP', () => {
+  it('renders', () => {
+    act(() => {
+      render(
+        <FirebaseContext.Provider value={firebase}>
+          <App />;
+        </FirebaseContext.Provider>
+        , container);
+    });
+  });
+
+  it('Fetch projects from firestore', () => {
+    act(() => {
+      render(
+        <FirebaseContext.Provider value={firebase}>
+          <App />;
+        </FirebaseContext.Provider>
+        , container);
+    });
+    expect(firebase.getProjects).toHaveBeenCalled();
   });
 });
