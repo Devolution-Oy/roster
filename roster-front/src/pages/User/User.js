@@ -6,8 +6,9 @@ import UserInfo from '../../components/UserInfo';
 import BalanceView from '../../components/Balance';
 import AssignedTasks from '../../components/TasksView/AssignedTasks';
 
-
 class UserPage extends Component {
+  // TODO: Fetch user's project and pass the project for AssignedTasks
+  // TODO: Loop user projects and create project view component for each
   render() {
     return (
       <AuthContext.Consumer>

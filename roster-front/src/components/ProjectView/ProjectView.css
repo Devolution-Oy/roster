@@ -1,0 +1,15 @@
+.project_view {
+  width: 100%;
+}
+.project_header_row {
+  display: flex;
+}
+
+.project_header {
+  width: 100%
+}
+.project_budget {
+  width: 100px;
+  color: green;
+  text-align: right;
+}
