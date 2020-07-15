@@ -74,6 +74,7 @@ describe('User info', () => {
         </FirebaseContext.Provider>, container
       );
     });
+    expect(container.querySelector('.project_container')).toBeTruthy();
     expect(document.getElementById('project_view_project1')).toBeTruthy();
     expect(document.getElementById('project_view_project2')).toBeTruthy();
     expect(document.getElementById('project_view_project3')).not.toBeTruthy();
