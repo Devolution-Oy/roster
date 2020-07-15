@@ -18,6 +18,9 @@ class ClosedTasks extends Component {
         loading: false,
         records: res.data
       });
+    }).catch(err => {
+      console.log(err.message);
+      this.setState({ loading: false });
     });
   }
 
