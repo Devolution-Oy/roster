@@ -26,7 +26,7 @@ class UserPage extends Component {
     }) : null;
 
     return (
-      <div>
+      <div id='user_page'>
         <BalanceView user={authUser} />
         <UserInfo authUser={authUser} />
         <AssignedTasks user={authUser.data.githubUser} projects={projects} />
