@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import './ProjectView.css';
 import ClosedTasks from '../ClosedTasks';
+import ReadyTasks from '../ImplementionReadyTasks/ReadyTasks';
 
 class ProjectView extends Component {
   constructor(props) {
@@ -16,7 +17,6 @@ class ProjectView extends Component {
   render() {
     // TODO: Fetch recent tasks for the project
     // TODO: Ready for implementation tasks for the project
-    // TODO: Create subcomponent for implementation tasks
     const project = this.state.project;
     const viewId = 'project_view_' + project.name;
     return (
@@ -26,11 +26,7 @@ class ProjectView extends Component {
           <h3 className='project_budget'>{project.budget} €</h3>
         </div>
         <ClosedTasks project={project.name} />
-        <div className='project_ready'>
-          <h4>Ready for implementation</h4>
-          <label>Do something</label> 
-          <label>Improve something</label> 
-        </div>
+        <ReadyTasks project={project.name} />
       </div>
     );
   }  
