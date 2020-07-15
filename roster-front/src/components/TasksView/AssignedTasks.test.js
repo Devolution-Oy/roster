@@ -4,10 +4,7 @@ import { act } from 'react-dom/test-utils';
 
 import AssignedTasks from './AssignedTasks';
 import { flushPromises, normaluser } from '../../test_data';
-import Firebase, { FirebaseContext } from '../Firebase';
-
-jest.mock('../Firebase/firebase');
-const firebase = new Firebase();
+import { projects } from '../../test_data/index.js';
 
 let container = null;
 beforeEach(() => {
@@ -24,11 +21,13 @@ afterEach(() => {
 describe('Assigned tasks container', () => {
   it('Has header and own part for each github projects', async () => {
     act(() => {
+      const usersProjects = projects.filter(project => {
+        return (project.contributors.includes(normaluser.data.githubUser));
+      });
       render(
-        <FirebaseContext.Provider value={firebase}>
-          <AssignedTasks
-            user={normaluser.data.githubUser} />
-        </FirebaseContext.Provider>
+        <AssignedTasks
+          user={normaluser.data.githubUser}
+          projects={usersProjects} />
         , container);
     });
     await flushPromises();
