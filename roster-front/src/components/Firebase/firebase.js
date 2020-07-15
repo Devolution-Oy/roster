@@ -130,6 +130,12 @@ class Firebase {
     const updateProject = this.functions.httpsCallable('updateProject');
     return updateProject(project);
   }
+
+  // TODO: Implement firebase getRecords function
+  getRecords = (project) => {
+    const getRecords = this.functions.httpsCallable('getRecords');
+    return getRecords(project);
+  }
 }
 
 export default Firebase;

@@ -4,9 +4,11 @@ import { act } from 'react-dom/test-utils';
 
 import { projects } from '../../test_data/index.js';
 import ProjectContainer from './ProjectContainer.js';
+import Firebase, { FirebaseContext } from '../Firebase/index.js';
+
+jest.mock('../Firebase/firebase');
 
 let container = null;
-
 beforeEach(() => {
   container = document.createElement('div');
   document.body.appendChild(container);
@@ -22,7 +24,9 @@ describe('ProjectContainer', () => {
   it('Renders header and project view for each project', () => {
     act(() => {
       render(
-        <ProjectContainer projects={projects} />
+        <FirebaseContext.Provider value={new Firebase()}>
+          <ProjectContainer projects={projects} />
+        </FirebaseContext.Provider>
         , container
       );
     });

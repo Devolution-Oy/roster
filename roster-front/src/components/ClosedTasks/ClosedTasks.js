@@ -1,12 +1,27 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withFirebase } from '../Firebase';
 
 class ClosedTasks extends Component {
-
-  componentDidMount() {
-    console.log(this.props.project);
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: false,
+      records: null
+    };
   }
 
+  componentDidMount() {
+    this.setState({loading: true});
+    this.props.firebase.getRecords(this.props.project).then(res => {
+      this.setState({
+        loading: false,
+        records: res.data
+      });
+    });
+  }
+
+  // TODO: Render closed tasks from state.records
   render() {
     return (
       <div className='project_latest'>
@@ -20,7 +35,8 @@ class ClosedTasks extends Component {
 }
 
 ClosedTasks.propTypes = {
+  firebase: PropTypes.object.isRequired,
   project: PropTypes.string.isRequired
 };
 
-export default ClosedTasks;
+export default withFirebase(ClosedTasks);

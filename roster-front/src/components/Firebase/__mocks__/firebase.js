@@ -129,6 +129,13 @@ class Firebase {
       resolve({ status: 200, message: 'OK' });
     });
   })
+
+  getRecords = jest.fn((_project) => {
+    console.log('firebase mock getRecords');
+    return new Promise(resolve => {
+      resolve({data: []});
+    });
+  });
 }
 
 export default Firebase;
