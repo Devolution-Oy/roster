@@ -3,6 +3,7 @@
 }
 .project_header_row {
   display: flex;
+  padding: 5px;
 }
 
 .project_header {

@@ -6,7 +6,7 @@ import UserInfo from '../../components/UserInfo';
 import BalanceView from '../../components/Balance';
 import AssignedTasks from '../../components/TasksView/AssignedTasks';
 import PropTypes from 'prop-types';
-import ProjectView from '../../components/ProjectView/ProjectView';
+import ProjectContainer from '../../components/ProjectView/ProjectContainer';
 
 class UserPage extends Component {
   static contextType = AuthContext;
@@ -27,15 +27,10 @@ class UserPage extends Component {
 
     return (
       <div>
-        <h1>User page content will be shown here</h1>
         <BalanceView user={authUser} />
         <UserInfo authUser={authUser} />
         <AssignedTasks user={authUser.data.githubUser} projects={projects} />
-        {
-          projects ? projects.map((project, i) => {
-            return <ProjectView key={i} project={project} />;
-          }) : null
-        }
+        <ProjectContainer projects={projects} />
       </div>
     );
   }
