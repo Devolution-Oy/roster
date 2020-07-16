@@ -31,6 +31,7 @@ class App extends Component {
   }
   
   componentDidMount() {
+    // TODO: Load all records and distribute them to other componenents
     this.setState({loading: true});
     this.props.firebase.getProjects().then(res => {
       this.setState({

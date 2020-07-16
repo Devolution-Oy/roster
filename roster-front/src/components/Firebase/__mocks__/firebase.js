@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { users, projects } from '../../../test_data/index.js';
+import { users, projects, project1Records } from '../../../test_data/index.js';
 
 const user = {
   uid: 'LoR1xY535HP6gNJNRBokMfhD8343',
@@ -133,7 +133,7 @@ class Firebase {
   getRecords = jest.fn((_project) => {
     console.log('firebase mock getRecords');
     return new Promise(resolve => {
-      resolve({data: []});
+      resolve({data: project1Records});
     });
   });
 }
