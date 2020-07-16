@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ScrollBar from 'react-perfect-scrollbar';
 import { withFirebase} from '../Firebase'; 
+import BalanceRecord from '../BalanceRecord';
 
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import './BalanceView.css';
-
-// TODO: Add style for the balance view
 
 // TODO: Add resizable element box for balance records
 
@@ -24,21 +23,6 @@ const BalanceViewTotalRow = amount => {
       </table>
     </div>
   );
-};
-
-const BalanceRecord = (record) => {
-  return (
-    <tr>
-      <td>
-        <label id={'date_recent_' + record.index} >{record.record.date}</label>
-      </td>
-      <td>
-        <label id={'description_recent_' + record.index} >{record.record.description}</label>
-      </td>
-      <td className='td_amount' red={record.record.amount < 0 ? 'true' : undefined}>
-        <label id={'amount_recent_' + record.index}>{record.record.amount.toFixed(2)} €</label><br />
-      </td>
-    </tr>);
 };
 
 class BalanceView extends Component {

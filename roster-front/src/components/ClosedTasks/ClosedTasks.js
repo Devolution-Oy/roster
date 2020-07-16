@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withFirebase } from '../Firebase';
+import BalanceRecord from '../BalanceRecord';
 
 class ClosedTasks extends Component {
   constructor(props) {
@@ -26,12 +27,31 @@ class ClosedTasks extends Component {
 
   // TODO: Render closed tasks from state.records
   render() {
+    const records = this.state.records;
+    console.log(records);
+    const loading = this.state.loading;
+    if (loading) {
+      return (
+        <div className='project_latest'>
+          <h4>Just closed</h4>
+          <div className='closed_tasks'>
+            <p>Loading records...</p>
+          </div>
+        </div>
+      );
+    }
     return (
       <div className='project_latest'>
         <h4>Just closed</h4>
-        <label>Latest closed task1</label>
-        <label>Latest closed task2</label>
-        <label>Latest closed task3</label>
+        <div className='closed_tasks'>
+          <table>
+            <tbody>
+              {records ? records.map((record, i) => {
+                return (<BalanceRecord key={i} record={record} index={i} />);
+              }) : null}
+            </tbody>
+          </table>
+        </div>
       </div>
     );
   }

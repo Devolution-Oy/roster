@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
-import { projects } from '../../test_data/index.js';
+import { projects, flushPromises } from '../../test_data/index.js';
 import Firebase, { FirebaseContext } from '../../components/Firebase';
 
 import ClosedTasks from './ClosedTasks';
@@ -22,7 +22,7 @@ afterEach(() => {
 });
 
 describe('ClosedTasks',() => {
-  it('Loads closed tasks for the projects from github',() => {
+  it('Loads closed tasks for the projects from github',async () => {
     act(() => {
       render(
         <FirebaseContext.Provider value={firebase}>
@@ -31,8 +31,10 @@ describe('ClosedTasks',() => {
         , container);
     });
 
+    await flushPromises();
     expect(container.querySelector('.project_latest')).toBeTruthy();
     expect(firebase.getRecords).toHaveBeenCalledWith(projects[0].name);
+    expect(container.querySelectorAll('.td_amount')).toHaveLength(3);
   });
 
 });
