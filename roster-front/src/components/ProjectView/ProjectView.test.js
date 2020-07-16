@@ -4,6 +4,9 @@ import { act } from 'react-dom/test-utils';
 import { projects } from '../../test_data/index.js';
 
 import ProjectView from './ProjectView';
+import Firebase, { FirebaseContext } from '../Firebase/index.js';
+
+jest.mock('../Firebase/firebase');
 
 let container = null;
 beforeEach(() => {
@@ -21,7 +24,9 @@ describe('ProjectView', () => {
   it('Shows project name, balance, latest action and dev.ready issues', () => {
     act(() => {
       render(
-        <ProjectView project={projects[0]} />
+        <FirebaseContext.Provider value={new Firebase()}>
+          <ProjectView project={projects[0]} />
+        </FirebaseContext.Provider>
         , container
       );
     });

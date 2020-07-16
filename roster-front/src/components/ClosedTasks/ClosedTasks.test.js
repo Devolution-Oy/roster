@@ -32,6 +32,7 @@ describe('ClosedTasks',() => {
     });
 
     expect(container.querySelector('.project_latest')).toBeTruthy();
+    expect(firebase.getRecords).toHaveBeenCalledWith(projects[0].name);
   });
 
 });
