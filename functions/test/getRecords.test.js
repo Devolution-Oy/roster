@@ -88,6 +88,7 @@ describe('getProjects', () => {
         chai.assert.exists(record.description);
         chai.assert.isDefined(Date.parse(record.date));
       });
+      return true;
     }).catch(err => {
       throw chai.assert.fail(err.message);
     });
