@@ -107,7 +107,6 @@ class Firebase {
 
   getUserBalance = (github) => {
     const getBalance = this.functions.httpsCallable('getUserBalance');
-    console.log('Calling get balance');
     return getBalance({user: github});
   };
 

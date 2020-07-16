@@ -98,8 +98,24 @@ export const project1Records = [
   }
 ];
 export const githubTasks = [
-  { title: 'Task test title1'},
-  { title: 'Task test title2'}
+  {
+    title: 'Task test title1',
+    labels: [
+      {
+        name: 'dev',
+        color: 'ff0000'
+      }
+    ]
+  },
+  {
+    title: 'Task test title2',
+    labels: [
+      {
+        name: 'UX',
+        color: '00ff00'
+      }
+    ]
+  }
 ];
 
 export const flushPromises = () => new Promise(setImmediate);

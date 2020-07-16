@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import axios from 'axios';
+import { githubTasks } from '../../test_data/index';
 
 const owner = 'Devolution-Oy';
 const githubAPI = 'https://api.github.com/';
@@ -67,11 +68,19 @@ const getIssues = (repo, user) => {
   });
 };
 
+// TODO: Call github API for implementation ready issues
+const getImplementationReadyIssues = _repo => {
+  return new Promise(resolve => {
+    resolve({data: githubTasks});
+  });
+};
+
 const GithubRequests = {
   getIssues,
   getHeaders,
   getJWT,
-  getAccessToken
+  getAccessToken,
+  getImplementationReadyIssues
 };
 
 export default GithubRequests;
