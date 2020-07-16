@@ -28,7 +28,6 @@ class ClosedTasks extends Component {
   // TODO: Render closed tasks from state.records
   render() {
     const records = this.state.records;
-    console.log(records);
     const loading = this.state.loading;
     if (loading) {
       return (
