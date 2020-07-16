@@ -1,13 +1,12 @@
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
-import { projects } from '../../test_data/index.js';
-import Firebase, { FirebaseContext } from '../../components/Firebase';
+import { projects, flushPromises, githubTasks } from '../../test_data/index.js';
+
+jest.mock('../GithubRequests');
 
 import ReadyTasks from '../ImplementionReadyTasks';
-
-jest.mock('../Firebase/firebase');
-const firebase = new Firebase();
+import GithubRequests from '../GithubRequests/GithubRequests.js';
 
 let container = null;
 beforeEach(() => {
@@ -22,16 +21,17 @@ afterEach(() => {
 });
 
 describe('ReadyTasks',() => {
-  it('Renders',() => {
+  it('Renders', async () => {
+    GithubRequests.getImplementationReadyIssues.mockResolvedValue({data: githubTasks});
     act(() => {
       render(
-        <FirebaseContext.Provider value={firebase}>
-          <ReadyTasks project={projects[0].name} />
-        </FirebaseContext.Provider>
+        <ReadyTasks project={projects[0].name} />
         , container);
     });
 
+    await flushPromises();
     expect(container.querySelector('.project_ready')).toBeTruthy();
+    expect(container.querySelectorAll('.task_item')).toHaveLength(2);
   });
 
 });

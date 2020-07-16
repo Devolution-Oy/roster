@@ -15,7 +15,6 @@ class ProjectView extends Component {
   }
 
   render() {
-    // TODO: Fetch recent tasks for the project
     // TODO: Ready for implementation tasks for the project
     const project = this.state.project;
     const viewId = 'project_view_' + project.name;
@@ -26,7 +25,7 @@ class ProjectView extends Component {
           <h3 className='project_budget'>{project.budget} €</h3>
         </div>
         <ClosedTasks project={project.name} />
-        <ReadyTasks project={project.name} />
+        {project.github ? <ReadyTasks project={project.name} /> : null }
       </div>
     );
   }  
