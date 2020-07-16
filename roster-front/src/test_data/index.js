@@ -80,6 +80,23 @@ export const projects = [
   }
 ];
 
+export const project1Records = [
+  {
+    amount: 49.00,
+    description: 'Did something',
+    date: '2020-07-01 13:00:00'
+  },
+  {
+    amount: 50.00,
+    description: 'Implemented a feature',
+    date: '2020-07-02 15:00:00'
+  },
+  {
+    amount: 51.10,
+    description: 'Fixed an issue',
+    date: '2020-07-03 14:00:00'
+  }
+];
 export const githubTasks = [
   { title: 'Task test title1'},
   { title: 'Task test title2'}
