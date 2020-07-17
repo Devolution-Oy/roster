@@ -57,6 +57,7 @@ class UpdateProject extends Component {
     }
   }
 
+  // TODO: Handle all config parameters
   onChange = event => {
     this.setState({ [event.target.name]: event.target.value });
     if (event.target.name === 'project') {
@@ -114,6 +115,11 @@ class UpdateProject extends Component {
       );
     }
 
+    // TODO: Add scroll area for settings
+    // TODO: Load price configs from project data
+    // TODO: Add checkbox for github project
+    // TODO: Add option to add contributors
+    // TODO: Add task price configs to own component
     return(
       <Modal
         id='modal_projects'
@@ -136,6 +142,37 @@ class UpdateProject extends Component {
           </datalist>
           <label id='label_budget'>Budget</label>
           <input id='input_budget' type='number' name='budget' onChange={this.onChange} value={Number(budget).toFixed(2)} />
+          <div id='task_prices'>
+            <h5>Task closing prices</h5>
+            <label className='configs_label' id='config_label_dev'>dev</label>
+            <input className='configs_input' id='config_input_dev' type='number' />
+            <label className='configs_label' id='config_label_ux'>UX</label>
+            <input className='configs_input' id='config_input_ux' type='number' />
+            <label className='configs_label' id='config_label_testautomation'>test automation</label>
+            <input className='configs_input' id='config_input_testautomation' type='number' />
+            <label className='configs_label' id='config_label_bug'>bug</label>
+            <input className='configs_input' id='config_input_bug' type='number' />
+            <label className='configs_label' id='config_label_documentation'>documentation</label>
+            <input className='configs_input' id='config_input_documentation' type='number' />
+            <label className='configs_label' id='config_label_question'>question</label>
+            <input className='configs_input' id='config_input_question' type='number' />
+            <label className='configs_label' id='config_label_design'>design</label>
+            <input className='configs_input' id='config_input_design' type='number' />
+            <label className='configs_label' id='config_label_design'>design</label>
+            <input className='configs_input' id='config_input_design' type='number' />
+          </div>
+          <div id='review_prices'>
+            <h5>Review</h5>
+            <label className='configs_label' id='config_label_review'>Review</label>
+            <input className='configs_input' id='config_input_review' type='number' />
+          </div>
+          <div id='issue_creation'>
+            <h5>Issue open</h5>
+            <label className='configs_label' id='config_label_open'>Open</label>
+            <input className='configs_input' id='config_input_open' type='number' />
+            <label className='configs_label' id='config_label_accepted'>Accepted</label>
+            <input className='configs_input' id='config_input_accepted' type='number' />
+          </div>
         </div>
       </Modal>
     );
