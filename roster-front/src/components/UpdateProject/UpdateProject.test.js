@@ -25,7 +25,7 @@ afterEach(() => {
 });
 
 describe('Projects modal', () => {
-  it('Shows "Project" and "Budget" inputs', async () => {
+  it('Shows "Project","Budget" and configs inputs', async () => {
     act(() => {
       render(
         <FirebaseContext.Provider value={firebase}>
@@ -36,6 +36,9 @@ describe('Projects modal', () => {
     await flushPromises();
     expect(document.getElementById('input_project')).toBeTruthy();
     expect(document.getElementById('input_budget')).toBeTruthy();
+    expect(document.getElementById('task_prices')).toBeTruthy();
+    expect(document.getElementById('review_prices')).toBeTruthy();
+    expect(document.getElementById('issue_creation')).toBeTruthy();
   });
 
   it('Loads existing project from firebase', async () => {
