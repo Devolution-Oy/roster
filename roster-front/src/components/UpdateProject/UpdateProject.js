@@ -66,8 +66,20 @@ class UpdateProject extends Component {
       github: this.state.github
     };
     // TODO: Show all project parameters on confirm dialog
-    if (window.confirm('Updating project"' + data.name + '"\n"' +
-      'Budget: ' + data.budget)) {
+    if (window.confirm('Updating / Creating project "' + data.name + '"\n"' +
+      'Budget: ' + data.budget + '\n' +
+      'github: ' + data.github + '\n\n' +
+      'Task Parameters\n' + 
+      'Dev: ' + data.dev + '\n' +
+      'UX: ' + data.ux + '\n' +
+      'Test Automation: ' + data.testautomation + '\n' +
+      'Bug: ' + data.bug + '\n' +
+      'Documentation: ' + data.documentation + '\n' +
+      'Question: ' + data.question + '\n' +
+      'Design: ' + data.design + '\n' +
+      'Review: ' + data.review + '\n' +
+      'Task creation: ' +  data.accepted + '\n'
+    )) {
       this.props.firebase.updateProject(data).then(() => {
         this.setState({ updating: null });
         this.props.closeProjects();
