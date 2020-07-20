@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class ProjectConfigs extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const dev = this.props.dev;
     const ux = this.props.ux;
