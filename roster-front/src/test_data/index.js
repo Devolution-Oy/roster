@@ -59,7 +59,16 @@ export const projects = [
       'testuser1',
       'testuser2',
       'testuser3',
-    ]
+    ],
+    accepted: 0,
+    bug: 0,
+    dev: 0,
+    design: 0,
+    documentation: 0,
+    question: 0,
+    review: 0,
+    testautomation: 0,
+    ux: 0
   },
   {
     name: 'project2',
@@ -68,7 +77,16 @@ export const projects = [
     contributors: [
       'testuser2',
       'testuser3',
-    ]
+    ],
+    accepted: 0,
+    bug: 0,
+    dev: 0,
+    design: 0,
+    documentation: 0,
+    question: 0,
+    review: 0,
+    testautomation: 0,
+    ux: 0
   },
   {
     name: 'project3',
