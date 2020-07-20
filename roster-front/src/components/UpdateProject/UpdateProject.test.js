@@ -80,15 +80,15 @@ describe('Projects modal', () => {
       budget: 10000.20,
       github: true,
       contributors: ['testuser1', 'testuser2', 'testuser3'],
-      accepted: 0,
-      bug: 0,
-      dev: 0,
-      design: 0,
-      documentation: 0,
-      question: 0,
-      review: 0,
-      testautomation: 0,
-      ux: 0
+      accepted: 48.8,
+      bug: 43.3,
+      dev: 40,
+      design: 46.6,
+      documentation: 44.4,
+      question: 45.5,
+      review: 47.7,
+      testautomation: 42.2,
+      ux: 41.1
     });
   });
 });

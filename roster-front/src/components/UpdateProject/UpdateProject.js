@@ -62,9 +62,9 @@ class UpdateProject extends Component {
       contributors: this.state.contributors,
       github: this.state.github
     };
+    // TODO: Show all project parameters on confirm dialog
     if (window.confirm('Updating project"' + data.name + '"\n"' +
       'Budget: ' + data.budget)) {
-      console.log(data);
       this.props.firebase.updateProject(data).then(() => {
         this.setState({ updating: null });
         this.props.closeProjects();
@@ -88,18 +88,25 @@ class UpdateProject extends Component {
     }
   }
 
-  // TODO: Handle all config parameters
   onChange = event => {
     if (event.target.name === 'project') {
       var project = this.state.projects.find(project => project.name === event.target.value);
 
       if (project) {
         this.setState({
-          project: project,
           name: event.target.value,
           budget: project.budget,
           github: project.github,
           contributors: project.contributors,
+          dev: project.dev,
+          ux: project.ux,
+          testautomation: project.testautomation,
+          bug: project.bug,
+          documentation: project.documentation,
+          question: project.question,
+          design: project.design,
+          review: project.review,
+          accepted: project.accepted
         });
       } else {
         this.setState({ name: event.target.value });
@@ -114,8 +121,16 @@ class UpdateProject extends Component {
     const loading = this.state.loading;
     const error = this.state.error;
     const updating = this.state.updating;
-    const project = this.state.project;
     const budget = this.state.budget;
+    const dev = this.state.dev;
+    const ux = this.state.ux;
+    const testautomation = this.state.testautomation;
+    const bug = this.state.bug;
+    const documentation = this.state.documentation;
+    const question = this.state.question;
+    const design = this.state.design;
+    const review = this.state.review;
+    const accepted = this.state.accepted;
 
     if (updating) {
       return (
@@ -185,7 +200,17 @@ class UpdateProject extends Component {
           </datalist>
           <label id='label_budget'>Budget</label>
           <input id='input_budget' type='number' name='budget' onChange={this.onChange} value={Number(budget).toFixed(2)} />
-          <ProjectConfigs project={project} change={this.onChange} />
+          <ProjectConfigs
+            dev={dev}
+            ux={ux}
+            testautomation={testautomation}
+            bug={bug}
+            documentation={documentation}
+            question={question}
+            design={design}
+            review={review}
+            accepted={accepted}
+            change={this.onChange} />
         </div>
       </Modal>
     );
