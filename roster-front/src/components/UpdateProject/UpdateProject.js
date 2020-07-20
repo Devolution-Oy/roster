@@ -65,7 +65,6 @@ class UpdateProject extends Component {
       contributors: this.state.contributors,
       github: this.state.github
     };
-    // TODO: Show all project parameters on confirm dialog
     if (window.confirm('Updating / Creating project "' + data.name + '"\n"' +
       'Budget: ' + data.budget + '\n' +
       'github: ' + data.github + '\n\n' +
