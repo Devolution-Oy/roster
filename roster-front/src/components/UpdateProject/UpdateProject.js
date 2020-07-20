@@ -115,7 +115,11 @@ class UpdateProject extends Component {
         this.setState({ name: event.target.value });
       }
     } else {
-      this.setState({ [event.target.name]: event.target.value } );
+      if (event.target.name !== 'github') {
+        this.setState({ [event.target.name]: event.target.value } );
+      } else {
+        this.setState({ [event.target.name]: event.target.checked} );
+      }
     }
   }
 
@@ -134,6 +138,7 @@ class UpdateProject extends Component {
     const design = this.state.design;
     const review = this.state.review;
     const accepted = this.state.accepted;
+    const github = this.state.github;
 
     if (updating) {
       return (
@@ -177,7 +182,6 @@ class UpdateProject extends Component {
       );
     }
 
-    // TODO: Add checkbox for github project
     // TODO: Add option to add contributors
     return(
       <Modal
@@ -202,6 +206,8 @@ class UpdateProject extends Component {
             </datalist>
             <label id='label_budget'>Budget</label>
             <input id='input_budget' type='number' name='budget' onChange={this.onChange} value={Number(budget).toFixed(2)} />
+            <label id='label_github'>Github Project</label>
+            <input id='input_github' type='checkbox' name='github' onChange={this.onChange} value={github} checked={Boolean(github)} />
             <ProjectConfigs
               dev={dev}
               ux={ux}
