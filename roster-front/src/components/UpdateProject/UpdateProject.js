@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import ScrollBar from 'react-perfect-scrollbar';
 
 import { withFirebase} from '../Firebase';
 import Modal from '../Modal';
 import ProjectConfigs from '../ProjectConfigs';
+
+import './UpdateProject.css';
 
 class UpdateProject extends Component {
   constructor(props) {
@@ -174,8 +177,6 @@ class UpdateProject extends Component {
       );
     }
 
-    // TODO: Add scroll area for settings
-    // TODO: Load price configs from project data
     // TODO: Add checkbox for github project
     // TODO: Add option to add contributors
     return(
@@ -186,31 +187,33 @@ class UpdateProject extends Component {
         onAccept={this.updateProject}
         accept='Confirm'>
         <div id='form_update_project'>
-          <label id='label_project'>Project</label>
-          <input id='input_project' type='text' name='project' list='projects' onChange={this.onChange}></input>
-          <datalist id='projects'>
-            {
-              projects ? projects.map((item, i) => {
-                let project_id = 'existing_project_' + item.name;
-                return (
-                  <option id={project_id} key={i} value={item.name}>{item.name}</option>
-                );
-              }) : null
-            }
-          </datalist>
-          <label id='label_budget'>Budget</label>
-          <input id='input_budget' type='number' name='budget' onChange={this.onChange} value={Number(budget).toFixed(2)} />
-          <ProjectConfigs
-            dev={dev}
-            ux={ux}
-            testautomation={testautomation}
-            bug={bug}
-            documentation={documentation}
-            question={question}
-            design={design}
-            review={review}
-            accepted={accepted}
-            change={this.onChange} />
+          <ScrollBar component='div'>
+            <label id='label_project'>Project</label>
+            <input id='input_project' type='text' name='project' list='projects' onChange={this.onChange}></input>
+            <datalist id='projects'>
+              {
+                projects ? projects.map((item, i) => {
+                  let project_id = 'existing_project_' + item.name;
+                  return (
+                    <option id={project_id} key={i} value={item.name}>{item.name}</option>
+                  );
+                }) : null
+              }
+            </datalist>
+            <label id='label_budget'>Budget</label>
+            <input id='input_budget' type='number' name='budget' onChange={this.onChange} value={Number(budget).toFixed(2)} />
+            <ProjectConfigs
+              dev={dev}
+              ux={ux}
+              testautomation={testautomation}
+              bug={bug}
+              documentation={documentation}
+              question={question}
+              design={design}
+              review={review}
+              accepted={accepted}
+              change={this.onChange} />
+          </ScrollBar>
         </div>
       </Modal>
     );
