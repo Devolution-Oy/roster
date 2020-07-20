@@ -38,6 +38,7 @@ describe('Projects modal', () => {
     expect(document.getElementById('input_budget')).toBeTruthy();
     expect(document.getElementById('task_prices')).toBeTruthy();
     expect(document.getElementById('review_prices')).toBeTruthy();
+    expect(document.getElementById('input_github')).toBeTruthy();
     expect(document.getElementById('issue_creation')).toBeTruthy();
   });
 
