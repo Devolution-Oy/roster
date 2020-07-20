@@ -75,6 +75,20 @@ describe('Projects modal', () => {
     Simulate.change(budgetInput, { target: { name: 'budget', value: 10000.20 }}); 
     const btnConfirm = container.querySelector('.btn_accept');
     await Simulate.click(btnConfirm);
-    expect(firebase.updateProject).toHaveBeenCalledWith({name: 'project1', budget: 10000.20 });
+    expect(firebase.updateProject).toHaveBeenCalledWith({
+      name: 'project1',
+      budget: 10000.20,
+      github: true,
+      contributors: ['testuser1', 'testuser2', 'testuser3'],
+      accepted: 0,
+      bug: 0,
+      dev: 0,
+      design: 0,
+      documentation: 0,
+      question: 0,
+      review: 0,
+      testautomation: 0,
+      ux: 0
+    });
   });
 });

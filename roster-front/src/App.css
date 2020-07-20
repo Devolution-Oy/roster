@@ -36,7 +36,7 @@ button:hover {
 
 .main-content {
   background: white;
-  max-width: 800px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 10px;
   min-height: 100vh;
@@ -67,4 +67,13 @@ select {
 input:disabled,
 select:disabled {
   background-color: #efefef;
+}
+@media only screen and (min-width: 1500px) {
+.main-content {
+  background: white;
+  max-width: 50%;
+  margin: 0 auto;
+  padding: 10px;
+  min-height: 100vh;
+}
 }

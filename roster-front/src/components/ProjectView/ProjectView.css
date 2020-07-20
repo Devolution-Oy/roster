@@ -14,3 +14,8 @@
   color: green;
   text-align: right;
 }
+@media only screen and (min-width: 1500px) {
+  .project_view {
+    max-width: 50%;
+  }
+}
