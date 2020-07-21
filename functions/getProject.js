@@ -17,9 +17,9 @@ module.exports = async (req, res) => {
   }
 
   console.log(req.body.project);
-  return admin.firestore().collection('projects').doc(req.body.project).get().then(doc => {
+  const doc = await admin.firestore().collection('projects').doc(req.body.project).get();
+  if (doc.data()) 
     return res.status(200).send(doc.data());
-  }).catch(err => {
-    return res.status(500).send(err.message);
-  });
+  else
+    return res.status(500).send('The project was not found');
 };
