@@ -17,9 +17,9 @@ module.exports = async (req, res) => {
   }
 
   console.log(req.body.project);
-  admin.firestore().collection('projects').doc(req.body.project).get().then(doc => {
-    res.status(200).send(doc.data());
+  return admin.firestore().collection('projects').doc(req.body.project).get().then(doc => {
+    return res.status(200).send(doc.data());
   }).catch(err => {
-    res.status(500).send(err.message);
+    return res.status(500).send(err.message);
   });
 };
