@@ -28,7 +28,8 @@ class AddRecordPopup extends Component {
       user: null,
       amount: 0,
       issue: '',
-      description: ''
+      description: '',
+      action: ''
     };  
   }
   addRecord = () => {
@@ -40,7 +41,8 @@ class AddRecordPopup extends Component {
       amount: Number(this.state.amount),
       issue: this.state.issue,
       githubUser: this.state.user,
-      timestamp: Date.now()
+      timestamp: Date.now(),
+      action: this.state.action
     };
 
     console.log(record);
@@ -163,6 +165,8 @@ class AddRecordPopup extends Component {
           <input name='issue' id='input_record_issue' type='text' onChange={this.onChange} />
           <label>Amount</label>
           <input name='amount' id='input_record_amount' type='number' onChange={this.onChange} />
+          <label>Action</label>
+          <input name='action' id='input_record_action' type='text' onChange={this.onChange} />
         </div>
       </Modal>
     );

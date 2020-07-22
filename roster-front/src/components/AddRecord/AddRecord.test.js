@@ -46,6 +46,7 @@ describe('Add post custom record popup', () => {
     let setDescription = 'test description';
     let setAmount = 999.91;
     let setIssue = '84_3';
+    let setAction = 'action';
 
     act(()=> {
       render(
@@ -65,6 +66,7 @@ describe('Add post custom record popup', () => {
     const descriptionInput = document.getElementById('input_record_description');
     const issueInput = document.getElementById('input_record_issue');
     const amountInput = document.getElementById('input_record_amount');
+    const actionInput = document.getElementById('input_record_action');
     expect(show_error).not.toBeTruthy();
     expect(show_loading).not.toBeTruthy();
     expect(userInput).toBeTruthy();
@@ -73,6 +75,7 @@ describe('Add post custom record popup', () => {
     Simulate.change(descriptionInput, { target: { name: 'description', value: setDescription } });
     Simulate.change(amountInput, { target: { name: 'amount', value: setAmount } });
     Simulate.change(issueInput, { target: { name: 'issue', value: setIssue } });
+    Simulate.change(actionInput,{ target: { name: 'action', value: setAction} }); 
     const btnConfirm = container.querySelector('.btn_accept');
     expect(btnConfirm).not.toBeDisabled();
     await Simulate.click(btnConfirm);
@@ -83,6 +86,7 @@ describe('Add post custom record popup', () => {
         description: setDescription,
         amount: setAmount,
         issue: setIssue,
+        action: setAction,
         githubUser: setUser,
       }));
   });
