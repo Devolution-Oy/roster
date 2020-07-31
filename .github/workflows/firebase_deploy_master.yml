@@ -25,6 +25,8 @@ jobs:
       CI: 1
     steps:
       - uses: actions/checkout@master
+        with:
+          submodules: true
       - uses: actions/setup-node@master
       - name: Install front end dependencies 
         run: npm ci
@@ -87,6 +89,8 @@ jobs:
       CI: 1
     steps:
     - uses: actions/checkout@master
+      with:
+        submodules: true
     - uses: actions/setup-node@master
     - run: npm ci 
       working-directory: ./roster-front

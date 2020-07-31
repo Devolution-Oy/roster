@@ -1,0 +1,3 @@
+[submodule "roster-front"]
+	path = roster-front
+	url = https://github.com/Devolution-Oy/roster-front.git
