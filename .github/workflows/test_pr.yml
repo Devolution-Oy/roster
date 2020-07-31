@@ -23,6 +23,7 @@ jobs:
       CI: 1
     steps:
       - uses: actions/checkout@master
+      - uses: textbook/git-checkout-submodule-action@master
       - uses: actions/setup-node@master
       - name: Install front end dependencies 
         run: npm ci
