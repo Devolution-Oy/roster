@@ -58,10 +58,10 @@ jobs:
         run: |
           docker build -t rfcontainer .
           docker run -v ${PWD}:/home/robot --rm rfcontainer -v USER_PW:${{ secrets.TEST_USER_PW }} -v FB_PROJECT:roster-pr -L TRACE -e not-ready
-        working-directory: ./testautomation
+        working-directory: ./roster-testautomation
       - name: Upload test results
         uses: actions/upload-artifact@v1
         if: always()
         with:
           name: reports
-          path: ./testautomation/logs
+          path: ./roster-testautomation/logs
