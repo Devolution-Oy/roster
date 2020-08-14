@@ -18,12 +18,16 @@ jobs:
     
     - name: Terraform init
       run: terraform init
+      working-directory: ./terraform/dev-env
 
     - name: Terraform Format
       run: terraform fmt -check terraform/pr-env.tf
+      working-directory: ./terraform/dev-env
 
     - name: Terraform Plan
       run: terraform plan terraform/pr-env.tf
+      working-directory: ./terraform/dev-env
 
     - name: Terraform Apply 
       run: terraform apply -auto-approve terraform/pr-env.tf
+      working-directory: ./terraform/dev-env
