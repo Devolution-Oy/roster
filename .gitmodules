@@ -4,3 +4,6 @@
 [submodule "roster-testautomation"]
 	path = roster-testautomation
 	url = git@github.com:Devolution-Oy/roster-testautomation.git
+[submodule "functions"]
+	path = functions
+	url = git@github.com:Devolution-Oy/roster-functions

@@ -1,1 +1,0 @@
-// TODO: Create unit tests for getBalance function
