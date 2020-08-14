@@ -1,10 +1,11 @@
 name: 'Create Dev env'
 
-on: create
+on:
+  push:
+    branches: [ terraform ]
 
 jobs:
   CreateEnv:
-    if: ${{ contains(github.ref, 'refs/heads/imp/')}}
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
