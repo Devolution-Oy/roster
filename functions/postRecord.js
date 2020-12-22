@@ -9,20 +9,23 @@ const updateBudget = (project, amount) => {
     .collection('projects')
     .where('repositories', 'array-contains', project)
     .get().then(res => {
-      console.log('Found ' + res);
-      console.log(res);
+      res.forEach(doc => {
+        data = doc.data();
+
+      })
       var budget = 0;
-      if (res.exists) {
-        budget = res.data().budget;
+      if (data.budget) {
+        budget = data.budget;
         console.log('Budget before ' + budget);
       }
 
       const newBudget = budget - amount;
+      data.budget = newBudget;
       console.log('New budget before ' + newBudget);
       return admin.firestore()
         .collection('projects')
-        .where('repositories', 'array-contains', project)
-        .set({ budget: newBudget }, { merge: true });
+        .doc(data.project)
+        .set(data);
   });
 };
 
