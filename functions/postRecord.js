@@ -11,9 +11,11 @@ const updateBudget = (project, amount) => {
     var budget = 0;
     if (res.exists) {
       budget = res.data().budget;
+      console.log('Budget before ' + budget);
     }
 
     const newBudget = budget - amount;
+    console.log('New btudget before ' + budget);
     return admin.firestore()
       .collection('projects')
       .where('repositories', 'array-contains', project)
