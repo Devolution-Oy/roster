@@ -9,7 +9,7 @@ const updateBudget = (project, amount) => {
     .collection('projects')
     .where('repositories', 'array-contains', project)
     .get().then(res => {
-      res.forEach(doc => {
+      return res.forEach(doc => {
         data = doc.data();
         console.log(data)
 
@@ -22,7 +22,7 @@ const updateBudget = (project, amount) => {
         const newBudget = budget - amount;
         data.budget = newBudget;
         console.log('New budget before ' + newBudget);
-        return admin.firestore()
+        admin.firestore()
           .collection('projects')
           .doc(data.project)
           .set(data);
