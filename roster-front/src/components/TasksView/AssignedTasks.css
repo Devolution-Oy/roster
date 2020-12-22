@@ -1,0 +1,16 @@
+.assigned_tasks {
+  margin: 0;
+  display: grid;
+}
+
+@media only screen and (min-width: 1500px) {
+.assigned_tasks {
+  position: absolute;
+  top: 75px;
+  right: 0;
+  background: white;
+  padding: 10px;
+  margin: 10px;
+  width: 20%;
+}
+}
