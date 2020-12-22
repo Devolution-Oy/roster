@@ -9,7 +9,7 @@ const updateBudget = (project, amount) => {
     .where('repositories', 'array-contains', project)
     .get().then(res => {
     var budget = 0;
-    if (res.data()) {
+    if (res.exists) {
       budget = res.data().budget;
     }
 
