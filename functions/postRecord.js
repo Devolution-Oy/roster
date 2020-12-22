@@ -11,21 +11,22 @@ const updateBudget = (project, amount) => {
     .get().then(res => {
       res.forEach(doc => {
         data = doc.data();
+        console.log(data)
 
-      })
-      var budget = 0;
-      if (data.budget) {
-        budget = data.budget;
-        console.log('Budget before ' + budget);
-      }
+        var budget = 0;
+        if (data.budget) {
+          budget = data.budget;
+          console.log('Budget before ' + budget);
+        }
 
-      const newBudget = budget - amount;
-      data.budget = newBudget;
-      console.log('New budget before ' + newBudget);
-      return admin.firestore()
-        .collection('projects')
-        .doc(data.project)
-        .set(data);
+        const newBudget = budget - amount;
+        data.budget = newBudget;
+        console.log('New budget before ' + newBudget);
+        admin.firestore()
+          .collection('projects')
+          .doc(data.project)
+          .set(data);
+    });
   });
 };
 
