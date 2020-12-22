@@ -51,14 +51,17 @@ describe('Post Record tests', () => {
 
     stubGet.callsFake(() => {
       return new Promise(resolve => {
-        resolve({ data: stubProjectData });
+        resolve({
+          exists: true, 
+          data: stubProjectData });
       });
     });
     stubProjectData.returns({
       budget: 1000,
-      name: 'test project',
+      name: 'testproject',
       contributors: ['tester'],
-      github: true
+      github: true,
+      repositories: ['testproject']
     });
 
     sandbox.stub(functions, 'config').returns({
