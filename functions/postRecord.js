@@ -2,24 +2,26 @@ const crypto = require('crypto-js');
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 
-const updateBudget = (project, amount) => {
+const updateBudget = async (project, amount) => {
 
+  console.log('Trying to search ' + project);
   return admin.firestore()
     .collection('projects')
     .where('repositories', 'array-contains', project)
     .get().then(res => {
-    var budget = 0;
-    if (res.exists) {
-      budget = res.data().budget;
-      console.log('Budget before ' + budget);
-    }
+      console.log('Found ' + res);
+      var budget = 0;
+      if (res.exists) {
+        budget = res.data().budget;
+        console.log('Budget before ' + budget);
+      }
 
-    const newBudget = budget - amount;
-    console.log('New btudget before ' + budget);
-    return admin.firestore()
-      .collection('projects')
-      .where('repositories', 'array-contains', project)
-      .set({budget: newBudget}, {merge: true});
+      const newBudget = budget - amount;
+      console.log('New btudget before ' + budget);
+      return admin.firestore()
+        .collection('projects')
+        .where('repositories', 'array-contains', project)
+        .set({ budget: newBudget }, { merge: true });
   });
 };
 
