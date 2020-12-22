@@ -1,0 +1,21 @@
+.project_view {
+  width: 100%;
+}
+.project_header_row {
+  display: flex;
+  padding: 5px;
+}
+
+.project_header {
+  width: 100%
+}
+.project_budget {
+  width: 100px;
+  color: green;
+  text-align: right;
+}
+@media only screen and (min-width: 1500px) {
+  .project_view {
+    max-width: 50%;
+  }
+}
