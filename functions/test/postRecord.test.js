@@ -22,6 +22,9 @@ describe('Post Record tests', () => {
   var statusStub;
   var res;
   var statusResult;
+  var forEachStub;
+  var stubDoc;
+
   beforeEach(() => {
     sandbox = sinon.createSandbox();
     stubFirestore = sandbox.stub();
@@ -33,6 +36,8 @@ describe('Post Record tests', () => {
     stubProjectData = sandbox.stub();
     sendStub = sandbox.stub();
     statusStub = sandbox.stub();
+    forEachStub = sandbox.stub();
+    stubDoc = sandbox.stub();
 
     sandbox.stub(admin, 'firestore').get(() => stubFirestore);
     stubFirestore.returns({ collection: stubCollection});
@@ -43,8 +48,15 @@ describe('Post Record tests', () => {
     });
     stubProjects.withArgs('repositories', 'array-contains', 'test project').returns({
       set: stubSet,
-      get: stubGet
+      get: stubGet,
     });
+    stubProjects.withArgs('test project').returns({
+      doc: stubDoc
+    })
+
+    stubDoc.returns({
+      set: stubSet
+    })
     stubSet.callsFake(set => {
       console.log(`Writing ${set}`);
     });
@@ -52,10 +64,14 @@ describe('Post Record tests', () => {
     stubGet.callsFake(() => {
       return new Promise(resolve => {
         resolve({
-          exists: true, 
-          data: stubProjectData });
+          forEach: forEachStub
+        });
       });
     });
+    forEachStub.returns({
+      data: stubProjectData
+    });
+
     stubProjectData.returns({
       budget: 1000,
       name: 'test project',
@@ -98,49 +114,48 @@ describe('Post Record tests', () => {
 
   describe('Post record requests are handled', () => {
 
-    //it('Each record reduce project\'s budget', async () => {
-    //  let validReq = {
-    //    body: {
-    //      githubUser: 'tester',
-    //      project: 'test project',
-    //      amount: 60,
-    //      issue: 1,
-    //      timestamp: '2020-06-12T12:45:00Z',
-    //      action: 'closed',
-    //      description: 'A part of a new feature'
-    //    },
-    //    method: 'POST',
-    //    headers: {
-    //      authorization: process.env.TASKER_APP_ID
-    //    }
-    //  };
+    it('Each record reduce project\'s budget', async () => {
+      let validReq = {
+        body: {
+          githubUser: 'tester',
+          project: 'test project',
+          amount: 60,
+          issue: 1,
+          timestamp: '2020-06-12T12:45:00Z',
+          action: 'closed',
+          description: 'A part of a new feature'
+        },
+        method: 'POST',
+        headers: {
+          authorization: process.env.TASKER_APP_ID
+        }
+      };
 
-    //  await handlePostRecord(validReq, res);
-    //  statusStub.calledWith(200).should.be.ok;
+      await handlePostRecord(validReq, res);
+      statusStub.calledWith(200).should.be.ok;
 
-    //});
+    });
 
-    //it('Validate record method gets called for request', async () => {
-    //  let validReq = {
-    //    body: {
-    //      githubUser: 'tester',
-    //      project: 'test project',
-    //      amount: 60,
-    //      issue: 1,
-    //      action: 'closed',
-    //      timestamp: '2020-06-12T12:45:00Z',
-    //      description: 'A part of a new feature'
-    //    },
-    //    method: 'POST',
-    //    headers: {
-    //      authorization: process.env.TASKER_APP_ID
-    //    }
-    //  };
+    it('Validate record method gets called for request', async () => {
+      let validReq = {
+        body: {
+          githubUser: 'tester',
+          project: 'test project',
+          amount: 60,
+          issue: 1,
+          action: 'closed',
+          timestamp: '2020-06-12T12:45:00Z',
+          description: 'A part of a new feature'
+        },
+        method: 'POST',
+        headers: {
+          authorization: process.env.TASKER_APP_ID
+        }
+      };
 
-    //  await handlePostRecord(validReq, res);
-    //  statusStub.calledWith(200).should.be.ok;
-    //  stubSet.calledWith({budget: 940}, {merge: true}).should.be.ok;
-    //});
+      await handlePostRecord(validReq, res);
+      statusStub.calledWith(200).should.be.ok;
+    });
   });
 
   describe('Validation failures are handled', () => {
