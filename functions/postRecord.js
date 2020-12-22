@@ -22,11 +22,11 @@ const updateBudget = (project, amount) => {
         const newBudget = budget - amount;
         data.budget = newBudget;
         console.log('New budget before ' + newBudget);
-        admin.firestore()
+        return admin.firestore()
           .collection('projects')
           .doc(data.project)
           .set(data);
-    });
+      });
   });
 };
 
