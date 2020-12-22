@@ -24,7 +24,7 @@ const updateBudget = (project, amount) => {
         console.log('New budget before ' + newBudget);
         admin.firestore()
           .collection('projects')
-          .doc(data.project)
+          .doc(data.name)
           .set(data);
       });
   });
