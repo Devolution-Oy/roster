@@ -22,6 +22,9 @@ describe('Post Record tests', () => {
   var statusStub;
   var res;
   var statusResult;
+  var forEachStub;
+  var stubDoc;
+
   beforeEach(() => {
     sandbox = sinon.createSandbox();
     stubFirestore = sandbox.stub();
@@ -33,6 +36,8 @@ describe('Post Record tests', () => {
     stubProjectData = sandbox.stub();
     sendStub = sandbox.stub();
     statusStub = sandbox.stub();
+    forEachStub = sandbox.stub();
+    stubDoc = sandbox.stub();
 
     sandbox.stub(admin, 'firestore').get(() => stubFirestore);
     stubFirestore.returns({ collection: stubCollection});
@@ -43,22 +48,36 @@ describe('Post Record tests', () => {
     });
     stubProjects.withArgs('repositories', 'array-contains', 'test project').returns({
       set: stubSet,
-      get: stubGet
+      get: stubGet,
     });
+    stubProjects.withArgs('test project').returns({
+      doc: stubDoc
+    })
+
+    stubDoc.returns({
+      set: stubSet
+    })
     stubSet.callsFake(set => {
       console.log(`Writing ${set}`);
     });
 
     stubGet.callsFake(() => {
       return new Promise(resolve => {
-        resolve({ data: stubProjectData });
+        resolve({
+          forEach: forEachStub
+        });
       });
     });
+    forEachStub.returns({
+      data: stubProjectData
+    });
+
     stubProjectData.returns({
       budget: 1000,
       name: 'test project',
       contributors: ['tester'],
-      github: true
+      github: true,
+      repositories: ['test project']
     });
 
     sandbox.stub(functions, 'config').returns({
@@ -136,7 +155,6 @@ describe('Post Record tests', () => {
 
       await handlePostRecord(validReq, res);
       statusStub.calledWith(200).should.be.ok;
-      stubSet.calledWith({budget: 940}, {merge: true}).should.be.ok;
     });
   });
 

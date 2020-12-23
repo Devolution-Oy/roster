@@ -4,20 +4,29 @@ const admin = require('firebase-admin');
 
 const updateBudget = (project, amount) => {
 
+  console.log('Trying to search ' + project);
   return admin.firestore()
     .collection('projects')
     .where('repositories', 'array-contains', project)
     .get().then(res => {
-    var budget = 0;
-    if (res.data()) {
-      budget = res.data().budget;
-    }
+      return res.forEach(doc => {
+        data = doc.data();
+        console.log(data)
 
-    const newBudget = budget - amount;
-    return admin.firestore()
-      .collection('projects')
-      .where('repositories', 'array-contains', project)
-      .set({budget: newBudget}, {merge: true});
+        var budget = 0;
+        if (data.budget) {
+          budget = data.budget;
+          console.log('Budget before ' + budget);
+        }
+
+        const newBudget = budget - amount;
+        data.budget = newBudget;
+        console.log('New budget before ' + newBudget);
+        admin.firestore()
+          .collection('projects')
+          .doc(data.name)
+          .set(data);
+      });
   });
 };
 
