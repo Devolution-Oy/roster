@@ -28,7 +28,7 @@ describe('User\'s Balance view component', () => {
     act(() => {
       render(
         <FirebaseContext.Provider value={new Firebase()}>
-          <BalanceView user={normaluser}/>
+          <BalanceView user={normaluser.data}/>
         </FirebaseContext.Provider>, container
       );
     });
