@@ -38,7 +38,7 @@ class BalanceView extends Component {
 
   fetchBalance = () => {
     this.setState({loading: true});
-    this.props.firebase.getUserBalance(this.props.user.data.githubUser)
+    this.props.firebase.getUserBalance(this.props.user.githubUser)
       .then(res => {
         this.setState({ balance: res.data, loading: false });
       }).catch(error => {
@@ -95,13 +95,10 @@ class BalanceView extends Component {
 BalanceView.propTypes = {
   firebase: PropTypes.object,
   user: PropTypes.shape({
-    uid: PropTypes.string.isRequired,
-    data: PropTypes.shape({
-      displayName: PropTypes.string.isRequired,
-      email: PropTypes.string.isRequired,
-      githubUser: PropTypes.string.isRequired,
-      role: PropTypes.number.isRequired, 
-    })
+    displayName: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    githubUser: PropTypes.string.isRequired,
+    role: PropTypes.number.isRequired,
   })
 };
 
