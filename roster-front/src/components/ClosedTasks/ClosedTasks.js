@@ -4,6 +4,10 @@ import { withFirebase } from '../Firebase';
 import BalanceRecord from '../BalanceRecord';
 import ScrollBar from 'react-perfect-scrollbar';
 
+import 'react-perfect-scrollbar/dist/css/styles.css';
+import './ClosedTasks.css';
+
+
 class ClosedTasks extends Component {
   constructor(props) {
     super(props);
@@ -15,6 +19,7 @@ class ClosedTasks extends Component {
 
   componentDidMount() {
     this.setState({loading: true});
+    // TODO Add a variable how many records are requested
     this.props.firebase.getRecords(this.props.project).then(res => {
       this.setState({
         loading: false,
