@@ -37,4 +37,17 @@ describe('ClosedTasks',() => {
     expect(container.querySelectorAll('.td_amount')).toHaveLength(3);
   });
 
+  it('Closed tasks are in a scrol area', async () => {
+    act(() => {
+      render(
+        <FirebaseContext.Provider value={firebase}>
+          <ClosedTasks project={projects[0].name} />
+        </FirebaseContext.Provider>
+        , container);
+    });
+
+    await flushPromises();
+    expect(container.querySelector('.scroll_closed_tasks')).toBeTruthy();
+  });
+
 });

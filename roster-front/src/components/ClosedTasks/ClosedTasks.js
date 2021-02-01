@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withFirebase } from '../Firebase';
 import BalanceRecord from '../BalanceRecord';
+import ScrollBar from 'react-perfect-scrollbar';
 
 class ClosedTasks extends Component {
   constructor(props) {
@@ -25,7 +26,6 @@ class ClosedTasks extends Component {
     });
   }
 
-  // TODO: Render closed tasks from state.records
   render() {
     const records = this.state.records;
     const loading = this.state.loading;
@@ -42,15 +42,17 @@ class ClosedTasks extends Component {
     return (
       <div className='project_latest'>
         <h4>Just closed</h4>
-        <div className='closed_tasks'>
-          <table>
-            <tbody>
-              {records ? records.map((record, i) => {
-                return (<BalanceRecord key={i} record={record} index={i} />);
-              }) : null}
-            </tbody>
-          </table>
-        </div>
+        <ScrollBar className='scroll_closed_tasks' component='div' >
+          <div className='closed_tasks'>
+            <table>
+              <tbody>
+                {records ? records.map((record, i) => {
+                  return (<BalanceRecord key={i} record={record} index={i} />);
+                }) : null}
+              </tbody>
+            </table>
+          </div>
+        </ScrollBar>
       </div>
     );
   }
