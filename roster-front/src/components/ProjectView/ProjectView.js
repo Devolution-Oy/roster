@@ -17,16 +17,18 @@ class ProjectView extends Component {
     };
   }
   componentDidMount() {
-    GithubRequests.getImplementationReadyIssues(this.props.project.name).then(res => {
-      this.setState({
-        tasks: res.data,
+    if (this.props.project.github) {
+      GithubRequests.getImplementationReadyIssues(this.props.project.name).then(res => {
+        this.setState({
+          tasks: res.data,
+        });
+      }).catch(err => {
+        console.log(err.message);
+        this.setState({
+          error: err.message
+        });
       });
-    }).catch(err => {
-      console.log(err.message);
-      this.setState({
-        error: err.message
-      });
-    });
+    }
   }
 
   // TODO Loop ready tasks and calculate their value
@@ -50,7 +52,7 @@ class ProjectView extends Component {
         </div>
         <div>
           <h3 className='project_header'>Ready task value</h3>
-          <h3 className='project_budget'>{taskValue}</h3>
+          <h3 className='project_budget'>{taskValue} €</h3>
         </div>
         <ClosedTasks project={project.name} />
         {project.github ? <ReadyTasks project={project.name} tasks={tasks}/> : null }
