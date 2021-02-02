@@ -50,7 +50,7 @@ class ProjectView extends Component {
           <h3 className='project_header'>{project.name}</h3>
           <h3 className='project_budget'>{(Math.round(project.budget * 100)/ 100).toFixed(2)} €</h3>
         </div>
-        <div>
+        <div className='project_header_row'>
           <h3 className='project_header'>Ready task value</h3>
           <h3 className='project_budget'>{taskValue} €</h3>
         </div>
