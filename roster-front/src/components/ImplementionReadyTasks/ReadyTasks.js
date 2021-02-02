@@ -34,7 +34,6 @@ class ReadyTasks extends Component {
 }
 
 ReadyTasks.propTypes = {
-  project: PropTypes.string.isRequired,
   tasks: PropTypes.array
 };
 
