@@ -3,10 +3,7 @@ import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import { projects, flushPromises, githubTasks } from '../../test_data/index.js';
 
-jest.mock('../GithubRequests');
-
 import ReadyTasks from '../ImplementionReadyTasks';
-import GithubRequests from '../GithubRequests/GithubRequests.js';
 
 let container = null;
 beforeEach(() => {
@@ -22,10 +19,9 @@ afterEach(() => {
 
 describe('ReadyTasks',() => {
   it('Renders', async () => {
-    GithubRequests.getImplementationReadyIssues.mockResolvedValue({data: githubTasks});
     act(() => {
       render(
-        <ReadyTasks project={projects[0].name} />
+        <ReadyTasks project={projects[0].name} tasks={githubTasks} />
         , container);
     });
 
@@ -35,10 +31,9 @@ describe('ReadyTasks',() => {
   });
 
   it('Is wrapped in scroll area', async () => {
-    GithubRequests.getImplementationReadyIssues.mockResolvedValue({data: githubTasks});
     act(() => {
       render(
-        <ReadyTasks project={projects[0].name} />
+        <ReadyTasks project={projects[0].name} tasks={githubTasks}  />
         , container);
     });
 
