@@ -53,7 +53,7 @@ export const users = [
 export const projects = [
   { 
     name: 'project1',
-    budget: 15000,
+    budget: 15000.0234,
     github: true,
     contributors: [
       'testuser1',
