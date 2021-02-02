@@ -72,7 +72,8 @@ const getImplementationReadyIssues = repo => {
     let requestURL = githubAPI + 'repos/' + owner + '/' + repo + '/issues';
     const params = {
       assignee: 'none',
-      state: 'open'
+      state: 'open',
+      labels: 'ready'
     };
     return axios.get(requestURL, { params: params, headers: headers });
   });
