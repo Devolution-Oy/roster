@@ -56,7 +56,7 @@ describe('Projects modal', () => {
     expect(document.getElementById('input_budget').value).toBe('0.00');
     const projectInput = document.getElementById('input_project');
     Simulate.change(projectInput, { target: { name: 'project', value: 'project1' }}); 
-    expect(document.getElementById('input_budget').value).toBe('15000.00');
+    expect(document.getElementById('input_budget').value).toBe('15000.02');
   });
 
   it('Calls firebase update project when data is submitted', async () => {
