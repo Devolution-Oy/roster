@@ -15,14 +15,13 @@ class ProjectView extends Component {
   }
 
   render() {
-    // TODO: Ready for implementation tasks for the project
     const project = this.state.project;
     const viewId = 'project_view_' + project.name;
     return (
       <div id={viewId} className='project_view'>
         <div className='project_header_row'>
           <h3 className='project_header'>{project.name}</h3>
-          <h3 className='project_budget'>{Math.round(project.budget * 100/ 100).toFixed(2)} €</h3>
+          <h3 className='project_budget'>{(Math.round(project.budget * 100)/ 100).toFixed(2)} €</h3>
         </div>
         <ClosedTasks project={project.name} />
         {project.github ? <ReadyTasks project={project.name} /> : null }

@@ -36,8 +36,10 @@ describe('ProjectView', () => {
     await flushPromises();
     expect(container.querySelector('.project_view')).toBeTruthy();
     expect(container.querySelector('.project_header')).toBeTruthy();
-    expect(container.querySelector('.project_budget')).toBeTruthy();
+    expect(container.querySelector('.project_budget').innerHTML).toBe('15000.02 €');
     expect(container.querySelector('.project_latest')).toBeTruthy();
     expect(container.querySelector('.project_ready')).toBeTruthy();
   });
+
+
 });
