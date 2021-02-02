@@ -29,17 +29,39 @@ class ProjectView extends Component {
         });
       });
     }
+
+  }
+
+  getLabelValue = (label, project) => {
+    if (label in project)
+      return project[label];
+
+    return 0.00;
   }
 
   // TODO Loop ready tasks and calculate their value
-  calculateTaskValue = () => {
-    return 0.00;
+  calculateTaskValue = (tasks, project) => {
+    if (!tasks)
+      return 0.00;
+
+    let sum = 0.00;
+    for (let task of tasks) {
+      for (let label of task.labels) {
+        let value = this.getLabelValue(label.name, project);
+        if (value !== 0.00) {
+          sum += value;
+          break;
+        }
+      }
+    }
+    return sum;
   }
+
   render() {
     const project = this.state.project;
     const viewId = 'project_view_' + project.name;
     const tasks = this.state.tasks;
-    const taskValue = this.calculateTaskValue();
+    const taskValue = this.calculateTaskValue(tasks, project);
     if (this.state.error) {
       return (<p>{this.state.error}</p>);
     }
@@ -52,7 +74,7 @@ class ProjectView extends Component {
         </div>
         <div className='project_header_row'>
           <h4 className='project_header'>Ready task value</h4>
-          <h4 className='project_budget'>{taskValue} €</h4>
+          <h4 id='open_value' className='project_budget'>{(Math.round(taskValue * 100) / 100).toFixed(2)} €</h4>
         </div>
         <ClosedTasks project={project.name} />
         {project.github ? <ReadyTasks project={project.name} tasks={tasks}/> : null }

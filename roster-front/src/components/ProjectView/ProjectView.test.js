@@ -56,5 +56,20 @@ describe('ProjectView', () => {
 
   });
 
+  it('Calculates open task values based on project settings', async () => {
+    GithubRequests.getImplementationReadyIssues.mockResolvedValue({data: githubTasks});
+    act(() => {
+      render(
+        <FirebaseContext.Provider value={new Firebase()}>
+          <ProjectView project={projects[0]} />
+        </FirebaseContext.Provider>
+        , container
+      );
+    });
+    await flushPromises();
+
+    expect(document.getElementById('open_value').innerHTML).toBe('81.10 €')
+  })
+
 
 });
