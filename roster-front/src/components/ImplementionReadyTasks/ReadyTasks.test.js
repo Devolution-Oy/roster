@@ -22,10 +22,9 @@ afterEach(() => {
 
 describe('ReadyTasks',() => {
   it('Renders', async () => {
-    GithubRequests.getImplementationReadyIssues.mockResolvedValue({data: githubTasks});
     act(() => {
       render(
-        <ReadyTasks project={projects[0].name} />
+        <ReadyTasks project={projects[0].name} tasks={githubTasks} />
         , container);
     });
 
@@ -35,10 +34,9 @@ describe('ReadyTasks',() => {
   });
 
   it('Is wrapped in scroll area', async () => {
-    GithubRequests.getImplementationReadyIssues.mockResolvedValue({data: githubTasks});
     act(() => {
       render(
-        <ReadyTasks project={projects[0].name} />
+        <ReadyTasks project={projects[0].name} tasks={githubTasks}  />
         , container);
     });
 

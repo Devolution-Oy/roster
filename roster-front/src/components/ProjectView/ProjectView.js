@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import './ProjectView.css';
 import ClosedTasks from '../ClosedTasks';
 import ReadyTasks from '../ImplementionReadyTasks/ReadyTasks';
+import GithubRequests from '../GithubRequests';
 
 class ProjectView extends Component {
   constructor(props) {
