@@ -34,4 +34,17 @@ describe('ReadyTasks',() => {
     expect(container.querySelectorAll('.task_item')).toHaveLength(2);
   });
 
+  it('Is wrapped in scroll area', async () => {
+    GithubRequests.getImplementationReadyIssues.mockResolvedValue({data: githubTasks});
+    act(() => {
+      render(
+        <ReadyTasks project={projects[0].name} />
+        , container);
+    });
+
+    await flushPromises();
+    expect(container.querySelector('.scroll_ready_tasks')).toBeTruthy();
+    expect(container.querySelectorAll('.task_item')).toHaveLength(2);
+  });
+
 });
