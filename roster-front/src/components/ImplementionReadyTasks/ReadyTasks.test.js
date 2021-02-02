@@ -3,10 +3,7 @@ import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import { projects, flushPromises, githubTasks } from '../../test_data/index.js';
 
-jest.mock('../GithubRequests');
-
 import ReadyTasks from '../ImplementionReadyTasks';
-import GithubRequests from '../GithubRequests/GithubRequests.js';
 
 let container = null;
 beforeEach(() => {
