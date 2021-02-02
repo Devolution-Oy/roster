@@ -122,6 +122,10 @@ export const githubTasks = [
       {
         name: 'dev',
         color: 'ff0000'
+      },
+      {
+        name: 'ready',
+        color: '00ff00'
       }
     ]
   },
@@ -129,9 +133,14 @@ export const githubTasks = [
     title: 'Task test title2',
     labels: [
       {
-        name: 'UX',
+        name: 'ux',
+        color: '00ff00'
+      },
+      {
+        name: 'ready',
         color: '00ff00'
       }
+
     ]
   }
 ];
