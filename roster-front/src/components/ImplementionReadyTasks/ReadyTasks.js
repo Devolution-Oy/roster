@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import GithubRequests from '../GithubRequests/GithubRequests';
 import TaskItem from '../TasksView/TaskItem';
+import ScrollBar from 'react-perfect-scrollbar';
+
+import 'react-perfect-scrollbar/dist/css/styles.css';
+import './ReadyTasks.css';
 
 class ReadyTasks extends Component {
   constructor(props) {
@@ -18,7 +22,7 @@ class ReadyTasks extends Component {
     GithubRequests.getImplementationReadyIssues(this.props.project).then(res => {
       this.setState({
         loading: false,
-        issues: res.data
+        issues: res.data,
       });
     }).catch(err => {
       console.log(err.message);
@@ -52,9 +56,13 @@ class ReadyTasks extends Component {
     return (
       <div className='project_ready'>
         <h4>Ready for implementation</h4>
-        {issues ? issues.map((issue, i) => {
-          return <TaskItem key={i} labels={issue.labels} title={issue.title} />;
-        }) : <p>No implementation ready tasks</p> }
+        <ScrollBar className='scroll_ready_tasks' component='div' >
+          <div className='ready_tasks'>
+            {issues ? issues.map((issue, i) => {
+              return <TaskItem key={i} labels={issue.labels} title={issue.title} />;
+            }) : <p>No implementation ready tasks</p>}
+          </div>
+        </ScrollBar>
       </div>
     );
   }
