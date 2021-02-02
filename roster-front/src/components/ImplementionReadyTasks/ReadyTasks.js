@@ -10,46 +10,15 @@ import './ReadyTasks.css';
 class ReadyTasks extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      issues: null,
-      loading: null,
-      error: null
-    };
-  }
-
-  componentDidMount() {
-    this.setState({loading: true});
-    GithubRequests.getImplementationReadyIssues(this.props.project).then(res => {
-      this.setState({
-        loading: false,
-        issues: res.data,
-      });
-    }).catch(err => {
-      console.log(err.message);
-      this.setState({
-        loading: false,
-        error: err.message
-      });
-    });
   }
 
   render() {
-    const error = this.state.error;
-    const loading = this.state.loading;
-    const issues = this.state.issues;
-    if (loading) {
+    const issues = this.props.tasks;
+    if (!issues) {
       return (
         <div className='project_ready'>
           <h4>Ready for implementation</h4>
           <p>Loading issues...</p>
-        </div>);
-    }
-
-    if (error) {
-      return (
-        <div className='project_ready'>
-          <h4>Ready for implementation</h4>
-          <p>{error}</p>
         </div>);
     }
 
@@ -69,7 +38,8 @@ class ReadyTasks extends Component {
 }
 
 ReadyTasks.propTypes = {
-  project: PropTypes.string.isRequired
+  project: PropTypes.string.isRequired,
+  tasks: PropTypes.array
 };
 
 export default ReadyTasks;

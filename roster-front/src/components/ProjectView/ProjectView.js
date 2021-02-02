@@ -10,13 +10,32 @@ class ProjectView extends Component {
     super(props);
 
     this.state = {
-      project: props.project
+      project: props.project,
+      tasks: null,
+      error: null
     };
+  }
+  componentDidMount() {
+    GithubRequests.getImplementationReadyIssues(this.props.project).then(res => {
+      this.setState({
+        tasks: res.data,
+      });
+    }).catch(err => {
+      console.log(err.message);
+      this.setState({
+        error: err.message
+      });
+    });
   }
 
   render() {
     const project = this.state.project;
     const viewId = 'project_view_' + project.name;
+    const tasks = this.state.tasks;
+    if (this.state.error) {
+      return (<p>{this.state.error}</p>);
+    }
+
     return (
       <div id={viewId} className='project_view'>
         <div className='project_header_row'>
@@ -24,7 +43,7 @@ class ProjectView extends Component {
           <h3 className='project_budget'>{(Math.round(project.budget * 100)/ 100).toFixed(2)} €</h3>
         </div>
         <ClosedTasks project={project.name} />
-        {project.github ? <ReadyTasks project={project.name} /> : null }
+        {project.github ? <ReadyTasks project={project.name} tasks={tasks}/> : null }
       </div>
     );
   }  
