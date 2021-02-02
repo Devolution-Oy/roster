@@ -7,9 +7,6 @@ import 'react-perfect-scrollbar/dist/css/styles.css';
 import './ReadyTasks.css';
 
 class ReadyTasks extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     const issues = this.props.tasks;
