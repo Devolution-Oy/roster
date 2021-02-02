@@ -22,7 +22,7 @@ class ProjectView extends Component {
       <div id={viewId} className='project_view'>
         <div className='project_header_row'>
           <h3 className='project_header'>{project.name}</h3>
-          <h3 className='project_budget'>{project.budget} €</h3>
+          <h3 className='project_budget'>{Math.round(project.budget * 100/ 100).toFixed(2)} €</h3>
         </div>
         <ClosedTasks project={project.name} />
         {project.github ? <ReadyTasks project={project.name} /> : null }
