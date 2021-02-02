@@ -17,7 +17,7 @@ class ProjectView extends Component {
     };
   }
   componentDidMount() {
-    GithubRequests.getImplementationReadyIssues(this.props.project).then(res => {
+    GithubRequests.getImplementationReadyIssues(this.props.project.name).then(res => {
       this.setState({
         tasks: res.data,
       });
