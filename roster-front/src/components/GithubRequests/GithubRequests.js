@@ -71,7 +71,6 @@ const getImplementationReadyIssues = repo => {
   return getHeaders().then(headers => {
     let requestURL = githubAPI + 'repos/' + owner + '/' + repo + '/issues';
     const params = {
-      assignee: 'none',
       state: 'open',
       labels: 'ready'
     };
