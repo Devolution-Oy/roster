@@ -53,7 +53,7 @@ jobs:
       - name: Deploy firebase to staging env
         uses: w9jds/firebase-action@master
         with:
-          args: deploy -P roster-test-e37b6 --only hosting
+          args: deploy -P roster-test-e37b6 --only hosting:roster-test-e37b6
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           TASKER_APP_ID: ${{ secrets.TASKER_APP_ID }}
@@ -110,7 +110,7 @@ jobs:
     - name: Deploy firebase to production
       uses: w9jds/firebase-action@master
       with:
-        args: deploy -P devolution-roster --only hosting
+        args: deploy -P devolution-roster --only hosting:devolution-roster
       env:
         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         TASKER_APP_ID: ${{ secrets.TASKER_APP_ID }}
